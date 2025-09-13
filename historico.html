@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arranca Ya! - Histórico</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-primary: #66BB6A;
+            --green-dark: #388E3C;
+            --green-light: #E8F5E9;
+            --gray-light: #f4f7f6;
+            --white: #fff;
+            --text-color: #212121;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--gray-light);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        .navbar {
+            background-color: var(--green-dark);
+            overflow: hidden;
+            text-align: center;
+        }
+        .navbar a {
+            display: inline-block;
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        .navbar a:hover {
+            background-color: #2e7d32;
+        }
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+        h2 {
+            font-size: 2rem;
+            color: var(--green-dark);
+            margin-bottom: 20px;
+        }
+        .section-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .section-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .section-buttons a,
+        .section-buttons button {
+            background-color: var(--green-dark);
+            color: var(--white);
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .section-buttons a:hover,
+        .section-buttons button:hover {
+            background-color: #2e7d32;
+            transform: translateY(-2px);
+        }
+        .footer {
+            background-color: var(--green-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+ <nav class="navbar">
+    <a href="index.html">Inicio</a>
+    <a href="registro.html">Registro</a>
+    <a href="cursos.html">Cursos</a>
+    <a href="historico.html">Histórico</a>
+    <a href="asesoria.html">Asesoría</a>
+    <a href="contacto.html">Contacto</a>
+     <a href="asistente.html">Contacto</a>
+</nav>
+
+    <div class="container">
+        <h2>Histórico de Movimientos</h2>
+
+        <div class="section-container">
+            <h2>Compras</h2>
+            <div class="section-buttons">
+                <a href="#">Registro Nuevo</a>
+                <a href="#">Reporte</a>
+            </div>
+        </div>
+        
+        <div class="section-container">
+            <h2>Ventas</h2>
+            <div class="section-buttons">
+                <a href="#">Registro de Ventas</a>
+                <a href="#">Registro por Foto/Voz</a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="footer">
+        <p>© 2025 Arranca Ya!. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>

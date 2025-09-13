@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arranca Ya! - Cursos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-primary: #66BB6A;
+            --green-dark: #388E3C;
+            --green-light: #E8F5E9;
+            --gray-light: #f4f7f6;
+            --white: #fff;
+            --text-color: #212121;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--gray-light);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        .navbar {
+            background-color: var(--green-dark);
+            overflow: hidden;
+            text-align: center;
+        }
+        .navbar a {
+            display: inline-block;
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        .navbar a:hover {
+            background-color: #2e7d32;
+        }
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+        h2 {
+            font-size: 2rem;
+            color: var(--green-dark);
+            margin-bottom: 20px;
+        }
+        .hero-section {
+            background-color: var(--green-primary);
+            color: var(--white);
+            padding: 60px 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+        .hero-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .hero-section p {
+            font-size: 1.1rem;
+        }
+        .quiz-form {
+            margin-top: 20px;
+            text-align: left;
+            padding: 0 20px;
+        }
+        .quiz-question {
+            margin-bottom: 25px;
+            background-color: var(--green-light);
+            padding: 15px;
+            border-radius: 10px;
+        }
+        .quiz-question p {
+            font-weight: 600;
+            margin-top: 0;
+        }
+        .quiz-options label,
+        .quiz-options textarea {
+            display: block;
+            margin-bottom: 10px;
+            width: 95%;
+        }
+        .quiz-options input[type="radio"] {
+            margin-right: 8px;
+        }
+        .quiz-options textarea {
+            min-height: 80px;
+            resize: vertical;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .hero-button {
+            background-color: var(--green-dark);
+            color: var(--white);
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+        .hero-button:hover {
+            background-color: #2e7d32;
+        }
+        .profile-container {
+            margin-top: 30px;
+        }
+        .profile-text {
+            background-color: var(--green-light);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .profile-text h3 {
+            color: var(--green-dark);
+            margin-top: 0;
+        }
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .course-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: left;
+        }
+        .course-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        .course-content {
+            padding: 15px;
+        }
+        .course-content h4 {
+            color: var(--green-dark);
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        .course-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+        .course-buttons .buy-btn {
+            background-color: var(--green-dark);
+            color: var(--white);
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .course-buttons .cart-btn {
+            background-color: #555;
+            color: var(--white);
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .footer {
+            background-color: var(--green-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+ <nav class="navbar">
+    <a href="index.html">Inicio</a>
+    <a href="registro.html">Registro</a>
+    <a href="cursos.html">Cursos</a>
+    <a href="historico.html">Histórico</a>
+    <a href="asesoria.html">Asesoría</a>
+    <a href="contacto.html">Contacto</a>
+     <a href="asistente.html">Asistente</a>
+</nav>
+    <div class="container">
+        <h2>Nuestros Cursos</h2>
+        <div id="quiz-section">
+            <div class="hero-section">
+                <h1>Encuentra tu camino</h1>
+                <p>Responde a este breve cuestionario para que te recomendemos los mejores cursos para tu perfil emprendedor.</p>
+            </div>
+            
+            <div class="quiz-form">
+                <div class="quiz-question">
+                    <p>1. ¿Qué prefieres: a) Innovar y crear algo nuevo o b) Mejorar algo que ya existe?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q1" value="a" required> a) Innovar y crear algo nuevo</label>
+                        <label><input type="radio" name="q1" value="b"> b) Mejorar algo que ya existe</label>
+                    </div>
+                </div>
+                
+                <div class="quiz-question">
+                    <p>2. ¿Cómo manejas los imprevistos en un proyecto?</p>
+                    <div class="quiz-options">
+                        <textarea name="q2" placeholder="Escribe tu respuesta aquí..." required></textarea>
+                    </div>
+                </div>
+                
+                <div class="quiz-question">
+                    <p>3. ¿Qué te motiva más: a) El éxito financiero o b) El impacto social?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q3" value="a" required> a) El éxito financiero</label>
+                        <label><input type="radio" name="q3" value="b"> b) El impacto social</label>
+                    </div>
+                </div>
+                
+                <div class="quiz-question">
+                    <p>4. Describe una idea de negocio que te apasione.</p>
+                    <div class="quiz-options">
+                        <textarea name="q4" placeholder="Escribe tu respuesta aquí..." required></textarea>
+                    </div>
+                </div>
+                
+                <div class="quiz-question">
+                    <p>5. ¿Cuál es tu mayor fortaleza como líder: a) Visión estratégica o b) Habilidad para motivar equipos?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q5" value="a" required> a) Visión estratégica</label>
+                        <label><input type="radio" name="q5" value="b"> b) Habilidad para motivar equipos</label>
+                    </div>
+                </div>
+                
+                <div class="quiz-question">
+                    <p>6. ¿Cómo te ves en 5 años?</p>
+                    <div class="quiz-options">
+                        <textarea name="q6" placeholder="Escribe tu respuesta aquí..." required></textarea>
+                    </div>
+                </div>
+                
+                <div class="quiz-question">
+                    <p>7. ¿Qué tipo de ambiente de trabajo prefieres: a) Independiente y autónomo o b) Colaborativo y en equipo?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q7" value="a" required> a) Independiente y autónomo</label>
+                        <label><input type="radio" name="q7" value="b"> b) Colaborativo y en equipo</label>
+                    </div>
+                </div>
+                
+                <div class="quiz-question">
+                    <p>8. ¿Qué problema de la sociedad te gustaría resolver?</p>
+                    <div class="quiz-options">
+                        <textarea name="q8" placeholder="Escribe tu respuesta aquí..." required></textarea>
+                    </div>
+                </div>
+                
+                <div class="quiz-question">
+                    <p>9. ¿Cuál es tu mayor riesgo a tomar: a) Financiero o b) De reputación?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q9" value="a" required> a) Financiero</label>
+                        <label><input type="radio" name="q9" value="b"> b) De reputación</label>
+                    </div>
+                </div>
+                
+                <div class="quiz-question">
+                    <p>10. ¿Cómo manejas el fracaso?</p>
+                    <div class="quiz-options">
+                        <textarea name="q10" placeholder="Escribe tu respuesta aquí..." required></textarea>
+                    </div>
+                </div>
+                
+                <button class="hero-button" onclick="showRecommendations()">Obtener mi Perfil</button>
+            </div>
+        </div>
+        
+        <div id="profile-section" class="profile-container" style="display: none;">
+            <div class="profile-text">
+                <h3>Tu Perfil es: VISIONARIO</h3>
+                <p>Eres un emprendedor visionario: enfocado en innovar y transformar.</p>
+                <p>Para complementar tu perfil, te recomendamos los siguientes cursos:</p>
+            </div>
+            
+            <div class="card-container">
+                <div class="course-card">
+                    <img src="https://via.placeholder.com/400x250/66BB6A/fff?text=Curso+1" alt="Curso de Marketing Digital">
+                    <div class="course-content">
+                        <h4>Curso de Marketing Digital Avanzado</h4>
+                        <p>Aprende las últimas estrategias para posicionar tu marca y alcanzar nuevos clientes en línea.</p>
+                        <div class="course-buttons">
+                            <button class="buy-btn">Comprar</button>
+                            <button class="cart-btn">Añadir a carrito</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <img src="https://via.placeholder.com/400x250/388E3C/fff?text=Curso+2" alt="Curso de Finanzas">
+                    <div class="course-content">
+                        <h4>Introducción a las Finanzas</h4>
+                        <p>Domina los conceptos financieros esenciales para gestionar las cuentas de tu negocio.</p>
+                        <div class="course-buttons">
+                            <button class="buy-btn">Comprar</button>
+                            <button class="cart-btn">Añadir a carrito</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <img src="https://via.placeholder.com/400x250/2E7D32/fff?text=Curso+3" alt="Curso de Liderazgo">
+                    <div class="course-content">
+                        <h4>Estrategias de Liderazgo y Gestión</h4>
+                        <p>Descubre cómo liderar equipos de alto rendimiento y maximizar la productividad.</p>
+                        <div class="course-buttons">
+                            <button class="buy-btn">Comprar</button>
+                            <button class="cart-btn">Añadir a carrito</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <p>© 2025 Arranca Ya!. Todos los derechos reservados.</p>
+    </footer>
+    
+    <script>
+        function showRecommendations() {
+            const q1Answer = document.querySelector('input[name="q1"]:checked');
+            const q2Answer = document.querySelector('textarea[name="q2"]');
+            
+            if (q1Answer && q2Answer.value.trim() !== '') {
+                // Validación básica para asegurar que al menos la primera pregunta cerrada y una abierta estén respondidas.
+                const quizSection = document.getElementById('quiz-section');
+                const profileSection = document.getElementById('profile-section');
+                
+                quizSection.style.display = 'none';
+                profileSection.style.display = 'block';
+            } else {
+                alert('Por favor, responde al menos la primera pregunta cerrada y la segunda pregunta abierta para obtener tu perfil.');
+            }
+        }
+    </script>
+</body>
+</html>

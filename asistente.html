@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arranca Ya! - Asistente IA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-primary: #66BB6A;
+            --green-dark: #388E3C;
+            --green-light: #E8F5E9;
+            --gray-light: #f4f7f6;
+            --white: #fff;
+            --text-color: #212121;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--gray-light);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .navbar {
+            background-color: var(--green-dark);
+            overflow: hidden;
+            text-align: center;
+        }
+        .navbar a {
+            display: inline-block;
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        .navbar a:hover {
+            background-color: #2e7d32;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            text-align: center;
+        }
+        h2 {
+            font-size: 2rem;
+            color: var(--green-dark);
+            margin-bottom: 20px;
+        }
+        .video-container {
+            width: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        video {
+            width: 100%;
+            height: auto;
+        }
+        .chat-container {
+            background-color: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            margin-top: 30px;
+            padding: 20px;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+        #chat-box {
+            flex-grow: 1;
+            overflow-y: auto;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+            text-align: left;
+        }
+        .message {
+            margin-bottom: 10px;
+        }
+        .user-message {
+            text-align: right;
+            color: var(--green-dark);
+        }
+        .ai-message {
+            text-align: left;
+            color: #555;
+        }
+        .chat-input-container {
+            display: flex;
+            padding-top: 10px;
+        }
+        #user-input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            font-size: 1rem;
+        }
+        #send-button {
+            margin-left: 10px;
+            background-color: var(--green-dark);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        .footer {
+            background-color: var(--green-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 20px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+   <nav class="navbar">
+    <a href="index.html">Inicio</a>
+    <a href="registro.html">Registro</a>
+    <a href="cursos.html">Cursos</a>
+    <a href="historico.html">Histórico</a>
+    <a href="asesoria.html">Asesoría</a>
+    <a href="contacto.html">Contacto</a>
+     <a href="asistente.html">Asistente</a>
+</nav>
+    <div class="container">
+        <h2>Asistente Virtual Sparkia</h2>
+        <div class="video-container">
+            <video controls>
+                <source src="C:\Users\MiguelAlvarez\Desktop\Hackaton\logo\alexia.mp4" type="video/mp4">
+                Tu navegador no soporta el formato de video.
+            </video>
+        </div>
+        <div class="chat-container">
+            <div id="chat-box">
+                <div class="message ai-message">¡Hola! Soy Sparkia, tu asistente virtual. Estoy lista para responder a tus preguntas.</div>
+            </div>
+            <div class="chat-input-container">
+                <input type="text" id="user-input" placeholder="Escribe tu mensaje..." onkeypress="handleKeyPress(event)">
+                <button id="send-button" onclick="sendMessage()">➤</button>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <p>© 2025 Arranca Ya!. Todos los derechos reservados.</p>
+    </footer>
+    <script>
+        async function sendMessage() {
+            const inputElement = document.getElementById('user-input');
+            const userMessage = inputElement.value.trim();
+            if (userMessage === '') return;
+
+            const chatBox = document.getElementById('chat-box');
+
+            // Muestra el mensaje del usuario en el chat
+            const userDiv = document.createElement('div');
+            userDiv.classList.add('message', 'user-message');
+            userDiv.textContent = 'Tú: ' + userMessage;
+            chatBox.appendChild(userDiv);
+
+            inputElement.value = ''; // Limpia el cuadro de texto
+
+            // Muestra un mensaje de "conectando" mientras espera la respuesta
+            const loadingDiv = document.createElement('div');
+            loadingDiv.classList.add('message', 'ai-message');
+            loadingDiv.textContent = 'Sparkia: Pensando...';
+            chatBox.appendChild(loadingDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            try {
+                // Envía la pregunta al servidor (URL de ejemplo)
+                const response = await fetch('http://localhost:3000/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: userMessage })
+                });
+
+                if (!response.ok) {
+                    throw new Error('El servidor respondió con un error.');
+                }
+                
+                const data = await response.json();
+                const aiResponse = data.message;
+
+                // Quita el mensaje de "Pensando..." y muestra la respuesta real de la IA
+                chatBox.removeChild(loadingDiv);
+                const aiDiv = document.createElement('div');
+                aiDiv.classList.add('message', 'ai-message');
+                aiDiv.textContent = 'Sparkia: ' + aiResponse;
+                chatBox.appendChild(aiDiv);
+
+            } catch (error) {
+                console.error('Error al conectar con el servidor:', error);
+                // Si falla, muestra un mensaje de error
+                chatBox.removeChild(loadingDiv);
+                const errorDiv = document.createElement('div');
+                errorDiv.classList.add('message', 'ai-message');
+                errorDiv.textContent = 'Sparkia: Lo siento, no pude conectar con mi cerebro en este momento. Intenta de nuevo más tarde.';
+                chatBox.appendChild(errorDiv);
+            }
+            
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+    </script>
+</body>
+</html>

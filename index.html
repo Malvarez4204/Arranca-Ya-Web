@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arranca Ya! - Emprende con Nosotros</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-primary: #66BB6A;
+            --green-dark: #388E3C;
+            --green-light: #E8F5E9;
+            --gray-light: #f4f7f6;
+            --white: #fff;
+            --text-color: #212121;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--gray-light);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        .navbar {
+            background-color: var(--green-dark);
+            overflow: hidden;
+            text-align: center;
+        }
+        .navbar a {
+            display: inline-block;
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        .navbar a:hover {
+            background-color: #2e7d32;
+        }
+        .hero-section {
+            background-color: var(--green-primary);
+            color: var(--white);
+            padding: 80px 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .hero-logo {
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .hero-section h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .hero-section p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+        .hero-button {
+            background-color: var(--green-dark);
+            color: var(--white);
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            margin: 0 10px;
+        }
+        .hero-button:hover {
+            background-color: #2e7d32;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        h2 {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--green-dark);
+            margin-bottom: 40px;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .feature-card {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 20px;
+            object-fit: contain;
+        }
+        .feature-card h3 {
+            font-size: 1.5rem;
+            color: var(--green-primary);
+            margin-bottom: 10px;
+        }
+        .footer {
+            background-color: var(--green-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+ <nav class="navbar">
+    <a href="index.html">Inicio</a>
+    <a href="registro.html">Registro</a>
+    <a href="cursos.html">Cursos</a>
+    <a href="historico.html">Histórico</a>
+    <a href="asesoria.html">Asesoría</a>
+    <a href="contacto.html">Contacto</a>
+     <a href="asistente.html">Asistente</a>
+</nav>
+
+    <header class="hero-section">
+        <img src="C:\Users\MiguelAlvarez\Desktop\Hackaton\logo\logosinf.png" alt="Logo de Arranca Ya" class="hero-logo">
+        <h1>Desbloquea tu Potencial Emprendedor</h1>
+        <p>Accede a todos nuestros cursos, herramientas y recursos para llevar tu negocio al siguiente nivel. Empieza hoy mismo tu camino al éxito.</p>
+        <div>
+            <a href="registro.html" class="hero-button">Comienza tu prueba gratuita</a>
+            <a href="asistente.html" class="hero-button">Usa nuestro asistente de voz</a>
+        </div>
+    </header>
+    <section class="container">
+        <h2>Lo que obtendrás con nuestra plataforma</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <img src="C:\Users\MiguelAlvarez\Desktop\Hackaton\logo\trofeo.png" alt="Icono de trofeo" class="feature-icon">
+                <h3>Cursos Ilimitados</h3>
+                <p>Aprende de nuestra biblioteca completa de cursos en áreas como finanzas, marketing y gestión.</p>
+            </div>
+            <div class="feature-card">
+                <img src="C:\Users\MiguelAlvarez\Desktop\Hackaton\logo\grafico.png" alt="Icono de gráfico" class="feature-icon">
+                <h3>Análisis Financiero</h3>
+                <p>Herramientas exclusivas para gestionar gastos, crear presupuestos y analizar la salud de tu negocio.</p>
+            </div>
+            <div class="feature-card">
+                <img src="C:\Users\MiguelAlvarez\Desktop\Hackaton\logo\ia.jpg" alt="Icono de robot" class="feature-icon">
+                <h3>Asistente con IA</h3>
+                <p>Obtén ayuda personalizada 24/7 con nuestro asistente virtual, Sparkia, para resolver todas tus dudas.</p>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <p>© 2025 Arranca Ya!. Todos los derechos reservados.</p>
+    </footer>
+    
+</body>
+</html>
