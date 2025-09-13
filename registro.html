@@ -124,24 +124,34 @@
             bottom: 20px;
             right: 20px;
             z-index: 1000;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            overflow: hidden;
+            width: 100px;
+            height: 100px;
+            border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease;
             background-color: var(--green-dark);
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
+            text-decoration: none;
+            padding: 10px;
         }
         .floating-button:hover {
             transform: scale(1.1);
         }
-        .floating-button img {
-            display: block;
-            width: 50px;
-            height: 50px;
+        .bot-icon {
+            font-size: 2.5rem;
+            color: white;
+            line-height: 1;
+            text-align: center;
+        }
+        .bot-text {
+            font-size: 0.7rem;
+            color: white;
+            text-align: center;
+            margin-top: 5px;
+            line-height: 1.2;
         }
 
         /* Ajustes para pantallas pequeñas (móviles) */
@@ -155,6 +165,10 @@
             }
             .container {
                 padding: 20px;
+            }
+            .floating-button {
+                width: 90px;
+                height: 90px;
             }
         }
     </style>
@@ -200,8 +214,10 @@
         </form>
     </div>
 
+    <!-- Botón flotante con emoji y texto -->
     <a href="asistente.html" class="floating-button" title="Habla con nuestro asistente virtual">
-        <img src="C:\Users\MiguelAlvarez\Desktop\Hackaton\logo\image_665554.png" alt="Asistente Virtual">
+        <span class="bot-icon">🤖</span>
+        <span class="bot-text">Soy EsparkIA<br>tu asistente virtual</span>
     </a>
 
     <footer class="footer">
@@ -227,7 +243,6 @@
 
             // Simulación de registro exitoso
             alert("¡Registro exitoso! Ahora puedes iniciar sesión.");
-            // En un caso real, aquí se enviaría la información a un servidor
             return true;
         }
     </script>
