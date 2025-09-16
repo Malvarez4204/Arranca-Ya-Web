@@ -7,9 +7,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --blue-primary: #007BFF;
-            --blue-dark: #0056b3;
-            --blue-light: #eaf4ff;
+            --green-primary: #66BB6A;
+            --green-dark: #388E3C;
+            --green-light: #E8F5E9;
             --gray-light: #f4f7f6;
             --white: #fff;
             --text-color: #212121;
@@ -23,7 +23,7 @@
             line-height: 1.6;
         }
         .navbar {
-            background-color: var(--blue-dark);
+            background-color: var(--green-dark);
             overflow: hidden;
             text-align: center;
         }
@@ -36,10 +36,10 @@
             transition: background-color 0.3s ease;
         }
         .navbar a:hover {
-            background-color: #00448f;
+            background-color: #2e7d32;
         }
         .hero-section {
-            background-color: var(--blue-primary);
+            background-color: var(--green-primary);
             color: var(--white);
             padding: 80px 20px;
             text-align: center;
@@ -63,7 +63,7 @@
             margin-bottom: 30px;
         }
         .hero-button {
-            background-color: var(--blue-dark);
+            background-color: var(--green-dark);
             color: var(--white);
             padding: 15px 30px;
             text-decoration: none;
@@ -72,7 +72,7 @@
             transition: transform 0.3s ease, background-color 0.3s ease;
         }
         .hero-button:hover {
-            background-color: #00448f;
+            background-color: #2e7d32;
             transform: translateY(-3px);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
@@ -85,7 +85,7 @@
             text-align: center;
             font-size: 2rem;
             font-weight: 600;
-            color: var(--blue-dark);
+            color: var(--green-dark);
             margin-bottom: 40px;
         }
         .features-grid {
@@ -108,59 +108,151 @@
         .feature-icon {
             width: 60px;
             height: 60px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         .feature-card h3 {
             font-size: 1.5rem;
-            color: var(--blue-primary);
+            color: var(--green-dark);
             margin-bottom: 10px;
         }
+        .feature-card p {
+            font-size: 1rem;
+        }
         .footer {
-            background-color: var(--blue-dark);
+            background-color: var(--green-dark);
             color: var(--white);
             text-align: center;
             padding: 20px;
         }
+
+        /* --- BOTÓN DE CHAT --- */
+        .chat-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--green-primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .chat-box {
+            display: none;
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 300px;
+            max-height: 400px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            overflow: hidden;
+            flex-direction: column;
+        }
+        .chat-header {
+            background: var(--green-dark);
+            color: white;
+            padding: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .chat-messages {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            font-size: 0.9rem;
+        }
+        .chat-input {
+            display: flex;
+            border-top: 1px solid #ddd;
+        }
+        .chat-input input {
+            flex: 1;
+            border: none;
+            padding: 10px;
+        }
+        .chat-input button {
+            background: var(--green-primary);
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
- <nav class="navbar">
-    <a href="index.html">Inicio</a>
-    <a href="registro.html">Registro</a>
-    <a href="cursos.html">Cursos</a>
-    <a href="historico.html">Histórico</a>
-    <a href="asesoria.html">Asesoría</a>
-    <a href="contacto.html">Contacto</a>
-     <a href="asistente.html">Asistente</a>
-</nav>
+    <nav class="navbar">
+        <a href="index.html">Inicio</a>
+        <a href="registro.html">Registro</a>
+        <a href="cursos.html">Cursos</a>
+        <a href="historico.html">Histórico</a>
+        <a href="asesoria.html">Asesoría</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="asistente.html">Asistente</a>
+    </nav>
+
     <header class="hero-section">
         <img src="logo/logosinf.png" alt="Logo de Arranca Ya" class="hero-logo">
         <h1>Desbloquea tu Potencial Emprendedor</h1>
         <p>Accede a todos nuestros cursos, herramientas y recursos para llevar tu negocio al siguiente nivel. Empieza hoy mismo tu camino al éxito.</p>
         <a href="registro.html" class="hero-button">Comienza tu prueba gratuita</a>
     </header>
+
     <section class="container">
         <h2>Lo que obtendrás con nuestra plataforma</h2>
         <div class="features-grid">
             <div class="feature-card">
-                <img src="https://via.placeholder.com/60/007BFF/fff?text=🏆" alt="Icono de trofeo" class="feature-icon">
+                <img src="https://via.placeholder.com/60/66BB6A/fff?text=🏆" alt="Icono de trofeo" class="feature-icon">
                 <h3>Cursos Ilimitados</h3>
                 <p>Aprende de nuestra biblioteca completa de cursos en áreas como finanzas, marketing y gestión.</p>
             </div>
             <div class="feature-card">
-                <img src="https://via.placeholder.com/60/007BFF/fff?text=📈" alt="Icono de gráfico" class="feature-icon">
+                <img src="https://via.placeholder.com/60/66BB6A/fff?text=📈" alt="Icono de gráfico" class="feature-icon">
                 <h3>Análisis Financiero</h3>
                 <p>Herramientas exclusivas para gestionar gastos, crear presupuestos y analizar la salud de tu negocio.</p>
             </div>
             <div class="feature-card">
-                <img src="https://via.placeholder.com/60/007BFF/fff?text=🤖" alt="Icono de robot" class="feature-icon">
+                <img src="https://via.placeholder.com/60/66BB6A/fff?text=🤖" alt="Icono de robot" class="feature-icon">
                 <h3>Asistente con IA</h3>
                 <p>Obtén ayuda personalizada 24/7 con nuestro asistente virtual, Sparkia, para resolver todas tus dudas.</p>
             </div>
         </div>
     </section>
+
     <footer class="footer">
         <p>© 2025 Arranca Ya!. Todos los derechos reservados.</p>
     </footer>
+
+    <button class="chat-button" onclick="toggleChat()">💬</button>
+    <div class="chat-box" id="chatBox">
+        <div class="chat-header">Asistente Arranca Ya!</div>
+        <div class="chat-messages" id="chatMessages"></div>
+        <div class="chat-input">
+            <input type="text" id="chatInput" placeholder="Escribe un mensaje...">
+            <button onclick="sendMessage()">Enviar</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleChat() {
+            const box = document.getElementById('chatBox');
+            box.style.display = box.style.display === 'flex' ? 'none' : 'flex';
+        }
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const messages = document.getElementById('chatMessages');
+            if(input.value.trim() !== '') {
+                const msg = document.createElement('div');
+                msg.textContent = input.value;
+                messages.appendChild(msg);
+                input.value = '';
+                messages.scrollTop = messages.scrollHeight;
+            }
+        }
+    </script>
 </body>
 </html>

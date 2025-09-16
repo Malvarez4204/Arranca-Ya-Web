@@ -88,30 +88,89 @@
             padding: 20px;
             margin-top: 20px;
         }
+        /* --- CHAT WIDGET --- */
+        .chat-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--green-primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 28px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .chat-box {
+            display: none;
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 300px;
+            max-height: 400px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            overflow: hidden;
+            flex-direction: column;
+        }
+        .chat-header {
+            background: var(--green-dark);
+            color: white;
+            padding: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .chat-messages {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            font-size: 0.9rem;
+        }
+        .chat-input {
+            display: flex;
+            border-top: 1px solid #ddd;
+        }
+        .chat-input input {
+            flex: 1;
+            border: none;
+            padding: 10px;
+        }
+        .chat-input button {
+            background: var(--green-primary);
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
     </style>
+    <script src='https://unpkg.com/tesseract.js@2.1.4/dist/tesseract.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
- <nav class="navbar">
-    <a href="index.html">Inicio</a>
-    <a href="registro.html">Registro</a>
-    <a href="cursos.html">Cursos</a>
-    <a href="historico.html">Histórico</a>
-    <a href="asesoria.html">Asesoría</a>
-    <a href="contacto.html">Contacto</a>
-     <a href="asistente.html">Contacto</a>
-</nav>
-
+    <nav class="navbar">
+        <a href="index.html">Inicio</a>
+        <a href="registro.html">Registro</a>
+        <a href="cursos.html">Cursos</a>
+        <a href="historico.html">Histórico</a>
+        <a href="asesoria.html">Asesoría</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="asistente.html">Asistente</a>
+    </nav>
     <div class="container">
         <h2>Histórico de Movimientos</h2>
-
         <div class="section-container">
             <h2>Compras</h2>
             <div class="section-buttons">
-                <a href="#">Registro Nuevo</a>
+                <label for="fotoTicket">
+                    <button>Escanear Ticket</button>
+                </label>
+                <input type="file" id="fotoTicket" accept="image/*" style="display:none;">
                 <a href="#">Reporte</a>
             </div>
         </div>
-        
         <div class="section-container">
             <h2>Ventas</h2>
             <div class="section-buttons">
@@ -119,11 +178,83 @@
                 <a href="#">Registro por Foto/Voz</a>
             </div>
         </div>
-
     </div>
-
     <footer class="footer">
         <p>© 2025 Arranca Ya!. Todos los derechos reservados.</p>
     </footer>
+    <button class="chat-button" onclick="toggleChat()">🤖</button>
+    <div class="chat-box" id="chatBox">
+        <div class="chat-header">Soy Sparkia, tu asistente virtual 🤖</div>
+        <div class="chat-messages" id="chatMessages">
+            <p><strong>Sparkia:</strong> ¡Hola! ¿En qué puedo ayudarte hoy?</p>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Escribe un mensaje...">
+            <button onclick="sendMessage()">➤</button>
+        </div>
+    </div>
+    
+    <script>
+        const { jsPDF } = window.jspdf;
+
+        document.getElementById('fotoTicket').addEventListener('change', async (event) => {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            console.log("Procesando imagen con Tesseract.js...");
+            alert("¡Procesando el ticket! Esto puede tardar unos segundos...");
+
+            Tesseract.recognize(
+              file,
+              'spa',
+              { logger: m => console.log(m) }
+            ).then(({ data: { text } }) => {
+              console.log("Texto extraído:", text);
+
+              const montoMatch = text.match(/(?:total|importe|subtotal)\s*[\$\€]?\s*([\d\.\,]+)/i);
+              const montoTotal = montoMatch ? `$${parseFloat(montoMatch[1].replace(',', '.')).toFixed(2)}` : "Monto no encontrado";
+
+              const fechaMatch = text.match(/\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4}/);
+              const fechaCompra = fechaMatch ? fechaMatch[0] : "Fecha no encontrada";
+
+              const doc = new jsPDF();
+              doc.setFontSize(16);
+              doc.text("Reporte de Gasto - Arranca Ya!", 10, 10);
+              doc.setFontSize(12);
+              doc.text(`Monto total: ${montoTotal}`, 10, 20);
+              doc.text(`Fecha de compra: ${fechaCompra}`, 10, 30);
+              doc.text("--- Texto completo del ticket ---", 10, 40);
+              
+              const splitText = doc.splitTextToSize(text, 180);
+              doc.text(splitText, 10, 50);
+
+              doc.save("Reporte_de_Gasto.pdf");
+
+              alert("¡Reporte PDF generado y descargado con éxito!");
+            }).catch(err => {
+                console.error("Error al procesar la imagen:", err);
+                alert("Ocurrió un error al procesar el ticket. Intenta con otra foto.");
+            });
+        });
+
+        function toggleChat() {
+            const chat = document.getElementById("chatBox");
+            chat.style.display = (chat.style.display === "flex") ? "none" : "flex";
+        }
+        function sendMessage() {
+            const input = document.getElementById("userInput");
+            const msg = input.value.trim();
+            if (msg === "") return;
+            const messages = document.getElementById("chatMessages");
+            const userMsg = document.createElement("p");
+            userMsg.innerHTML = "<strong>Tú:</strong> " + msg;
+            messages.appendChild(userMsg);
+            const botMsg = document.createElement("p");
+            botMsg.innerHTML = "<strong>Sparkia:</strong> Estoy en desarrollo, pero siempre aquí para ayudarte 🚀";
+            messages.appendChild(botMsg);
+            messages.scrollTop = messages.scrollHeight;
+            input.value = "";
+        }
+    </script>
 </body>
 </html>

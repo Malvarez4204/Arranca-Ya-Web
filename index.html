@@ -123,6 +123,64 @@
             text-align: center;
             padding: 20px;
         }
+
+        /* --- CHAT WIDGET --- */
+        .chat-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--green-primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .chat-box {
+            display: none;
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 300px;
+            max-height: 400px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            overflow: hidden;
+            flex-direction: column;
+        }
+        .chat-header {
+            background: var(--green-dark);
+            color: white;
+            padding: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .chat-messages {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            font-size: 0.9rem;
+        }
+        .chat-input {
+            display: flex;
+            border-top: 1px solid #ddd;
+        }
+        .chat-input input {
+            flex: 1;
+            border: none;
+            padding: 10px;
+        }
+        .chat-input button {
+            background: var(--green-primary);
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -168,6 +226,47 @@
     <footer class="footer">
         <p>© 2025 Arranca Ya!. Todos los derechos reservados.</p>
     </footer>
-    
+
+    <!-- Botón de chat -->
+<button class="chat-button" onclick="toggleChat()">🤖</button>
+
+
+    <!-- Caja de chat -->
+    <div class="chat-box" id="chatBox">
+        <div class="chat-header">Soy Sparkia, tu asistente virtual 🤖</div>
+        <div class="chat-messages" id="chatMessages">
+            <p><strong>Sparkia:</strong> ¡Hola! ¿En qué puedo ayudarte hoy?</p>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Escribe un mensaje...">
+            <button onclick="sendMessage()">➤</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleChat() {
+            const chat = document.getElementById("chatBox");
+            chat.style.display = (chat.style.display === "flex") ? "none" : "flex";
+        }
+
+        function sendMessage() {
+            const input = document.getElementById("userInput");
+            const msg = input.value.trim();
+            if (msg === "") return;
+            
+            const messages = document.getElementById("chatMessages");
+            const userMsg = document.createElement("p");
+            userMsg.innerHTML = "<strong>Tú:</strong> " + msg;
+            messages.appendChild(userMsg);
+
+            // Respuesta simple de Sparkia
+            const botMsg = document.createElement("p");
+            botMsg.innerHTML = "<strong>Sparkia:</strong> Estoy en desarrollo, pero siempre aquí para ayudarte 🚀";
+            messages.appendChild(botMsg);
+
+            messages.scrollTop = messages.scrollHeight;
+            input.value = "";
+        }
+    </script>
 </body>
 </html>
