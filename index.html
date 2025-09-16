@@ -181,18 +181,32 @@
             padding: 10px 15px;
             cursor: pointer;
         }
+
+        /*
+        * AÑADIDO: MEDIA QUERY PARA CELULARES
+        */
+        @media (max-width: 768px) {
+            .hero-section div {
+                display: flex;
+                flex-direction: column; /* Apila los botones verticalmente */
+            }
+            .hero-button {
+                margin: 10px 0; /* Añade espacio entre los botones apilados */
+            }
+        }
+
     </style>
 </head>
 <body>
- <nav class="navbar">
-    <a href="index.html">Inicio</a>
-    <a href="registro.html">Registro</a>
-    <a href="cursos.html">Cursos</a>
-    <a href="historico.html">Histórico</a>
-    <a href="asesoria.html">Asesoría</a>
-    <a href="contacto.html">Contacto</a>
-     <a href="asistente.html">Asistente</a>
-</nav>
+    <nav class="navbar">
+        <a href="index.html">Inicio</a>
+        <a href="registro.html">Registro</a>
+        <a href="cursos.html">Cursos</a>
+        <a href="historico.html">Histórico</a>
+        <a href="asesoria.html">Asesoría</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="asistente.html">Asistente</a>
+    </nav>
 
     <header class="hero-section">
         <img src="logo/logosinf.png" alt="Logo de Arranca Ya" class="hero-logo">
@@ -227,11 +241,8 @@
         <p>© 2025 Arranca Ya!. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- Botón de chat -->
-<button class="chat-button" onclick="toggleChat()">🤖</button>
+    <button class="chat-button" onclick="toggleChat()">🤖</button>
 
-
-    <!-- Caja de chat -->
     <div class="chat-box" id="chatBox">
         <div class="chat-header">Soy Sparkia, tu asistente virtual 🤖</div>
         <div class="chat-messages" id="chatMessages">

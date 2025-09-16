@@ -330,7 +330,11 @@
                     document.getElementById('cantidad').value = cantidad;
                     document.getElementById('producto').value = producto;
                     document.getElementById('monto').value = monto;
-                    alert("Datos cargados. Revisa el formulario y haz clic en 'Agregar a la Venta'.");
+                    alert("Datos cargados. Haz clic en 'Agregar a la Venta'.");
+
+                    // NUEVA LÍNEA: Agrega el producto automáticamente a la venta
+                    agregarProducto();
+
                 } else {
                     alert("No pude entender la frase. Inténtalo de nuevo con un formato como: 'Vendí 5 tacos por 150'.");
                 }
@@ -483,7 +487,6 @@
             });
         }
 
-        // Nueva función para generar reportes de ventas filtrados
         function generarReporteDeVentas(periodo) {
             if (ventas.length === 0) {
                 alert('No hay ventas registradas para generar un reporte.');
@@ -560,34 +563,31 @@
                      console.log("Selección de archivo cancelada.");
                      return;
                 }
+                
+                alert("Procesando imagen con Tesseract.js...");
 
-                console.log("Procesando imagen con Tesseract.js...");
+                try {
+                    const { data: { text } } = await Tesseract.recognize(file, 'spa');
+                    console.log("Texto extraído:", text);
 
-                Tesseract.recognize(
-                  file,
-                  'spa',
-                  { logger: m => console.log(m) }
-                ).then(({ data: { text } }) => {
-                  console.log("Texto extraído:", text);
+                    const montoMatch = text.match(/(?:total|importe|subtotal)\s*[\$\€]?\s*([\d\.\,]+)/i);
+                    const montoTotal = montoMatch ? `$${parseFloat(montoMatch[1].replace(',', '.')).toFixed(2)}` : "Monto no encontrado";
 
-                  const montoMatch = text.match(/(?:total|importe|subtotal)\s*[\$\€]?\s*([\d\.\,]+)/i);
-                  const montoTotal = montoMatch ? `$${parseFloat(montoMatch[1].replace(',', '.')).toFixed(2)}` : "Monto no encontrado";
+                    const doc = new jsPDF();
+                    doc.setFontSize(16);
+                    doc.text("Reporte de Gasto - Arranca Ya!", 10, 10);
+                    doc.setFontSize(12);
+                    doc.text(`Monto total: ${montoTotal}`, 10, 20);
+                    doc.text("--- Texto completo del ticket ---", 10, 40);
+                    const splitText = doc.splitTextToSize(text, 180);
+                    doc.text(splitText, 10, 50);
+                    doc.save("Reporte_de_Gasto.pdf");
 
-                  const doc = new jsPDF();
-                  doc.setFontSize(16);
-                  doc.text("Reporte de Gasto - Arranca Ya!", 10, 10);
-                  doc.setFontSize(12);
-                  doc.text(`Monto total: ${montoTotal}`, 10, 20);
-                  doc.text("--- Texto completo del ticket ---", 10, 40);
-                  const splitText = doc.splitTextToSize(text, 180);
-                  doc.text(splitText, 10, 50);
-                  doc.save("Reporte_de_Gasto.pdf");
-
-                  alert("¡Reporte PDF generado y descargado con éxito!");
-                }).catch(err => {
+                    alert("¡Reporte PDF generado y descargado con éxito!");
+                } catch (err) {
                     console.error("Error al procesar la imagen:", err);
-                    alert("Ocurrió un error al procesar el ticket. Intenta con otra foto.");
-                });
+                    alert("Ocurrió un error al procesar el ticket. Intenta con una foto más clara o revisa los permisos.");
+                }
             };
             input.click();
         }
