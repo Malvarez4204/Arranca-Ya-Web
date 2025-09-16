@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arranca Ya! - Histórico</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
             --green-primary: #66BB6A;
@@ -145,11 +146,48 @@
             padding: 10px 15px;
             cursor: pointer;
         }
+        /* --- Tabla de ventas --- */
+        .sales-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .sales-table th, .sales-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .sales-table th {
+            background-color: var(--green-light);
+            color: var(--text-color);
+        }
+        /* --- Formulario de ventas --- */
+        .sales-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .sales-form input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .sales-form button {
+            background-color: var(--green-dark);
+            color: var(--white);
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
     </style>
     <script src='https://unpkg.com/tesseract.js@2.1.4/dist/tesseract.min.js'></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
-<body>
+<body onload="cargarDatos()">
     <nav class="navbar">
         <a href="index.html">Inicio</a>
         <a href="registro.html">Registro</a>
@@ -164,18 +202,58 @@
         <div class="section-container">
             <h2>Compras</h2>
             <div class="section-buttons">
-                <label for="fotoTicket">
-                    <button>Escanear Ticket</button>
-                </label>
-                <input type="file" id="fotoTicket" accept="image/*" style="display:none;">
-                <a href="#">Reporte</a>
+                <button onclick="iniciarEscaneo()">Escanear Ticket</button>
+                <button onclick="generarReporteDeCompras()">Reporte de Compras</button>
             </div>
         </div>
         <div class="section-container">
             <h2>Ventas</h2>
             <div class="section-buttons">
-                <a href="#">Registro de Ventas</a>
-                <a href="#">Registro por Foto/Voz</a>
+                <button onclick="mostrarFormularioVentas()">Registro de Ventas</button>
+                <button onclick="iniciarRegistroPorVoz()">Registro por Voz</button>
+            </div>
+        </div>
+        
+        <div id="ventasContainer" style="display:none;">
+            <h3>Registrar Nueva Venta</h3>
+            <form class="sales-form">
+                <input type="text" id="producto" placeholder="Producto" required>
+                <input type="number" id="cantidad" placeholder="Cantidad" step="1" required>
+                <input type="number" id="monto" placeholder="Monto" step="0.01" required>
+                <input type="date" id="fecha" required>
+                <button type="button" onclick="agregarProducto()">Agregar a la Venta</button>
+                <button type="button" onclick="emitirTicket()">Emitir Ticket</button>
+            </form>
+            
+            <h3>Resumen de la Venta</h3>
+            <table class="sales-table">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Monto</th>
+                    </tr>
+                </thead>
+                <tbody id="salesTableBody">
+                </tbody>
+            </table>
+            <h3 style="margin-top:20px;">
+                Total de Venta Actual: <span id="totalVentaActual">$0.00</span>
+            </h3>
+        </div>
+
+        <div id="graficoVentas" style="margin-top: 40px;">
+            <h3>Ventas Históricas por Producto</h3>
+            <canvas id="salesChart"></canvas>
+            <p id="noDataMessage" style="text-align: center; color: #777;"></p>
+        </div>
+
+        <div class="section-container">
+            <h2>Reportes de Ventas</h2>
+            <div class="section-buttons">
+                <button onclick="generarReporteDeVentas('day')">Reporte Diario</button>
+                <button onclick="generarReporteDeVentas('week')">Reporte Semanal</button>
+                <button onclick="generarReporteDeVentas('month')">Reporte Mensual</button>
             </div>
         </div>
     </div>
@@ -196,46 +274,345 @@
     
     <script>
         const { jsPDF } = window.jspdf;
+        let ventas = [];
+        let productosParaTicket = [];
+        let chartInstance = null;
+        let totalVentaActual = 0;
+        
+        function cargarDatos() {
+            const datosGuardados = localStorage.getItem('historialVentas');
+            if (datosGuardados) {
+                ventas = JSON.parse(datosGuardados);
+            }
+            generarGraficoVentas();
+        }
 
-        document.getElementById('fotoTicket').addEventListener('change', async (event) => {
-            const file = event.target.files[0];
-            if (!file) return;
+        function guardarDatos() {
+            localStorage.setItem('historialVentas', JSON.stringify(ventas));
+        }
 
-            console.log("Procesando imagen con Tesseract.js...");
-            alert("¡Procesando el ticket! Esto puede tardar unos segundos...");
+        function mostrarFormularioVentas() {
+            const ventasContainer = document.getElementById('ventasContainer');
+            ventasContainer.style.display = 'block';
+            document.getElementById('fecha').valueAsDate = new Date();
+        }
 
-            Tesseract.recognize(
-              file,
-              'spa',
-              { logger: m => console.log(m) }
-            ).then(({ data: { text } }) => {
-              console.log("Texto extraído:", text);
+        function iniciarRegistroPorVoz() {
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                alert("Lo siento, tu navegador no soporta el reconocimiento de voz.");
+                return;
+            }
+            
+            mostrarFormularioVentas();
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const recognition = new SpeechRecognition();
+            recognition.lang = 'es-MX';
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+            recognition.start();
 
-              const montoMatch = text.match(/(?:total|importe|subtotal)\s*[\$\€]?\s*([\d\.\,]+)/i);
-              const montoTotal = montoMatch ? `$${parseFloat(montoMatch[1].replace(',', '.')).toFixed(2)}` : "Monto no encontrado";
+            recognition.onstart = function() {
+                alert("Escuchando... Por favor, di algo como: 'Vendí 5 tacos por 150 pesos'.");
+            };
+            
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript;
+                console.log("Lo que dijiste: " + transcript);
 
-              const fechaMatch = text.match(/\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4}/);
-              const fechaCompra = fechaMatch ? fechaMatch[0] : "Fecha no encontrada";
+                const regex = /(?:vendí|vendo|vendiste|venta de)\s*(\d+)\s*(.*?)\s*(?:por|en)\s*(\d+)/i;
+                const match = transcript.match(regex);
+                
+                if (match && match.length === 4) {
+                    const cantidad = match[1];
+                    const producto = match[2].trim();
+                    const monto = match[3];
 
-              const doc = new jsPDF();
-              doc.setFontSize(16);
-              doc.text("Reporte de Gasto - Arranca Ya!", 10, 10);
-              doc.setFontSize(12);
-              doc.text(`Monto total: ${montoTotal}`, 10, 20);
-              doc.text(`Fecha de compra: ${fechaCompra}`, 10, 30);
-              doc.text("--- Texto completo del ticket ---", 10, 40);
-              
-              const splitText = doc.splitTextToSize(text, 180);
-              doc.text(splitText, 10, 50);
+                    document.getElementById('cantidad').value = cantidad;
+                    document.getElementById('producto').value = producto;
+                    document.getElementById('monto').value = monto;
+                    alert("Datos cargados. Revisa el formulario y haz clic en 'Agregar a la Venta'.");
+                } else {
+                    alert("No pude entender la frase. Inténtalo de nuevo con un formato como: 'Vendí 5 tacos por 150'.");
+                }
+            };
 
-              doc.save("Reporte_de_Gasto.pdf");
+            recognition.onerror = function(event) {
+                console.error("Error de reconocimiento de voz:", event.error);
+                alert("Ocurrió un error con el reconocimiento de voz. Asegúrate de tener permiso para el micrófono.");
+            };
+        }
 
-              alert("¡Reporte PDF generado y descargado con éxito!");
-            }).catch(err => {
-                console.error("Error al procesar la imagen:", err);
-                alert("Ocurrió un error al procesar el ticket. Intenta con otra foto.");
+        function agregarProducto() {
+            const producto = document.getElementById('producto').value;
+            const cantidad = parseInt(document.getElementById('cantidad').value, 10);
+            const monto = parseFloat(document.getElementById('monto').value);
+
+            if (producto && !isNaN(cantidad) && !isNaN(monto)) {
+                const nuevoProducto = { producto, cantidad, monto, fecha: document.getElementById('fecha').value };
+                productosParaTicket.push(nuevoProducto);
+                
+                totalVentaActual += (cantidad * monto);
+                document.getElementById('totalVentaActual').textContent = `$${totalVentaActual.toFixed(2)}`;
+
+                actualizarTablaProductos();
+                
+                document.getElementById('producto').value = '';
+                document.getElementById('cantidad').value = '';
+                document.getElementById('monto').value = '';
+            } else {
+                alert("Por favor, completa todos los campos con valores válidos.");
+            }
+        }
+        
+        function emitirTicket() {
+            if (productosParaTicket.length === 0) {
+                alert("No hay productos para emitir en el ticket.");
+                return;
+            }
+            
+            const doc = new jsPDF();
+            let y = 15;
+            
+            doc.setFontSize(18);
+            doc.text("Recibo de Venta", 10, y);
+            y += 10;
+            doc.setFontSize(12);
+            doc.text("--------------------------------------", 10, y);
+            y += 10;
+            
+            productosParaTicket.forEach(item => {
+                doc.text(`Producto: ${item.producto}`, 10, y);
+                y += 7;
+                doc.text(`Cantidad: ${item.cantidad}`, 10, y);
+                y += 7;
+                doc.text(`Monto: $${item.monto.toFixed(2)}`, 10, y);
+                y += 10;
             });
-        });
+            
+            doc.text("--------------------------------------", 10, y);
+            y += 10;
+            doc.setFontSize(14);
+            doc.text(`Total: $${totalVentaActual.toFixed(2)}`, 10, y);
+
+            doc.save(`ticket_${new Date().getTime()}.pdf`);
+            alert("Ticket PDF generado y descargado.");
+            
+            ventas = ventas.concat(productosParaTicket);
+            productosParaTicket = [];
+            totalVentaActual = 0;
+            document.getElementById('totalVentaActual').textContent = `$0.00`;
+            actualizarTablaProductos();
+            guardarDatos();
+            generarGraficoVentas();
+        }
+        
+        function actualizarTablaProductos() {
+            const tbody = document.getElementById('salesTableBody');
+            tbody.innerHTML = '';
+            
+            productosParaTicket.forEach(item => {
+                const fila = document.createElement('tr');
+                fila.innerHTML = `
+                    <td>${item.producto}</td>
+                    <td>${item.cantidad}</td>
+                    <td>$${item.monto.toFixed(2)}</td>
+                `;
+                tbody.appendChild(fila);
+            });
+        }
+        
+        function generarGraficoVentas() {
+            const noDataMessage = document.getElementById('noDataMessage');
+            const canvas = document.getElementById('salesChart');
+            const ctx = canvas.getContext('2d');
+
+            if (ventas.length === 0) {
+                noDataMessage.textContent = 'No hay datos de ventas aún. ¡Registra una venta para ver el gráfico!';
+                if (chartInstance) {
+                    chartInstance.destroy();
+                    chartInstance = null;
+                }
+                canvas.style.display = 'none';
+                return;
+            }
+
+            noDataMessage.textContent = '';
+            canvas.style.display = 'block';
+
+            const ventasPorProducto = {};
+            ventas.forEach(venta => {
+                if (ventasPorProducto[venta.producto]) {
+                    ventasPorProducto[venta.producto] += venta.cantidad * venta.monto;
+                } else {
+                    ventasPorProducto[venta.producto] = venta.cantidad * venta.monto;
+                }
+            });
+
+            const labels = Object.keys(ventasPorProducto);
+            const data = Object.values(ventasPorProducto);
+
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+
+            chartInstance = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Ventas por Producto',
+                        data: data,
+                        backgroundColor: [
+                            '#66BB6A', '#388E3C', '#E8F5E9', '#A5D6A7', '#4CAF50'
+                        ],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Total de Ventas por Producto'
+                        }
+                    }
+                }
+            });
+        }
+
+        // Nueva función para generar reportes de ventas filtrados
+        function generarReporteDeVentas(periodo) {
+            if (ventas.length === 0) {
+                alert('No hay ventas registradas para generar un reporte.');
+                return;
+            }
+
+            const hoy = new Date();
+            const ventasFiltradas = ventas.filter(venta => {
+                const fechaVenta = new Date(venta.fecha);
+                const diff = hoy.getTime() - fechaVenta.getTime();
+                const diasDeDiferencia = diff / (1000 * 60 * 60 * 24);
+
+                if (periodo === 'day' && diasDeDiferencia < 1) {
+                    return true;
+                }
+                if (periodo === 'week' && diasDeDiferencia < 7) {
+                    return true;
+                }
+                if (periodo === 'month' && diasDeDiferencia < 30) {
+                    return true;
+                }
+                return false;
+            });
+
+            if (ventasFiltradas.length === 0) {
+                alert(`No se encontraron ventas para el periodo '${periodo}'.`);
+                return;
+            }
+
+            const doc = new jsPDF();
+            let y = 15;
+            let totalGeneral = 0;
+            const titulo = `Reporte de Ventas por ${periodo.charAt(0).toUpperCase() + periodo.slice(1)}`;
+
+            doc.setFontSize(18);
+            doc.text(titulo, 10, y);
+            y += 10;
+            doc.setFontSize(12);
+            doc.text("--------------------------------------", 10, y);
+            y += 10;
+
+            ventasFiltradas.forEach(item => {
+                doc.text(`Producto: ${item.producto}`, 10, y);
+                y += 7;
+                doc.text(`Cantidad: ${item.cantidad}`, 10, y);
+                y += 7;
+                doc.text(`Monto: $${item.monto.toFixed(2)}`, 10, y);
+                y += 7;
+                doc.text(`Fecha: ${item.fecha}`, 10, y);
+                y += 10;
+                totalGeneral += item.cantidad * item.monto;
+            });
+            
+            doc.text("--------------------------------------", 10, y);
+            y += 10;
+            doc.setFontSize(14);
+            doc.text(`Total del Periodo: $${totalGeneral.toFixed(2)}`, 10, y);
+
+            doc.save(`Reporte_Ventas_${periodo}.pdf`);
+            alert("Reporte PDF generado y descargado.");
+        }
+
+        async function iniciarEscaneo() {
+            console.log("Activando escáner...");
+            alert("¡Por favor, toma una foto del ticket para escanearlo!");
+
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.setAttribute('capture', 'environment');
+            input.accept = 'image/*';
+            input.onchange = async (event) => {
+                const file = event.target.files[0];
+                if (!file) {
+                     console.log("Selección de archivo cancelada.");
+                     return;
+                }
+
+                console.log("Procesando imagen con Tesseract.js...");
+
+                Tesseract.recognize(
+                  file,
+                  'spa',
+                  { logger: m => console.log(m) }
+                ).then(({ data: { text } }) => {
+                  console.log("Texto extraído:", text);
+
+                  const montoMatch = text.match(/(?:total|importe|subtotal)\s*[\$\€]?\s*([\d\.\,]+)/i);
+                  const montoTotal = montoMatch ? `$${parseFloat(montoMatch[1].replace(',', '.')).toFixed(2)}` : "Monto no encontrado";
+
+                  const doc = new jsPDF();
+                  doc.setFontSize(16);
+                  doc.text("Reporte de Gasto - Arranca Ya!", 10, 10);
+                  doc.setFontSize(12);
+                  doc.text(`Monto total: ${montoTotal}`, 10, 20);
+                  doc.text("--- Texto completo del ticket ---", 10, 40);
+                  const splitText = doc.splitTextToSize(text, 180);
+                  doc.text(splitText, 10, 50);
+                  doc.save("Reporte_de_Gasto.pdf");
+
+                  alert("¡Reporte PDF generado y descargado con éxito!");
+                }).catch(err => {
+                    console.error("Error al procesar la imagen:", err);
+                    alert("Ocurrió un error al procesar el ticket. Intenta con otra foto.");
+                });
+            };
+            input.click();
+        }
+
+        function generarReporteDeCompras() {
+            console.log("Generando reporte de compras...");
+            const doc = new jsPDF();
+            doc.setFontSize(16);
+            doc.text("Reporte de Compras", 10, 10);
+            doc.setFontSize(12);
+            doc.text("Fecha: 15/09/2025", 10, 20);
+            doc.text("--- Artículos ---", 10, 30);
+            const articulos = [
+                { nombre: "Masa", costo: "25.00" },
+                { nombre: "Agua", costo: "12.50" },
+                { nombre: "Chiles", costo: "30.00" }
+            ];
+            let y = 40;
+            articulos.forEach(item => {
+                doc.text(`${item.nombre}: $${item.costo}`, 15, y);
+                y += 10;
+            });
+            doc.save("Reporte_de_Compras.pdf");
+            alert("¡Reporte de Compras generado y descargado con éxito!");
+        }
 
         function toggleChat() {
             const chat = document.getElementById("chatBox");
