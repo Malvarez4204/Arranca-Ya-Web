@@ -25,15 +25,17 @@
             flex-direction: column;
             min-height: 100vh;
         }
+        /* --- NAVBAR --- */
         .navbar {
             background-color: var(--green-dark);
-            overflow: hidden;
             text-align: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
         }
         .navbar a {
-            display: inline-block;
             color: white;
-            padding: 14px 20px;
+            padding: 12px 16px;
             text-decoration: none;
             font-size: 1rem;
             transition: background-color 0.3s ease;
@@ -41,14 +43,51 @@
         .navbar a:hover {
             background-color: #2e7d32;
         }
+        /* --- BANNER --- */
+        .banner {
+            background-color: var(--green-light);
+            color: var(--green-dark);
+            text-align: center;
+            padding: 10px;
+            font-weight: 600;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        .banner-content {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 10px 20px;
+            text-align: center;
+        }
+        .banner-headline {
+            font-size: 1.1rem;
+            margin: 0;
+        }
+        .banner-subtext {
+            font-weight: 400;
+            margin: 0;
+        }
+        .banner-callout {
+            background-color: var(--green-dark);
+            color: var(--white);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 700;
+            margin: 0;
+            white-space: nowrap;
+        }
+        /* --- CONTENEDOR PRINCIPAL --- */
         .container {
-            max-width: 800px;
-            margin: 40px auto;
+            max-width: 600px;
+            margin: 30px auto;
             padding: 20px;
             text-align: center;
         }
         h2 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: var(--green-dark);
             margin-bottom: 20px;
         }
@@ -62,6 +101,7 @@
             width: 100%;
             height: auto;
         }
+        /* --- CHAT --- */
         .chat-container {
             background-color: var(--white);
             border-radius: 15px;
@@ -112,9 +152,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             cursor: pointer;
         }
+        /* --- FOOTER --- */
         .footer {
             background-color: var(--green-dark);
             color: var(--white);
@@ -122,18 +163,64 @@
             padding: 20px;
             margin-top: auto;
         }
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 1.5rem;
+            }
+            .container {
+                padding: 15px;
+            }
+            .chat-container {
+                height: 350px;
+            }
+            #send-button {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .navbar {
+                flex-direction: column;
+            }
+            .navbar a {
+                padding: 10px;
+                font-size: 0.9rem;
+                width: 100%;
+            }
+            .banner-content {
+                flex-direction: column;
+                gap: 10px;
+            }
+            h2 {
+                font-size: 1.3rem;
+            }
+            .chat-container {
+                height: 300px;
+                padding: 15px;
+            }
+        }
     </style>
 </head>
 <body>
-   <nav class="navbar">
-    <a href="index.html">Inicio</a>
-    <a href="registro.html">Registro</a>
-    <a href="cursos.html">Cursos</a>
-    <a href="historico.html">Histórico</a>
-    <a href="asesoria.html">Asesoría</a>
-    <a href="contacto.html">Contacto</a>
-     <a href="asistente.html">Asistente</a>
-</nav>
+    <nav class="navbar">
+        <a href="index.html">Inicio</a>
+        <a href="registro.html">Registro</a>
+        <a href="cursos.html">Cursos</a>
+        <a href="historico.html">Histórico</a>
+        <a href="asesoria.html">Asesoría</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="asistente.html">Asistente</a>
+        <a href="retos.html">Retos</a>
+    </nav>
+    <div class="banner">
+        <div class="banner-content">
+            <p class="banner-headline">¿Quieres elegir un nuevo curso? ✨</p>
+            <p class="banner-subtext">Nuestras reseñas hablan por sí solas. Empieza a aprender ahora desde solo $200 MX$.</p>
+            <p class="banner-callout">¡Quedan 2 días!</p>
+        </div>
+    </div>
     <div class="container">
         <h2>Asistente Virtual Sparkia</h2>
         <div class="video-container">
@@ -160,63 +247,45 @@
             const inputElement = document.getElementById('user-input');
             const userMessage = inputElement.value.trim();
             if (userMessage === '') return;
-
             const chatBox = document.getElementById('chat-box');
-
-            // Muestra el mensaje del usuario en el chat
+            // Muestra el mensaje del usuario
             const userDiv = document.createElement('div');
             userDiv.classList.add('message', 'user-message');
             userDiv.textContent = 'Tú: ' + userMessage;
             chatBox.appendChild(userDiv);
-
-            inputElement.value = ''; // Limpia el cuadro de texto
-
-            // Muestra un mensaje de "conectando" mientras espera la respuesta
+            inputElement.value = '';
+            // Mensaje de espera
             const loadingDiv = document.createElement('div');
             loadingDiv.classList.add('message', 'ai-message');
             loadingDiv.textContent = 'Sparkia: Pensando...';
             chatBox.appendChild(loadingDiv);
             chatBox.scrollTop = chatBox.scrollHeight;
-
             try {
-                // Envía la pregunta al servidor (URL de ejemplo)
                 const response = await fetch('http://localhost:3000/chat', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ message: userMessage })
                 });
-
-                if (!response.ok) {
-                    throw new Error('El servidor respondió con un error.');
-                }
-                
+                if (!response.ok) throw new Error('Error en el servidor.');
                 const data = await response.json();
                 const aiResponse = data.message;
-
-                // Quita el mensaje de "Pensando..." y muestra la respuesta real de la IA
                 chatBox.removeChild(loadingDiv);
                 const aiDiv = document.createElement('div');
                 aiDiv.classList.add('message', 'ai-message');
                 aiDiv.textContent = 'Sparkia: ' + aiResponse;
                 chatBox.appendChild(aiDiv);
-
             } catch (error) {
-                console.error('Error al conectar con el servidor:', error);
-                // Si falla, muestra un mensaje de error
+                console.error(error);
                 chatBox.removeChild(loadingDiv);
                 const errorDiv = document.createElement('div');
                 errorDiv.classList.add('message', 'ai-message');
-                errorDiv.textContent = 'Sparkia: Lo siento, no pude conectar con mi cerebro en este momento. Intenta de nuevo más tarde.';
+                errorDiv.textContent = 'Sparkia: Lo siento, no pude conectar. Intenta de nuevo más tarde.';
                 chatBox.appendChild(errorDiv);
             }
-            
             chatBox.scrollTop = chatBox.scrollHeight;
         }
-
         function handleKeyPress(event) {
-            if (event.key === 'Enter') {
-                sendMessage();
-            }
+            if (event.key === 'Enter') sendMessage();
         }
     </script>
 </body>

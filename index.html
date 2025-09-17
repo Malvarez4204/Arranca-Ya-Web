@@ -1,283 +1,375 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arranca Ya! - Emprende con Nosotros</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --green-primary: #66BB6A;
-            --green-dark: #388E3C;
-            --green-light: #E8F5E9;
-            --gray-light: #f4f7f6;
-            --white: #fff;
-            --text-color: #212121;
-        }
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--gray-light);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-        .navbar {
-            background-color: var(--green-dark);
-            overflow: hidden;
-            text-align: center;
-        }
-        .navbar a {
-            display: inline-block;
-            color: white;
-            padding: 14px 20px;
-            text-decoration: none;
-            font-size: 1rem;
-            transition: background-color 0.3s ease;
-        }
-        .navbar a:hover {
-            background-color: #2e7d32;
-        }
-        .hero-section {
-            background-color: var(--green-primary);
-            color: var(--white);
-            padding: 80px 20px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .hero-logo {
-            max-width: 200px;
-            height: auto;
-            margin-bottom: 20px;
-        }
-        .hero-section h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        .hero-section p {
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin-bottom: 30px;
-        }
-        .hero-button {
-            background-color: var(--green-dark);
-            color: var(--white);
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-            margin: 0 10px;
-        }
-        .hero-button:hover {
-            background-color: #2e7d32;
-            transform: translateY(-3px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-        .container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 20px;
-        }
-        h2 {
-            text-align: center;
-            font-size: 2rem;
-            font-weight: 600;
-            color: var(--green-dark);
-            margin-bottom: 40px;
-        }
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        .feature-card {
-            background-color: var(--white);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-        }
-        .feature-icon {
-            width: 60px;
-            height: 60px;
-            margin-bottom: 20px;
-            object-fit: contain;
-        }
-        .feature-card h3 {
-            font-size: 1.5rem;
-            color: var(--green-primary);
-            margin-bottom: 10px;
-        }
-        .footer {
-            background-color: var(--green-dark);
-            color: var(--white);
-            text-align: center;
-            padding: 20px;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arranca Ya! - Emprende con Nosotros</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green-primary: #66BB6A;
+      --green-dark: #388E3C;
+      --green-light: #E8F5E9;
+      --gray-light: #f4f7f6;
+      --white: #fff;
+      --text-color: #212121;
+      --purple-udemy:#A435F0; 
+      --purple-light-udemy:#CEC0FC; 
+      --purple-dark-udemy:#8C25B6;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--gray-light);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
 
-        /* --- CHAT WIDGET --- */
-        .chat-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: var(--green-primary);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-        .chat-box {
-            display: none;
-            position: fixed;
-            bottom: 90px;
-            right: 20px;
-            width: 300px;
-            max-height: 400px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            overflow: hidden;
-            flex-direction: column;
-        }
-        .chat-header {
-            background: var(--green-dark);
-            color: white;
-            padding: 10px;
-            font-weight: bold;
-            text-align: center;
-        }
-        .chat-messages {
-            flex: 1;
-            padding: 10px;
-            overflow-y: auto;
-            font-size: 0.9rem;
-        }
-        .chat-input {
-            display: flex;
-            border-top: 1px solid #ddd;
-        }
-        .chat-input input {
-            flex: 1;
-            border: none;
-            padding: 10px;
-        }
-        .chat-input button {
-            background: var(--green-primary);
-            border: none;
-            color: white;
-            padding: 10px 15px;
-            cursor: pointer;
-        }
+    /* BANNER */
+    .top-banner {
+      background: var(--purple-light-udemy);
+      padding: 10px 20px;
+      text-align: center;
+      position: relative;
+      font-size: 0.9rem;
+    }
+    .top-banner p {
+      margin: 0;
+      color: var(--purple-dark-udemy);
+      font-weight: 600;
+    }
+    .top-banner .close-btn {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: var(--purple-dark-udemy);
+    }
 
-        /*
-        * AÑADIDO: MEDIA QUERY PARA CELULARES
-        */
-        @media (max-width: 768px) {
-            .hero-section div {
-                display: flex;
-                flex-direction: column; /* Apila los botones verticalmente */
-            }
-            .hero-button {
-                margin: 10px 0; /* Añade espacio entre los botones apilados */
-            }
-        }
+    /* HEADER */
+    .header-main {
+      background-color: var(--white);
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      border-bottom: 2px solid var(--green-light);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      flex-wrap: wrap;
+    }
+    .brand h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: var(--green-dark);
+    }
+    .search-bar {
+      flex-grow: 1;
+      position: relative;
+      min-width: 200px;
+    }
+    .search-bar input {
+      width: 100%;
+      padding: 10px 40px 10px 15px;
+      border: 1px solid #ccc;
+      border-radius: 999px;
+      font-family: inherit;
+    }
+    .search-bar-icon {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #777;
+    }
+    .header-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn-login, .btn-signup {
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .btn-login {
+      background: var(--white);
+      color: var(--green-dark);
+      border: 2px solid var(--green-dark);
+    }
+    .btn-signup {
+      background: var(--green-dark);
+      color: var(--white);
+      border: none;
+    }
 
-    </style>
+    /* HERO */
+    .hero-section {
+      background-color: var(--green-primary);
+      color: var(--white);
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .hero-logo {
+      max-width: 100px;
+      height: auto;
+      margin-bottom: 15px;
+    }
+    .hero-section h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .hero-section p {
+      font-size: 1rem;
+      max-width: 500px;
+      margin: 0 auto 20px auto;
+    }
+    .hero-button {
+      background-color: var(--green-dark);
+      color: var(--white);
+      padding: 12px 20px;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      margin: 5px;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+    .hero-button:hover {
+      transform: translateY(-3px);
+      background-color: #2e7d32;
+    }
+
+    /* FEATURES */
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+    h2 {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--green-dark);
+      margin-bottom: 40px;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .feature-card {
+      background-color: var(--white);
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+    .feature-icon {
+      width: 60px;
+      margin-bottom: 15px;
+    }
+    .feature-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      color: var(--green-primary);
+    }
+
+    /* FOOTER */
+    .footer {
+      background-color: var(--green-dark);
+      color: var(--white);
+      text-align: center;
+      padding: 20px;
+    }
+
+    /* CHAT */
+    .chat-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: var(--green-primary);
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 24px;
+      border: none;
+      cursor: pointer;
+      color: white;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      z-index: 1000;
+    }
+    .chat-box {
+      display: none;
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 90%;
+      max-width: 300px;
+      max-height: 400px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .chat-header {
+      background: var(--green-dark);
+      color: white;
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+    }
+    .chat-messages {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      font-size: 0.9rem;
+    }
+    .chat-input {
+      display: flex;
+    }
+    .chat-input input {
+      flex: 1;
+      border: none;
+      padding: 10px;
+    }
+    .chat-input button {
+      background: var(--green-primary);
+      border: none;
+      color: white;
+      padding: 10px 15px;
+      cursor: pointer;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .header-main {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .header-actions {
+        justify-content: center;
+        width: 100%;
+      }
+      .hero-section h1 {
+        font-size: 1.6rem;
+      }
+      .hero-section p {
+        font-size: 0.9rem;
+      }
+    }
+    @media (max-width: 480px) {
+      .hero-section {
+        padding: 30px 15px;
+      }
+      .hero-section h1 {
+        font-size: 1.4rem;
+      }
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
-    <nav class="navbar">
-        <a href="index.html">Inicio</a>
-        <a href="registro.html">Registro</a>
-        <a href="cursos.html">Cursos</a>
-        <a href="historico.html">Histórico</a>
-        <a href="asesoria.html">Asesoría</a>
-        <a href="contacto.html">Contacto</a>
-        <a href="asistente.html">Asistente</a>
-    </nav>
 
-    <header class="hero-section">
-        <img src="logo/logosinf.png" alt="Logo de Arranca Ya" class="hero-logo">
-        <h1>Desbloquea tu Potencial Emprendedor</h1>
-        <p>Accede a todos nuestros cursos, herramientas y recursos para llevar tu negocio al siguiente nivel. Empieza hoy mismo tu camino al éxito.</p>
-        <div>
-            <a href="registro.html" class="hero-button">Comienza tu prueba gratuita</a>
-            <a href="asistente.html" class="hero-button">Usa nuestro asistente de voz</a>
-        </div>
-    </header>
-    <section class="container">
-        <h2>Lo que obtendrás con nuestra plataforma</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <img src="logo/trofeo.png" alt="Icono de trofeo" class="feature-icon">
-                <h3>Cursos Ilimitados</h3>
-                <p>Aprende de nuestra biblioteca completa de cursos en áreas como finanzas, marketing y gestión.</p>
-            </div>
-            <div class="feature-card">
-                <img src="logo/grafico.png" alt="Icono de gráfico" class="feature-icon">
-                <h3>Análisis Financiero</h3>
-                <p>Herramientas exclusivas para gestionar gastos, crear presupuestos y analizar la salud de tu negocio.</p>
-            </div>
-            <div class="feature-card">
-                <img src="logo/ia.jpg" alt="Icono de robot" class="feature-icon">
-                <h3>Asistente con IA</h3>
-                <p>Obtén ayuda personalizada 24/7 con nuestro asistente virtual, Sparkia, para resolver todas tus dudas.</p>
-            </div>
-        </div>
-    </section>
-    <footer class="footer">
-        <p>© 2025 Arranca Ya!. Todos los derechos reservados.</p>
-    </footer>
+  <!-- BANNER -->
+  <div class="top-banner" id="promo-banner">
+    <p>¡Promoción especial! 50% de descuento en tu próximo curso 🎉</p>
+    <span class="close-btn" onclick="document.getElementById('promo-banner').style.display='none';">&times;</span>
+  </div>
 
-    <button class="chat-button" onclick="toggleChat()">🤖</button>
-
-    <div class="chat-box" id="chatBox">
-        <div class="chat-header">Soy Sparkia, tu asistente virtual 🤖</div>
-        <div class="chat-messages" id="chatMessages">
-            <p><strong>Sparkia:</strong> ¡Hola! ¿En qué puedo ayudarte hoy?</p>
-        </div>
-        <div class="chat-input">
-            <input type="text" id="userInput" placeholder="Escribe un mensaje...">
-            <button onclick="sendMessage()">➤</button>
-        </div>
+  <!-- HEADER -->
+  <header class="header-main">
+    <div class="brand"><h1>Arranca Ya!</h1></div>
+    <div class="search-bar">
+      <input type="text" placeholder="Buscar cursos o herramientas...">
+      <span class="search-bar-icon">&#x1F50D;</span>
     </div>
+    <div class="header-actions">
+      <a href="#" class="btn-login" id="showLoginBtn">Iniciar sesión</a>
+      <a href="registro.html" class="btn-signup">Regístrate</a>
+    </div>
+  </header>
 
-    <script>
-        function toggleChat() {
-            const chat = document.getElementById("chatBox");
-            chat.style.display = (chat.style.display === "flex") ? "none" : "flex";
-        }
+  <!-- HERO -->
+  <section class="hero-section">
+    <img src="logo/logosinf.png" alt="Logo de Arranca Ya" class="hero-logo">
+    <h1 id="heroTitle">Desbloquea tu Potencial Emprendedor</h1>
+    <p>Accede a cursos, herramientas y recursos para llevar tu negocio al siguiente nivel. 🚀</p>
+    <a href="registro.html" class="hero-button">Prueba gratuita</a>
+    <a href="asistente.html" class="hero-button">Usa nuestro asistente de voz</a>
+  </section>
 
-        function sendMessage() {
-            const input = document.getElementById("userInput");
-            const msg = input.value.trim();
-            if (msg === "") return;
-            
-            const messages = document.getElementById("chatMessages");
-            const userMsg = document.createElement("p");
-            userMsg.innerHTML = "<strong>Tú:</strong> " + msg;
-            messages.appendChild(userMsg);
+  <!-- FEATURES -->
+  <section class="container">
+    <h2>Lo que obtendrás</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <img src="logo/trofeo.png" alt="Cursos ilimitados" class="feature-icon">
+        <h3>Cursos Ilimitados</h3>
+        <p>Aprende en áreas como finanzas, marketing y gestión.</p>
+      </div>
+      <div class="feature-card">
+        <img src="logo/grafico.png" alt="Análisis financiero" class="feature-icon">
+        <h3>Análisis Financiero</h3>
+        <p>Herramientas exclusivas para gestionar gastos y presupuestos.</p>
+      </div>
+      <div class="feature-card">
+        <img src="logo/ia.jpg" alt="Asistente con IA" class="feature-icon">
+        <h3>Asistente con IA</h3>
+        <p>Soporte personalizado 24/7 con Sparkia.</p>
+      </div>
+    </div>
+  </section>
 
-            // Respuesta simple de Sparkia
-            const botMsg = document.createElement("p");
-            botMsg.innerHTML = "<strong>Sparkia:</strong> Estoy en desarrollo, pero siempre aquí para ayudarte 🚀";
-            messages.appendChild(botMsg);
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>© 2025 Arranca Ya!. Todos los derechos reservados.</p>
+  </footer>
 
-            messages.scrollTop = messages.scrollHeight;
-            input.value = "";
-        }
-    </script>
+  <!-- CHAT -->
+  <button class="chat-button" onclick="toggleChat()">🤖</button>
+  <div class="chat-box" id="chatBox">
+    <div class="chat-header">Soy Sparkia 🤖</div>
+    <div class="chat-messages" id="chatMessages">
+      <p><strong>Sparkia:</strong> ¡Hola! ¿En qué puedo ayudarte hoy?</p>
+    </div>
+    <div class="chat-input">
+      <input type="text" id="userInput" placeholder="Escribe un mensaje...">
+      <button onclick="sendMessage()">➤</button>
+    </div>
+  </div>
+
+  <script>
+    // CHAT
+    function toggleChat() {
+      const chat = document.getElementById("chatBox");
+      chat.style.display = (chat.style.display === "flex") ? "none" : "flex";
+    }
+    function sendMessage() {
+      const input = document.getElementById("userInput");
+      const msg = input.value.trim();
+      if (!msg) return;
+      const messages = document.getElementById("chatMessages");
+      messages.innerHTML += "<p><strong>Tú:</strong> " + msg + "</p>";
+      messages.innerHTML += "<p><strong>Sparkia:</strong> Estoy en desarrollo, pero siempre aquí 🚀</p>";
+      messages.scrollTop = messages.scrollHeight;
+      input.value = "";
+    }
+  </script>
 </body>
 </html>

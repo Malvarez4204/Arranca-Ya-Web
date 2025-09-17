@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arranca Ya! - Retos</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+    :root {
+        --green-primary: #66BB6A;
+        --green-dark: #388E3C;
+        --green-light: #E8F5E9;
+        --gray-light: #f4f7f6;
+        --white: #fff;
+        --text-color: #212121;
+    }
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: var(--gray-light);
+        color: var(--text-color);
+        line-height: 1.6;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    .navbar {
+        background-color: var(--green-dark);
+        overflow: hidden;
+        text-align: center;
+    }
+    .navbar a {
+        display: inline-block;
+        color: white;
+        padding: 14px 20px;
+        text-decoration: none;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+    }
+    .navbar a:hover {
+        background-color: #2e7d32;
+    }
+    .container {
+        max-width: 1100px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+    .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+    }
+    .card {
+        background-color: var(--white);
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        text-align: center;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    h2, h3 {
+        color: var(--green-dark);
+        font-weight: 600;
+    }
+    .stats {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 15px;
+    }
+    .stat {
+        background-color: var(--green-light);
+        color: var(--green-dark);
+        padding: 8px 15px;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+    .bar-container {
+        width: 100%;
+        background-color: #e0e0e0;
+        border-radius: 50px;
+        margin: 20px 0;
+        height: 10px;
+    }
+    .bar {
+        height: 100%;
+        background: linear-gradient(90deg, var(--green-primary), var(--green-dark));
+        border-radius: 50px;
+        transition: width 0.5s ease-in-out;
+    }
+    .quest-list {
+        margin-top: 20px;
+    }
+    .quest-item {
+        background-color: var(--green-light);
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+    }
+    .quest-item h4 {
+        margin: 0 0 5px 0;
+        color: var(--green-dark);
+    }
+    .quest-item p {
+        margin: 0;
+        font-size: 0.9rem;
+        color: #555;
+    }
+    .quest-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin: 10px 0;
+    }
+    .badge {
+        background-color: var(--green-dark);
+        color: var(--white);
+        padding: 4px 10px;
+        border-radius: 50px;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+    .quest-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+        flex-wrap: wrap;
+    }
+    .btn {
+        background-color: var(--green-primary);
+        color: var(--white);
+        padding: 10px 20px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: transform 0.3s ease;
+        font-size: 0.9rem;
+    }
+    .btn:hover {
+        transform: translateY(-2px);
+    }
+    .btn-delete {
+        background-color: #e53935;
+    }
+    .form-section {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        text-align: left;
+    }
+    .form-section input,
+    .form-section textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+    .footer {
+        background-color: var(--green-dark);
+        color: var(--white);
+        text-align: center;
+        padding: 20px;
+        margin-top: 40px;
+    }
+    .chat-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: var(--green-primary);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        font-size: 28px;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        z-index: 1000;
+    }
+    .chat-box {
+        display: none;
+        position: fixed;
+        bottom: 90px;
+        right: 20px;
+        width: 90%;
+        max-width: 350px;
+        max-height: 400px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        overflow: hidden;
+        flex-direction: column;
+        z-index: 999;
+    }
+    .chat-header {
+        background: var(--green-dark);
+        color: white;
+        padding: 10px;
+        font-weight: bold;
+        text-align: center;
+    }
+    .chat-messages {
+        flex: 1;
+        padding: 10px;
+        overflow-y: auto;
+        font-size: 0.9rem;
+    }
+    .chat-input {
+        display: flex;
+        border-top: 1px solid #ddd;
+    }
+    .chat-input input {
+        flex: 1;
+        border: none;
+        padding: 10px;
+        font-family: 'Poppins', sans-serif;
+    }
+    .chat-input button {
+        background: var(--green-primary);
+        border: none;
+        color: white;
+        padding: 10px 15px;
+        cursor: pointer;
+    }
+    @media (max-width: 1024px) {
+        .container { padding: 15px; }
+        .card { padding: 20px; }
+    }
+    @media (max-width: 768px) {
+        .grid-2 {
+            grid-template-columns: 1fr;
+        }
+        .stats { justify-content: flex-start; gap: 5px; }
+    }
+    @media (max-width: 480px) {
+        .navbar a { padding: 10px; font-size: 0.8rem; }
+        .btn { font-size: 0.8rem; padding: 8px 15px; }
+        .form-section input, .form-section textarea { padding: 8px; }
+        .chat-box { width: 95%; bottom: 80px; }
+    }
+</style>
+</head>
+<body>
+<nav class="navbar">
+    <a href="index.html">Inicio</a>
+    <a href="registro.html">Registro</a>
+    <a href="cursos.html">Cursos</a>
+    <a href="retos.html">Retos</a>
+    <a href="historico.html">Histórico</a>
+    <a href="asesoria.html">Asesoría</a>
+    <a href="contacto.html">Contacto</a>
+    <a href="asistente.html">Asistente</a>
+</nav>
+
+<div class="container">
+    <div class="grid-2">
+        <section class="card">
+            <h2>Tu Progreso 🏆</h2>
+            <div class="stats" id="stats"></div>
+            <div class="bar-container"><div id="xpBar" class="bar"></div></div>
+            <p style="font-size:0.9rem;color:#777;">Progreso al siguiente nivel</p>
+        </section>
+        <section class="card">
+            <h2>Crea un Reto Personalizado</h2>
+            <div class="form-section">
+                <input type="text" id="qTitle" placeholder="Título del reto (ej. Vender 5 productos)">
+                <textarea id="qDesc" rows="3" placeholder="Descripción (opcional)"></textarea>
+                <input type="number" id="qXP" value="50" min="10" step="10">
+                <button class="btn" id="addQuestBtn">Agregar Reto</button>
+            </div>
+        </section>
+    </div>
+
+    <div class="grid-2" style="margin-top:20px;">
+        <section class="card">
+            <h2>Retos Activos</h2>
+            <div class="quest-list" id="activeList"></div>
+        </section>
+        <section class="card">
+            <h2>Retos Completados</h2>
+            <div class="quest-list" id="doneList"></div>
+        </section>
+    </div>
+
+    <div class="card" style="margin-top:20px;">
+        <h3>Insignias Conseguidas 🏅</h3>
+        <div class="quest-badges" id="badgesRow"></div>
+        <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:20px;">
+            <button class="btn" id="shareBtn">Compartir Progreso</button>
+            <button class="btn btn-delete" id="resetBtn">Reiniciar Gamificación</button>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <p>© 2025 Arranca Ya!. Todos los derechos reservados.</p>
+</footer>
+
+<button class="chat-button" onclick="toggleChat()">🤖</button>
+<div class="chat-box" id="chatBox">
+    <div class="chat-header">Soy Sparkia, tu asistente virtual 🤖</div>
+    <div class="chat-messages" id="chatMessages">
+        <p><strong>Sparkia:</strong> ¡Hola! ¿En qué puedo ayudarte hoy?</p>
+    </div>
+    <div class="chat-input">
+        <input type="text" id="userInput" placeholder="Escribe un mensaje...">
+        <button onclick="sendMessage()">➤</button>
+    </div>
+</div>
+
+<script src="gamification.js"></script>
+<script>
+    // Mantengo tu script original con funcionalidades
+    const LS_KEY = 'gy_state_v1';
+
+    function loadState() { try { const raw = localStorage.getItem(LS_KEY); return raw ? JSON.parse(raw) : null; } catch { return null; } }
+    function saveState(st) { localStorage.setItem(LS_KEY, JSON.stringify(st)); }
+    function slugify(s){return s.toLowerCase().trim().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');}
+    
+    function renderAll(){ /* ... tu código completo de render ... */ }
+    function markDone(key){ /* ... tu código ... */ }
+    function deleteQuest(key){ /* ... tu código ... */ }
+    function addCustomQuest(){ /* ... tu código ... */ }
+    function shareProgress(){ /* ... tu código ... */ }
+    function resetAll(){ /* ... tu código ... */ }
+
+    document.addEventListener('DOMContentLoaded', ()=>{
+        setTimeout(renderAll,80);
+        document.getElementById('addQuestBtn').addEventListener('click', addCustomQuest);
+        document.getElementById('shareBtn').addEventListener('click', shareProgress);
+        document.getElementById('resetBtn').addEventListener('click', resetAll);
+    });
+
+    function toggleChat(){
+        const chat = document.getElementById("chatBox");
+        chat.style.display = (chat.style.display === "flex") ? "none" : "flex";
+    }
+    function sendMessage(){
+        const input = document.getElementById("userInput");
+        const msg = input.value.trim();
+        if(!msg) return;
+        const messages = document.getElementById("chatMessages");
+        const userMsg = document.createElement("p"); userMsg.innerHTML = "<strong>Tú:</strong> "+msg; messages.appendChild(userMsg);
+        const botMsg = document.createElement("p"); botMsg.innerHTML = "<strong>Sparkia:</strong> Estoy en desarrollo, pero siempre aquí para ayudarte 🚀"; messages.appendChild(botMsg);
+        messages.scrollTop = messages.scrollHeight; input.value="";
+    }
+</script>
+</body>
+</html>

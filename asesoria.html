@@ -1,236 +1,283 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arranca Ya! - Asesoría</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --green-primary: #66BB6A;
-            --green-dark: #388E3C;
-            --green-light: #E8F5E9;
-            --gray-light: #f4f7f6;
-            --white: #fff;
-            --text-color: #212121;
-        }
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--gray-light);
-            color: var(--text-color);
-            line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        .navbar {
-            background-color: var(--green-dark);
-            overflow: hidden;
-            text-align: center;
-        }
-        .navbar a {
-            display: inline-block;
-            color: white;
-            padding: 14px 20px;
-            text-decoration: none;
-            font-size: 1rem;
-            transition: background-color 0.3s ease;
-        }
-        .navbar a:hover {
-            background-color: #2e7d32;
-        }
-        .header {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: var(--white);
-            padding: 15px 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        }
-        .header-logo {
-            max-width: 100px;
-        }
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 40px;
-            background-color: var(--white);
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            text-align: center;
-        }
-        h2 {
-            font-size: 2rem;
-            color: var(--green-dark);
-            margin-top: 0;
-            margin-bottom: 20px;
-        }
-        .footer {
-            background-color: var(--green-dark);
-            color: var(--white);
-            text-align: center;
-            padding: 20px;
-            margin-top: auto;
-        }
-        .form-group {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 600;
-        }
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-sizing: border-box;
-            font-size: 1rem;
-        }
-        .submit-button {
-            background-color: var(--green-dark);
-            color: var(--white);
-            padding: 15px 30px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 20px;
-            transition: background-color 0.3s ease;
-        }
-        .submit-button:hover {
-            background-color: #2e7d32;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arranca Ya! - Asesoría</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green-primary: #66BB6A;
+      --green-dark: #388E3C;
+      --green-light: #E8F5E9;
+      --gray-light: #f4f7f6;
+      --white: #fff;
+      --text-color: #212121;
+    }
 
-        /* --- BOTÓN DE CHAT --- */
-        .chat-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: var(--green-primary);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-        .chat-box {
-            display: none;
-            position: fixed;
-            bottom: 90px;
-            right: 20px;
-            width: 300px;
-            max-height: 400px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            overflow: hidden;
-            flex-direction: column;
-        }
-        .chat-header {
-            background: var(--green-dark);
-            color: white;
-            padding: 10px;
-            font-weight: bold;
-            text-align: center;
-        }
-        .chat-messages {
-            flex: 1;
-            padding: 10px;
-            overflow-y: auto;
-            font-size: 0.9rem;
-        }
-        .chat-input {
-            display: flex;
-            border-top: 1px solid #ddd;
-        }
-        .chat-input input {
-            flex: 1;
-            border: none;
-            padding: 10px;
-        }
-        .chat-input button {
-            background: var(--green-primary);
-            border: none;
-            color: white;
-            padding: 10px 15px;
-            cursor: pointer;
-        }
-    </style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--gray-light);
+      color: var(--text-color);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* --- NAVBAR --- */
+    .navbar {
+      background-color: var(--green-dark);
+      overflow: hidden;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .navbar a {
+      flex: 1 1 auto;
+      text-align: center;
+      color: white;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+      min-width: 120px;
+    }
+    .navbar a:hover {
+      background-color: #2e7d32;
+    }
+
+    /* --- HEADER --- */
+    .header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--white);
+      padding: 15px 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+    .header-logo {
+      max-width: 100px;
+      height: auto;
+    }
+
+    /* --- CONTENEDOR --- */
+    .container {
+      width: 90%;
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: var(--white);
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      text-align: center;
+    }
+    h2 {
+      font-size: 1.8rem;
+      color: var(--green-dark);
+      margin-bottom: 15px;
+    }
+
+    /* --- FORMULARIO --- */
+    .form-group {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+    .submit-button {
+      background-color: var(--green-dark);
+      color: var(--white);
+      padding: 15px 30px;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 20px;
+      transition: background-color 0.3s ease;
+    }
+    .submit-button:hover {
+      background-color: #2e7d32;
+    }
+
+    /* --- FOOTER --- */
+    .footer {
+      background-color: var(--green-dark);
+      color: var(--white);
+      text-align: center;
+      padding: 20px;
+      margin-top: auto;
+      font-size: 0.9rem;
+    }
+
+    /* --- BOTÓN DE CHAT --- */
+    .chat-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: var(--green-primary);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 55px;
+      height: 55px;
+      font-size: 22px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .chat-box {
+      display: none;
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      width: 300px;
+      max-height: 400px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      overflow: hidden;
+      flex-direction: column;
+    }
+    .chat-header {
+      background: var(--green-dark);
+      color: white;
+      padding: 10px;
+      font-weight: bold;
+      text-align: center;
+    }
+    .chat-messages {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      font-size: 0.9rem;
+    }
+    .chat-input {
+      display: flex;
+      border-top: 1px solid #ddd;
+    }
+    .chat-input input {
+      flex: 1;
+      border: none;
+      padding: 10px;
+    }
+    .chat-input button {
+      background: var(--green-primary);
+      border: none;
+      color: white;
+      padding: 10px 15px;
+      cursor: pointer;
+    }
+
+    /* --- MEDIA QUERIES --- */
+    @media (max-width: 768px) {
+      h2 {
+        font-size: 1.5rem;
+      }
+      .container {
+        padding: 15px;
+      }
+      .navbar a {
+        font-size: 0.9rem;
+        padding: 10px;
+      }
+    }
+    @media (max-width: 480px) {
+      .navbar {
+        flex-direction: column;
+      }
+      .navbar a {
+        width: 100%;
+        border-top: 1px solid rgba(255,255,255,0.2);
+      }
+      .chat-box {
+        width: 90%;
+        right: 5%;
+      }
+    }
+  </style>
 </head>
 <body>
- <nav class="navbar">
-        <a href="index.html">Inicio</a>
-        <a href="registro.html">Registro</a>
-        <a href="cursos.html">Cursos</a>
-        <a href="historico.html">Histórico</a>
-        <a href="asesoria.html">Asesoría</a>
-        <a href="contacto.html">Contacto</a>
-        <a href="asistente.html">Asistente</a>
-    </nav>
+  <nav class="navbar">
+    <a href="index.html">Inicio</a>
+    <a href="registro.html">Registro</a>
+    <a href="cursos.html">Cursos</a>
+    <a href="historico.html">Histórico</a>
+    <a href="asesoria.html">Asesoría</a>
+    <a href="contacto.html">Contacto</a>
+    <a href="asistente.html">Asistente</a>
+    <a href="retos.html">Retos</a>
+  </nav>
 
-    <div class="header">
-        <img src="logo/logosinf.png" alt="Logo de Arranca Ya" class="header-logo">
-    </div>
-    <div class="container">
-        <h2>Agenda tu Asesoría</h2>
-        <p>Completa el formulario y un especialista se pondrá en contacto contigo para ayudarte a llevar tu idea de negocio al siguiente nivel.</p>
-        <form>
-            <div class="form-group">
-                <label for="name">Nombre</label>
-                <input type="text" id="name" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Correo electrónico</label>
-                <input type="email" id="email" required>
-            </div>
-            <div class="form-group">
-                <label for="business">Breve descripción de tu negocio</label>
-                <textarea id="business" rows="4" required></textarea>
-            </div>
-            <button type="submit" class="submit-button">Solicitar Asesoría</button>
-        </form>
-    </div>
-    <footer class="footer">
-        <p>© 2025 Arranca Ya!. Todos los derechos reservados.</p>
-    </footer>
+  <div class="header">
+    <img src="logo/logosinf.png" alt="Logo de Arranca Ya" class="header-logo">
+  </div>
 
-    <!-- BOTÓN DE CHAT VERDE -->
-    <button class="chat-button" onclick="toggleChat()">🤖</button>
-    <div class="chat-box" id="chatBox">
-        <div class="chat-header">Asistente Arranca Ya!</div>
-        <div class="chat-messages" id="chatMessages"></div>
-        <div class="chat-input">
-            <input type="text" id="chatInput" placeholder="Escribe un mensaje...">
-            <button onclick="sendMessage()">Enviar</button>
-        </div>
-    </div>
+  <div class="container">
+    <h2>Agenda tu Asesoría</h2>
+    <p>Completa el formulario y un especialista se pondrá en contacto contigo para ayudarte a llevar tu idea de negocio al siguiente nivel.</p>
+    <form>
+      <div class="form-group">
+        <label for="name">Nombre</label>
+        <input type="text" id="name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Correo electrónico</label>
+        <input type="email" id="email" required>
+      </div>
+      <div class="form-group">
+        <label for="business">Breve descripción de tu negocio</label>
+        <textarea id="business" rows="4" required></textarea>
+      </div>
+      <button type="submit" class="submit-button">Solicitar Asesoría</button>
+    </form>
+  </div>
 
-    <script>
-        function toggleChat() {
-            const box = document.getElementById('chatBox');
-            box.style.display = box.style.display === 'flex' ? 'none' : 'flex';
-        }
-        function sendMessage() {
-            const input = document.getElementById('chatInput');
-            const messages = document.getElementById('chatMessages');
-            if(input.value.trim() !== '') {
-                const msg = document.createElement('div');
-                msg.textContent = input.value;
-                messages.appendChild(msg);
-                input.value = '';
-                messages.scrollTop = messages.scrollHeight;
-            }
-        }
-    </script>
+  <footer class="footer">
+    <p>© 2025 Arranca Ya!. Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- BOTÓN DE CHAT -->
+  <button class="chat-button" onclick="toggleChat()">🤖</button>
+  <div class="chat-box" id="chatBox">
+    <div class="chat-header">Asistente Arranca Ya!</div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-input">
+      <input type="text" id="chatInput" placeholder="Escribe un mensaje...">
+      <button onclick="sendMessage()">Enviar</button>
+    </div>
+  </div>
+
+  <script>
+    function toggleChat() {
+      const box = document.getElementById('chatBox');
+      box.style.display = box.style.display === 'flex' ? 'none' : 'flex';
+    }
+    function sendMessage() {
+      const input = document.getElementById('chatInput');
+      const messages = document.getElementById('chatMessages');
+      if(input.value.trim() !== '') {
+        const msg = document.createElement('div');
+        msg.textContent = input.value;
+        messages.appendChild(msg);
+        input.value = '';
+        messages.scrollTop = messages.scrollHeight;
+      }
+    }
+  </script>
 </body>
 </html>

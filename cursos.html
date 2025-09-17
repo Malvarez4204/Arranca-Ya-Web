@@ -1,246 +1,222 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arranca Ya! - Cursos</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --green-primary: #66BB6A;
-            --green-dark: #388E3C;
-            --green-light: #E8F5E9;
-            --gray-light: #f4f7f6;
-            --white: #fff;
-            --text-color: #212121;
-        }
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--gray-light);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-        .navbar {
-            background-color: var(--green-dark);
-            overflow: hidden;
-            text-align: center;
-        }
-        .navbar a {
-            display: inline-block;
-            color: white;
-            padding: 14px 20px;
-            text-decoration: none;
-            font-size: 1rem;
-            transition: background-color 0.3s ease;
-        }
-        .navbar a:hover {
-            background-color: #2e7d32;
-        }
-        .container {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: var(--white);
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            text-align: center;
-        }
-        h2 {
-            font-size: 2rem;
-            color: var(--green-dark);
-            margin-bottom: 20px;
-        }
-        .hero-section {
-            background-color: var(--green-primary);
-            color: var(--white);
-            padding: 60px 20px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-        }
-        .hero-section h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-        .hero-section p {
-            font-size: 1.1rem;
-        }
-        .quiz-form {
-            margin-top: 20px;
-            text-align: left;
-            padding: 0 20px;
-        }
-        .quiz-question {
-            margin-bottom: 25px;
-            background-color: var(--green-light);
-            padding: 15px;
-            border-radius: 10px;
-        }
-        .quiz-question p {
-            font-weight: 600;
-            margin-top: 0;
-        }
-        .quiz-options label,
-        .quiz-options textarea {
-            display: block;
-            margin-bottom: 10px;
-            width: 95%;
-        }
-        .quiz-options input[type="radio"] {
-            margin-right: 8px;
-        }
-        .quiz-options textarea {
-            min-height: 80px;
-            resize: vertical;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .hero-button {
-            background-color: var(--green-dark);
-            color: var(--white);
-            padding: 12px 25px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            transition: background-color 0.3s ease;
-            margin-top: 20px;
-        }
-        .hero-button:hover {
-            background-color: #2e7d32;
-        }
-        .profile-container {
-            margin-top: 30px;
-        }
-        .profile-text {
-            background-color: var(--green-light);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-        .profile-text h3 {
-            color: var(--green-dark);
-            margin-top: 0;
-        }
-        .card-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        .course-card {
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            text-align: left;
-        }
-        .course-card img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-        }
-        .course-content {
-            padding: 15px;
-        }
-        .course-content h4 {
-            color: var(--green-dark);
-            margin-top: 0;
-            margin-bottom: 10px;
-            font-size: 1.2rem;
-        }
-        .course-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 15px;
-        }
-        .course-buttons .buy-btn {
-            background-color: var(--green-dark);
-            color: var(--white);
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .course-buttons .cart-btn {
-            background-color: #555;
-            color: var(--white);
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .footer {
-            background-color: var(--green-dark);
-            color: var(--white);
-            text-align: center;
-            padding: 20px;
-            margin-top: 20px;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arranca Ya! - Cursos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green-primary: #66BB6A;
+      --green-dark: #388E3C;
+      --green-light: #E8F5E9;
+      --gray-light: #f4f7f6;
+      --white: #fff;
+      --text-color: #212121;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--gray-light);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
 
-        /* --- CHAT WIDGET --- */
-        .chat-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: var(--green-primary);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            font-size: 28px;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-        .chat-box {
-            display: none;
-            position: fixed;
-            bottom: 90px;
-            right: 20px;
-            width: 300px;
-            max-height: 400px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            overflow: hidden;
-            flex-direction: column;
-        }
-        .chat-header {
-            background: var(--green-dark);
-            color: white;
-            padding: 10px;
-            font-weight: bold;
-            text-align: center;
-        }
-        .chat-messages {
-            flex: 1;
-            padding: 10px;
-            overflow-y: auto;
-            font-size: 0.9rem;
-        }
-        .chat-input {
-            display: flex;
-            border-top: 1px solid #ddd;
-        }
-        .chat-input input {
-            flex: 1;
-            border: none;
-            padding: 10px;
-        }
-        .chat-input button {
-            background: var(--green-primary);
-            border: none;
-            color: white;
-            padding: 10px 15px;
-            cursor: pointer;
-        }
-    </style>
+    /* NAVBAR */
+    .navbar {
+      background-color: var(--green-dark);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .navbar a {
+      display: block;
+      color: white;
+      padding: 14px 20px;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+    }
+    .navbar a:hover {
+      background-color: #2e7d32;
+    }
+
+    /* CONTENEDOR PRINCIPAL */
+    .container {
+      max-width: 1100px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: var(--white);
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: var(--green-dark);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    /* HERO */
+    .hero-section {
+      background-color: var(--green-primary);
+      color: var(--white);
+      padding: 40px 20px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .hero-section h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+    .hero-section p {
+      font-size: 1rem;
+    }
+
+    /* QUIZ */
+    .quiz-form {
+      margin-top: 20px;
+      text-align: left;
+    }
+    .quiz-question {
+      margin-bottom: 20px;
+      background-color: var(--green-light);
+      padding: 15px;
+      border-radius: 10px;
+    }
+    .quiz-options label,
+    .quiz-options textarea {
+      display: block;
+      margin-bottom: 10px;
+      width: 100%;
+    }
+
+    /* BOTONES */
+    .hero-button {
+      background-color: var(--green-dark);
+      color: var(--white);
+      padding: 12px 25px;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: background-color 0.3s ease;
+      margin-top: 10px;
+    }
+    .hero-button:hover {
+      background-color: #2e7d32;
+    }
+
+    /* CARDS */
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .course-card {
+      background-color: var(--white);
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+    .course-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+    .course-content {
+      padding: 15px;
+    }
+    .course-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .course-buttons button {
+      flex: 1;
+      min-width: 120px;
+    }
+
+    /* FOOTER */
+    .footer {
+      background-color: var(--green-dark);
+      color: var(--white);
+      text-align: center;
+      padding: 15px;
+      font-size: 0.9rem;
+    }
+
+    /* BOTONES FLOTANTES */
+    .chat-button, .shopping-cart-button {
+      position: fixed;
+      bottom: 20px;
+      border: none;
+      border-radius: 50%;
+      width: 55px;
+      height: 55px;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .chat-button {
+      right: 20px;
+      background-color: var(--green-primary);
+      color: white;
+    }
+    .shopping-cart-button {
+      right: 90px;
+      background-color: #2196F3;
+      color: white;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .hero-section h1 {
+        font-size: 1.6rem;
+      }
+      .hero-section p {
+        font-size: 0.95rem;
+      }
+      .navbar {
+        flex-direction: column;
+      }
+      .navbar a {
+        padding: 10px;
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 15px;
+      }
+      h2 {
+        font-size: 1.4rem;
+      }
+      .hero-section {
+        padding: 25px 15px;
+      }
+      .chat-button, .shopping-cart-button {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+      }
+    }
+  </style>
 </head>
 <body>
- <nav class="navbar">
+  <nav class="navbar">
     <a href="index.html">Inicio</a>
     <a href="registro.html">Registro</a>
     <a href="cursos.html">Cursos</a>
@@ -248,84 +224,26 @@
     <a href="asesoria.html">Asesoría</a>
     <a href="contacto.html">Contacto</a>
     <a href="asistente.html">Asistente</a>
-</nav>
+    <a href="retos.html">Retos</a>
+  </nav>
 
-    <div class="container">
-        <h2>Nuestros Cursos</h2>
-        <div id="quiz-section">
-            <div class="hero-section">
-                <h1>Encuentra tu camino</h1>
-                <p>Responde a este breve cuestionario para que te recomendemos los mejores cursos para tu perfil emprendedor.</p>
-            </div>
-            
-            <div class="quiz-form">
-                <!-- Aquí van todas las preguntas del cuestionario igual que antes -->
-                <button class="hero-button" onclick="showRecommendations()">Obtener mi Perfil</button>
-            </div>
-        </div>
-        
-        <div id="profile-section" class="profile-container" style="display: none;">
-            <!-- Perfil y cursos recomendados igual que antes -->
-        </div>
+  <div class="container">
+    <h2>Nuestros Cursos</h2>
+    <div class="hero-section">
+      <h1>Encuentra tu camino</h1>
+      <p>Responde a este breve cuestionario para que te recomendemos los mejores cursos.</p>
+      <button class="hero-button">Comenzar Cuestionario</button>
     </div>
-    
-    <footer class="footer">
-        <p>© 2025 Arranca Ya!. Todos los derechos reservados.</p>
-    </footer>
-
-    <!-- Botón de chat -->
-    <button class="chat-button" onclick="toggleChat()">🤖</button>
-
-    <!-- Caja de chat -->
-    <div class="chat-box" id="chatBox">
-        <div class="chat-header">Soy Sparkia, tu asistente virtual 🤖</div>
-        <div class="chat-messages" id="chatMessages">
-            <p><strong>Sparkia:</strong> ¡Hola! ¿En qué puedo ayudarte hoy?</p>
-        </div>
-        <div class="chat-input">
-            <input type="text" id="userInput" placeholder="Escribe un mensaje...">
-            <button onclick="sendMessage()">➤</button>
-        </div>
+    <div class="card-container">
+      <!-- Aquí irán los cursos -->
     </div>
+  </div>
 
-    <script>
-        function showRecommendations() {
-            const q1Answer = document.querySelector('input[name="q1"]:checked');
-            const q2Answer = document.querySelector('textarea[name="q2"]');
-            
-            if (q1Answer && q2Answer.value.trim() !== '') {
-                const quizSection = document.getElementById('quiz-section');
-                const profileSection = document.getElementById('profile-section');
-                
-                quizSection.style.display = 'none';
-                profileSection.style.display = 'block';
-            } else {
-                alert('Por favor, responde al menos la primera pregunta cerrada y la segunda pregunta abierta para obtener tu perfil.');
-            }
-        }
+  <footer class="footer">
+    <p>© 2025 Arranca Ya!. Todos los derechos reservados.</p>
+  </footer>
 
-        function toggleChat() {
-            const chat = document.getElementById("chatBox");
-            chat.style.display = (chat.style.display === "flex") ? "none" : "flex";
-        }
-
-        function sendMessage() {
-            const input = document.getElementById("userInput");
-            const msg = input.value.trim();
-            if (msg === "") return;
-            
-            const messages = document.getElementById("chatMessages");
-            const userMsg = document.createElement("p");
-            userMsg.innerHTML = "<strong>Tú:</strong> " + msg;
-            messages.appendChild(userMsg);
-
-            const botMsg = document.createElement("p");
-            botMsg.innerHTML = "<strong>Sparkia:</strong> Estoy en desarrollo, pero siempre aquí para ayudarte 🚀";
-            messages.appendChild(botMsg);
-
-            messages.scrollTop = messages.scrollHeight;
-            input.value = "";
-        }
-    </script>
+  <button class="chat-button">🤖</button>
+  <button class="shopping-cart-button">🛒</button>
 </body>
 </html>

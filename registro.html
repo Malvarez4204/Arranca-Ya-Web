@@ -1,220 +1,255 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arranca Ya! - Registro</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --green-primary: #66BB6A;
-            --green-dark: #388E3C;
-            --green-light: #E8F5E9;
-            --gray-light: #f4f7f6;
-            --white: #fff;
-            --text-color: #212121;
-        }
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--gray-light);
-            color: var(--text-color);
-            line-height: 1.6;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-        }
-        .navbar {
-            background-color: var(--green-dark);
-            overflow: hidden;
-            text-align: center;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arranca Ya! - Registro</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --green-primary: #66BB6A;
+        --green-dark: #388E3C;
+        --green-light: #E8F5E9;
+        --gray-light: #f4f7f6;
+        --white: #fff;
+        --text-color: #212121;
+    }
+    * {
+        box-sizing: border-box;
+    }
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: var(--gray-light);
+        color: var(--text-color);
+        line-height: 1.6;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    .navbar {
+        background-color: var(--green-dark);
+        text-align: center;
+        flex-wrap: wrap;
+        display: flex;
+        justify-content: center;
+    }
+    .navbar a {
+        display: block;
+        color: white;
+        padding: 12px 18px;
+        text-decoration: none;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+    }
+    .navbar a:hover {
+        background-color: #2e7d32;
+    }
+    .container {
+        max-width: 500px;
+        width: 90%;
+        margin: 40px auto;
+        padding: 20px 30px;
+        background-color: var(--white);
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    }
+    h2 {
+        font-size: 2rem;
+        color: var(--green-dark);
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 600;
+    }
+    .form-group input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .privacy-notice {
+        background-color: var(--green-light);
+        border-radius: 8px;
+        padding: 15px;
+        font-size: 0.9rem;
+        max-height: 150px;
+        overflow-y: auto;
+        border: 1px solid var(--green-dark);
+        margin-bottom: 15px;
+    }
+    .privacy-notice h3 {
+        margin-top: 0;
+        color: var(--green-dark);
+        font-size: 1.2rem;
+    }
+    .privacy-checkbox {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 20px;
+        gap: 10px;
+    }
+    .privacy-checkbox input {
+        margin-top: 4px;
+    }
+    .submit-btn {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        background-color: var(--green-dark);
+        color: var(--white);
+        border: none;
+        border-radius: 5px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    .submit-btn:hover {
+        background-color: #2e7d32;
+    }
+    .footer {
+        background-color: var(--green-dark);
+        color: var(--white);
+        text-align: center;
+        padding: 20px;
+        margin-top: 20px;
+    }
+    .floating-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        width: 90px;
+        height: 90px;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease;
+        background-color: var(--green-dark);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        padding: 10px;
+        text-align: center;
+    }
+    .floating-button:hover {
+        transform: scale(1.1);
+    }
+    .bot-icon {
+        font-size: 2.2rem;
+        color: white;
+        line-height: 1;
+    }
+    .bot-text {
+        font-size: 0.65rem;
+        color: white;
+        line-height: 1.1;
+        margin-top: 5px;
+    }
+    .form-group .error-message {
+        color: #D32F2F;
+        font-size: 0.8rem;
+        margin-top: 5px;
+        display: none;
+    }
+    .form-group.has-error input {
+        border-color: #D32F2F;
+    }
+    .status-message {
+        font-weight: 600;
+        text-align: center;
+        margin-top: 20px;
+    }
+    .status-message.success {
+        color: var(--green-dark);
+    }
+    .status-message.error {
+        color: #D32F2F;
+    }
+
+    /* MEDIA QUERIES */
+    @media (max-width: 768px) {
+        h2 {
+            font-size: 1.7rem;
         }
         .navbar a {
-            display: inline-block;
-            color: white;
-            padding: 14px 20px;
-            text-decoration: none;
-            font-size: 1rem;
-            transition: background-color 0.3s ease;
-        }
-        .navbar a:hover {
-            background-color: #2e7d32;
+            padding: 10px;
+            font-size: 0.9rem;
         }
         .container {
-            max-width: 600px;
-            margin: 40px auto;
-            padding: 20px 40px;
-            background-color: var(--white);
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            padding: 15px 20px;
         }
-        h2 {
-            font-size: 2rem;
-            color: var(--green-dark);
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 600;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-        .privacy-notice {
-            background-color: var(--green-light);
-            border-radius: 8px;
-            padding: 15px;
-            font-size: 0.9rem;
-            max-height: 150px;
-            overflow-y: auto;
-            border: 1px solid var(--green-dark);
-            margin-bottom: 15px;
-        }
-        .privacy-notice h3 {
-            margin-top: 0;
-            color: var(--green-dark);
-            font-size: 1.2rem;
-        }
-        .privacy-checkbox {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 20px;
-        }
-        .privacy-checkbox input {
-            margin-right: 10px;
-            flex-shrink: 0;
-            margin-top: 4px;
-        }
-        .submit-btn {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            background-color: var(--green-dark);
-            color: var(--white);
-            border: none;
-            border-radius: 5px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .submit-btn:hover {
-            background-color: #2e7d32;
-        }
-        .footer {
-            background-color: var(--green-dark);
-            color: var(--white);
-            text-align: center;
-            padding: 20px;
-            margin-top: 20px;
-        }
-
-        /* Código para el botón flotante */
         .floating-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-            width: 100px;
-            height: 100px;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
-            background-color: var(--green-dark);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-decoration: none;
-            padding: 10px;
+            width: 80px;
+            height: 80px;
         }
-        .floating-button:hover {
-            transform: scale(1.1);
-        }
-        .bot-icon {
-            font-size: 2.5rem;
-            color: white;
-            line-height: 1;
-            text-align: center;
+    }
+    @media (max-width: 480px) {
+        h2 {
+            font-size: 1.5rem;
         }
         .bot-text {
-            font-size: 0.7rem;
-            color: white;
-            text-align: center;
-            margin-top: 5px;
-            line-height: 1.2;
+            font-size: 0.6rem;
         }
-
-        /* Ajustes para pantallas pequeñas (móviles) */
-        @media (max-width: 600px) {
-            .navbar a {
-                padding: 10px 10px;
-                font-size: 0.8rem;
-            }
-            h2 {
-                font-size: 1.5rem;
-            }
-            .container {
-                padding: 20px;
-            }
-            .floating-button {
-                width: 90px;
-                height: 90px;
-            }
+        .container {
+            margin: 20px auto;
+            padding: 15px;
         }
-    </style>
+    }
+</style>
 </head>
 <body>
     <nav class="navbar">
         <a href="index.html">Inicio</a>
-        <a href="historico.html">Histórico</a>
         <a href="registro.html">Registro</a>
         <a href="cursos.html">Cursos</a>
+        <a href="historico.html">Histórico</a>
         <a href="asesoria.html">Asesoría</a>
         <a href="contacto.html">Contacto</a>
+        <a href="asistente.html">Asistente</a>
     </nav>
+
     <div class="container">
         <h2>Registro de Usuario</h2>
-        <form onsubmit="return validateForm()">
+        <form onsubmit="handleRegistration(event)">
             <div class="form-group">
                 <label for="name">Nombre completo:</label>
                 <input type="text" id="name" name="name" required>
+                <span class="error-message" id="name-error"></span>
             </div>
             <div class="form-group">
                 <label for="email">Correo electrónico:</label>
                 <input type="email" id="email" name="email" required>
+                <span class="error-message" id="email-error"></span>
             </div>
             <div class="form-group">
                 <label for="password">Contraseña:</label>
                 <input type="password" id="password" name="password" required>
+                <span class="error-message" id="password-error"></span>
             </div>
-
             <div class="privacy-notice">
                 <h3>Aviso de Privacidad</h3>
                 <p>
-                    En "Arranca Ya!", valoramos tu privacidad. Tus datos personales (nombre y correo electrónico) serán utilizados únicamente para crear y gestionar tu cuenta, ofrecerte nuestros servicios de capacitación y enviarte información relevante sobre emprendimiento. No compartiremos tus datos con terceros sin tu consentimiento. Al registrarte, aceptas los términos de nuestro aviso de privacidad.
+                    En "Arranca Ya!", valoramos tu privacidad. Tus datos personales serán utilizados únicamente para crear y gestionar tu cuenta, ofrecer nuestros servicios y enviarte información relevante. No compartiremos tus datos con terceros sin tu consentimiento. Al registrarte, aceptas nuestro aviso de privacidad.
                 </p>
             </div>
-
             <div class="privacy-checkbox">
                 <input type="checkbox" id="accept-privacy" required>
                 <label for="accept-privacy">He leído y acepto el aviso de privacidad.</label>
             </div>
-
             <button type="submit" class="submit-btn">Registrarme</button>
+            <div id="status-message" class="status-message"></div>
         </form>
     </div>
 
-    <!-- Botón flotante con emoji y texto -->
     <a href="asistente.html" class="floating-button" title="Habla con nuestro asistente virtual">
         <span class="bot-icon">🤖</span>
         <span class="bot-text">Soy EsparkIA<br>tu asistente virtual</span>
@@ -226,24 +261,62 @@
 
     <script>
         function validateForm() {
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
+            const name = document.getElementById('name');
+            const email = document.getElementById('email');
+            const password = document.getElementById('password');
             const privacyAccepted = document.getElementById('accept-privacy').checked;
-
-            if (name === "" || email === "" || password === "") {
-                alert("Por favor, rellena todos los campos del formulario.");
-                return false;
+            document.querySelectorAll('.error-message').forEach(el => {
+                el.textContent = '';
+                el.style.display = 'none';
+            });
+            document.querySelectorAll('.form-group').forEach(el => el.classList.remove('has-error'));
+            const statusMessage = document.getElementById('status-message');
+            statusMessage.textContent = '';
+            statusMessage.className = 'status-message';
+            let isValid = true;
+            if (name.value.trim() === '') {
+                document.getElementById('name-error').textContent = 'El nombre es obligatorio.';
+                document.getElementById('name-error').style.display = 'block';
+                name.closest('.form-group').classList.add('has-error');
+                isValid = false;
             }
-
+            if (email.value.trim() === '' || !email.value.includes('@')) {
+                document.getElementById('email-error').textContent = 'Por favor, introduce un correo válido.';
+                document.getElementById('email-error').style.display = 'block';
+                email.closest('.form-group').classList.add('has-error');
+                isValid = false;
+            }
+            if (password.value.length < 8) {
+                document.getElementById('password-error').textContent = 'La contraseña debe tener al menos 8 caracteres.';
+                document.getElementById('password-error').style.display = 'block';
+                password.closest('.form-group').classList.add('has-error');
+                isValid = false;
+            }
             if (!privacyAccepted) {
                 alert("Debes aceptar el aviso de privacidad para continuar.");
-                return false;
+                isValid = false;
             }
-
-            // Simulación de registro exitoso
-            alert("¡Registro exitoso! Ahora puedes iniciar sesión.");
-            return true;
+            return isValid;
+        }
+        
+        async function handleRegistration(event) {
+            event.preventDefault();
+            const statusMessage = document.getElementById('status-message');
+            if (!validateForm()) return;
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            statusMessage.textContent = 'Enviando datos...';
+            statusMessage.classList.add('success');
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            if (email === 'error@ejemplo.com') {
+                statusMessage.textContent = 'Este correo ya está registrado. Intenta con otro.';
+                statusMessage.classList.remove('success');
+                statusMessage.classList.add('error');
+            } else {
+                localStorage.setItem('userName', name);
+                statusMessage.textContent = '¡Registro exitoso! Redirigiendo a la página de cursos...';
+                window.location.href = 'cursos.html';
+            }
         }
     </script>
 </body>

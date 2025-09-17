@@ -1,174 +1,194 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arranca Ya! - Contacto</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --green-primary: #66BB6A;
-            --green-dark: #388E3C;
-            --green-light: #E8F5E9;
-            --gray-light: #f4f7f6;
-            --white: #fff;
-            --text-color: #212121;
-        }
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--gray-light);
-            color: var(--text-color);
-            line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        .navbar {
-            background-color: var(--green-dark);
-            overflow: hidden;
-            text-align: center;
-        }
-        .navbar a {
-            display: inline-block;
-            color: white;
-            padding: 14px 20px;
-            text-decoration: none;
-            font-size: 1rem;
-            transition: background-color 0.3s ease;
-        }
-        .navbar a:hover {
-            background-color: #2e7d32;
-        }
-        .header {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: var(--white);
-            padding: 15px 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        }
-        .header-logo {
-            max-width: 100px;
-        }
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 40px;
-            background-color: var(--white);
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            text-align: center;
-        }
-        h2 {
-            font-size: 2rem;
-            color: var(--green-dark);
-            margin-top: 0;
-            margin-bottom: 20px;
-        }
-        .footer {
-            background-color: var(--green-dark);
-            color: var(--white);
-            text-align: center;
-            padding: 20px;
-            margin-top: auto;
-        }
-        .form-group {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 600;
-        }
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-sizing: border-box;
-            font-size: 1rem;
-        }
-        .submit-button {
-            background-color: var(--green-dark);
-            color: var(--white);
-            padding: 15px 30px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 20px;
-            transition: background-color 0.3s ease;
-        }
-        .submit-button:hover {
-            background-color: #2e7d32;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto - Arranca Ya!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green-primary: #66BB6A;
+      --green-dark: #388E3C;
+      --green-light: #E8F5E9;
+      --gray-light: #f4f7f6;
+      --white: #fff;
+      --text-color: #212121;
+    }
 
-        /* --- BOTÓN DE CHAT --- */
-        .chat-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: var(--green-primary);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-        .chat-box {
-            display: none;
-            position: fixed;
-            bottom: 90px;
-            right: 20px;
-            width: 300px;
-            max-height: 400px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            overflow: hidden;
-            flex-direction: column;
-        }
-        .chat-header {
-            background: var(--green-dark);
-            color: white;
-            padding: 10px;
-            font-weight: bold;
-            text-align: center;
-        }
-        .chat-messages {
-            flex: 1;
-            padding: 10px;
-            overflow-y: auto;
-            font-size: 0.9rem;
-        }
-        .chat-input {
-            display: flex;
-            border-top: 1px solid #ddd;
-        }
-        .chat-input input {
-            flex: 1;
-            border: none;
-            padding: 10px;
-        }
-        .chat-input button {
-            background: var(--green-primary);
-            border: none;
-            color: white;
-            padding: 10px 15px;
-            cursor: pointer;
-        }
-    </style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--gray-light);
+      color: var(--text-color);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .navbar {
+      background-color: var(--green-dark);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .navbar a {
+      flex: 1 1 auto;
+      text-align: center;
+      color: white;
+      padding: 14px 12px;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .navbar a:hover {
+      background-color: #2e7d32;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: var(--white);
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      flex-grow: 1;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: clamp(1.5rem, 2vw, 2rem);
+      font-weight: 600;
+      color: var(--green-dark);
+      margin-bottom: 30px;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .contact-form label {
+      font-weight: 600;
+      color: var(--text-color);
+    }
+
+    .contact-form input,
+    .contact-form textarea,
+    .contact-form select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .contact-form button {
+      background-color: var(--green-primary);
+      color: var(--white);
+      padding: 15px;
+      border: none;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-size: 1rem;
+      width: 100%;
+    }
+
+    .contact-form button:hover {
+      background-color: var(--green-dark);
+    }
+
+    .footer {
+      background-color: var(--green-dark);
+      color: var(--white);
+      text-align: center;
+      padding: 20px;
+      margin-top: auto;
+    }
+
+    /* Mensaje de confirmación */
+    .confirmation-message {
+      display: none;
+      text-align: center;
+      padding: 20px;
+      background-color: var(--green-light);
+      border: 1px solid var(--green-primary);
+      border-radius: 10px;
+      margin-top: 20px;
+      font-weight: 600;
+      color: var(--green-dark);
+    }
+
+    /* Estilos del campo de archivo */
+    .file-upload-container {
+      border: 2px dashed #ccc;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.3s ease;
+    }
+
+    .file-upload-container:hover {
+      border-color: var(--green-primary);
+    }
+
+    .file-upload-container p {
+      margin: 0;
+      color: #555;
+    }
+
+    .file-upload-container input[type="file"] {
+      display: none;
+    }
+
+    .filename {
+      font-style: italic;
+      color: var(--green-dark);
+    }
+
+    .file-upload-field {
+      display: none;
+    }
+
+    /* Media Queries */
+    @media (max-width: 768px) {
+      .navbar a {
+        flex: 1 1 100%;
+        font-size: 0.95rem;
+        padding: 12px;
+      }
+
+      .container {
+        margin: 20px auto;
+        padding: 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .contact-form button {
+        font-size: 0.9rem;
+        padding: 12px;
+      }
+    }
+  </style>
 </head>
 <body>
- <nav class="navbar">
+  <nav class="navbar">
     <a href="index.html">Inicio</a>
     <a href="registro.html">Registro</a>
     <a href="cursos.html">Cursos</a>
@@ -176,63 +196,107 @@
     <a href="asesoria.html">Asesoría</a>
     <a href="contacto.html">Contacto</a>
     <a href="asistente.html">Asistente</a>
-</nav>
+    <a href="retos.html">Retos</a>
+  </nav>
 
-<div class="header">
-    <img src="logo/logosinf.png" alt="Logo de Arranca Ya" class="header-logo">
-</div>
-
-<div class="container">
+  <div class="container">
     <h2>Contáctanos</h2>
-    <p>Envíanos un mensaje y te responderemos a la brevedad posible.</p>
-    <form>
-        <div class="form-group">
-            <label for="name">Nombre</label>
-            <input type="text" id="name" required>
+    <form class="contact-form" id="contactForm">
+      <label for="name">Nombre:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Correo Electrónico:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="reason">Motivo de Contacto:</label>
+      <select id="reason" name="reason" required>
+        <option value="">Selecciona un motivo</option>
+        <option value="consulta">Consulta General</option>
+        <option value="socio">Alta de Socio</option>
+        <option value="profesor">Alta de Profesor</option>
+      </select>
+
+      <div class="file-upload-field" id="fileField">
+        <label for="cv">Cargar Currículum (opcional):</label>
+        <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx">
+        <div class="file-upload-container" onclick="document.getElementById('cv').click()">
+          <p id="file-label">Haz clic aquí o arrastra un archivo</p>
+          <span id="file-name" class="filename"></span>
         </div>
-        <div class="form-group">
-            <label for="email">Correo electrónico</label>
-            <input type="email" id="email" required>
-        </div>
-        <div class="form-group">
-            <label for="message">Mensaje</label>
-            <textarea id="message" rows="5" required></textarea>
-        </div>
-        <button type="submit" class="submit-button">Enviar Mensaje</button>
+      </div>
+
+      <label for="message">Mensaje:</label>
+      <textarea id="message" name="message" rows="6" required></textarea>
+
+      <button type="submit">Enviar Solicitud</button>
     </form>
-</div>
 
-<footer class="footer">
+    <div class="confirmation-message" id="confirmationMessage"></div>
+  </div>
+
+  <footer class="footer">
     <p>© 2025 Arranca Ya!. Todos los derechos reservados.</p>
-</footer>
+  </footer>
 
-<!-- BOTÓN DE CHAT VERDE -->
-<button class="chat-button" onclick="toggleChat()">🤖</button>
-<div class="chat-box" id="chatBox">
-    <div class="chat-header">Asistente Arranca Ya!</div>
-    <div class="chat-messages" id="chatMessages"></div>
-    <div class="chat-input">
-        <input type="text" id="chatInput" placeholder="Escribe un mensaje...">
-        <button onclick="sendMessage()">Enviar</button>
-    </div>
-</div>
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const reason = document.getElementById('reason').value;
+      const folio = Math.floor(Math.random() * 1000000);
+      let messageText = '';
 
-<script>
-    function toggleChat() {
-        const box = document.getElementById('chatBox');
-        box.style.display = box.style.display === 'flex' ? 'none' : 'flex';
-    }
-    function sendMessage() {
-        const input = document.getElementById('chatInput');
-        const messages = document.getElementById('chatMessages');
-        if(input.value.trim() !== '') {
-            const msg = document.createElement('div');
-            msg.textContent = input.value;
-            messages.appendChild(msg);
-            input.value = '';
-            messages.scrollTop = messages.scrollHeight;
-        }
-    }
-</script>
+      if (reason === 'socio') {
+        messageText = `
+          <p>¡Gracias por tu interés en unirte como socio!</p>
+          <p><strong>Folio de seguimiento: ${folio}</strong></p>
+          <p>Te contactaremos en menos de 48 horas.</p>
+        `;
+      } else if (reason === 'profesor') {
+        messageText = `
+          <p>¡Gracias por tu interés en unirte como profesor!</p>
+          <p><strong>Folio de seguimiento: ${folio}</strong></p>
+          <p>Te contactaremos en menos de 48 horas.</p>
+        `;
+      } else {
+        messageText = `
+          <p>Tu solicitud ha sido procesada con éxito.</p>
+          <p><strong>Folio de seguimiento: ${folio}</strong></p>
+          <p>Recibirás una respuesta en menos de 24 horas.</p>
+        `;
+      }
+
+      document.getElementById('contactForm').style.display = 'none';
+      const messageDiv = document.getElementById('confirmationMessage');
+      messageDiv.innerHTML = messageText;
+      messageDiv.style.display = 'block';
+    });
+
+    // Mostrar el campo de CV solo si se selecciona "Socio" o "Profesor"
+    document.getElementById('reason').addEventListener('change', function() {
+      const fileField = document.getElementById('fileField');
+      if (this.value === 'socio' || this.value === 'profesor') {
+        fileField.style.display = 'block';
+      } else {
+        fileField.style.display = 'none';
+        document.getElementById('cv').value = '';
+        document.getElementById('file-name').innerText = '';
+        document.getElementById('file-label').innerText = 'Haz clic aquí o arrastra un archivo';
+      }
+    });
+
+    // Mostrar nombre del archivo seleccionado
+    document.getElementById('cv').addEventListener('change', function() {
+      const fileNameSpan = document.getElementById('file-name');
+      const fileLabel = document.getElementById('file-label');
+      const file = this.files[0];
+      if (file) {
+        fileNameSpan.innerText = file.name;
+        fileLabel.innerText = 'Archivo adjuntado:';
+      } else {
+        fileNameSpan.innerText = '';
+        fileLabel.innerText = 'Haz clic aquí o arrastra un archivo';
+      }
+    });
+  </script>
 </body>
 </html>
