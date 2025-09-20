@@ -25,7 +25,7 @@
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #22eb22
+            background-color: var(--gray-light);
             color: var(--text-color);
             line-height: 1.6;
         }
@@ -115,33 +115,56 @@
             border: none;
         }
 
-        /* HERO */
-   .hero-section {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-                    url('logo/baner1.JPG');
-    background-size: cover;     /* Cubre todo, sin espacios */
-    background-position: center; /* Centrada */
-    background-repeat: no-repeat; /* No repetir */
-    color: var(--white);
-    padding: 50px 50px;
-    text-align: center;
-    transition: background-image 0.5s ease-in-out;
-    height: 100vh; /* Toda la altura de la pantalla */
-}
-
+        /* HERO - BANNER PRINCIPAL */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            z-index: 1;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            color: var(--white);
+            padding: 20px;
+            max-width: 800px;
+        }
         .hero-logo {
             max-width: 300px;
             height: auto;
             margin-bottom: 15px;
         }
         .hero-section h1 {
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 10px;
         }
         .hero-section p {
-            font-size: 1rem;
-            max-width: 500px;
+            font-size: 1.1rem;
+            max-width: 600px;
             margin: 0 auto 20px auto;
         }
         .hero-button {
@@ -160,7 +183,29 @@
             background-color: #2e7d32;
         }
 
-        /* FEATURES */
+        /* ANIMACIONES ESPECÍFICAS DEL BANNER */
+        @keyframes slide-in-top {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slide-in-bottom {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animated-hero-logo,
+        .animated-hero-title,
+        .animated-hero-text,
+        .animated-hero-btn {
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+        .animated-hero-logo { animation: slide-in-top 0.8s ease-out forwards; }
+        .animated-hero-title { animation: slide-in-top 0.8s ease-out 0.3s forwards; }
+        .animated-hero-text { animation: slide-in-bottom 0.8s ease-out 0.6s forwards; }
+        .animated-hero-btn { animation: slide-in-bottom 0.8s ease-out 0.9s forwards; }
+
+
+        /* SECCIONES POSTERIORES */
         .container {
             max-width: 1200px;
             margin: 40px auto;
@@ -228,12 +273,8 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
         @keyframes slide-right {
-            from {
-                transform: translateX(0);
-            }
-            to {
-                transform: translateX(-50%);
-            }
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
         }
 
         /* SECCIONES DE TEXTO E IMAGEN */
@@ -567,12 +608,18 @@
         </div>
     </div>
     
-    <section class="hero-section fade-in">
-        <img src="logo/logosinf.png" alt="Logo de Arranca Ya" class="hero-logo">
-        <h1 id="heroTitle">Desbloquea tu Potencial Emprendedor</h1>
-        <p>Accede a cursos, herramientas y recursos para llevar tu negocio al siguiente nivel. 🚀</p>
-        <a href="registro.html" class="hero-button">Prueba gratuita</a>
-        <a href="asistente.html" class="hero-button">Usa nuestro asistente de voz</a>
+    <section class="hero-section">
+        <div class="hero-overlay"></div>
+        <img src="logo/baner1.jpeg" alt="Banner" class="hero-image">
+        <div class="hero-content">
+            <img src="logo/logosinf.png" alt="Logo de Arranca Ya" class="hero-logo animated-hero-logo">
+            <h1 id="heroTitle" class="animated-hero-title">Desbloquea tu Potencial Emprendedor</h1>
+            <p class="animated-hero-text">Accede a cursos, herramientas y recursos para llevar tu negocio al siguiente nivel. 🚀</p>
+            <div class="hero-buttons-container">
+                <a href="registro.html" class="hero-button animated-hero-btn">Prueba gratuita</a>
+                <a href="asistente.html" class="hero-button animated-hero-btn">Usa nuestro asistente de voz</a>
+            </div>
+        </div>
     </section>
 
     <section class="container fade-in">
@@ -713,7 +760,6 @@
 
             loginForm.addEventListener('submit', (e) => {
                 e.preventDefault();
-
                 const email = document.getElementById('email').value;
                 const password = document.getElementById('password').value;
 
@@ -723,7 +769,6 @@
 
                     welcomeMessage.textContent = `¡Bienvenido! Redirigiendo a la página de Tu perfil...`;
                     welcomeMessage.style.display = 'block';
-                   
                     
                     setTimeout(() => {
                         loginForm.style.display = 'none';
