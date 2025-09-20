@@ -126,18 +126,18 @@
         }
 
         /* HERO - Sección de inicio del cuestionario */
-        .hero-section {
-            background: linear-gradient(45deg, var(--green-primary), var(--green-dark));
-            color: var(--white);
-            padding: 50px 30px;
-            border-radius: 18px;
-            margin-bottom: 30px;
-            text-align: center;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-            position: relative;
-            overflow: hidden;
-            animation: fadeIn 1.2s ease-out;
-        }
+ .hero-section {
+    background: url('logo/emprendedor.jpg') center/cover no-repeat;
+    color: var(--white);
+    padding: 50px 30px;
+    border-radius: 18px;
+    margin-bottom: 30px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 1.2s ease-out;
+}
         .hero-section::before { /* Elemento decorativo de fondo */
             content: '';
             position: absolute;
@@ -145,7 +145,6 @@
             left: -20px;
             width: 150px;
             height: 150px;
-            background-color: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             transform: rotate(30deg);
         }
@@ -160,13 +159,17 @@
             border-radius: 50%;
             transform: rotate(-45deg);
         }
-        .hero-section h1 {
-            font-size: 2.8rem;
-            margin-bottom: 15px;
-            font-weight: 700;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            animation: pulse 3s infinite ease-in-out;
-        }
+      .hero-section h1 {
+    font-size: 2.8rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    animation: pulse 3s infinite ease-in-out;
+    background: linear-gradient(90deg, #72f705, #eff304);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
         .hero-section p {
             font-size: 1.3rem;
             margin-bottom: 30px;
@@ -664,7 +667,7 @@
         <h2 id="all-courses-title" style="margin-top: 50px;">Explora Todos Nuestros Cursos</h2>
         <div id="all-courses-container" class="card-container">
             <div class="course-card">
-                <img src="logo/cursos/marketing.jpg" alt="Curso Marketing Digital">
+                <img src="logo/marketing.jpg" alt="Curso Marketing Digital">
                 <div class="course-content">
                     <h3>Marketing Digital Estratégico</h3>
                     <p>Aprende a diseñar y ejecutar campañas de marketing digital efectivas para hacer crecer tu negocio.</p>
@@ -697,7 +700,7 @@
                 </div>
             </div>
             <div class="course-card">
-                <img src="logo/ventas.jpg" alt="Curso Ventas Efectivas">
+                <img src="logo/cursos/ventas.jpg" alt="Curso Ventas Efectivas">
                 <div class="course-content">
                     <h3>Estrategias de Ventas Efectivas</h3>
                     <p>Conviértete en un experto en ventas y cierra más tratos con técnicas probadas y un enfoque centrado en el cliente.</p>
