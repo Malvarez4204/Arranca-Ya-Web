@@ -1,283 +1,234 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Arranca Ya! - Asesoría</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --green-primary: #66BB6A;
-      --green-dark: #388E3C;
-      --green-light: #E8F5E9;
-      --gray-light: #f4f7f6;
-      --white: #fff;
-      --text-color: #212121;
-    }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: var(--gray-light);
-      color: var(--text-color);
-      line-height: 1.6;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    /* --- NAVBAR --- */
-    .navbar {
-      background-color: var(--green-dark);
-      overflow: hidden;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .navbar a {
-      flex: 1 1 auto;
-      text-align: center;
-      color: white;
-      padding: 14px 16px;
-      text-decoration: none;
-      font-size: 1rem;
-      transition: background-color 0.3s ease;
-      min-width: 120px;
-    }
-    .navbar a:hover {
-      background-color: #2e7d32;
-    }
-
-    /* --- HEADER --- */
-    .header {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: var(--white);
-      padding: 15px 20px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    }
-    .header-logo {
-      max-width: 100px;
-      height: auto;
-    }
-
-    /* --- CONTENEDOR --- */
-    .container {
-      width: 90%;
-      max-width: 800px;
-      margin: 30px auto;
-      padding: 20px;
-      background-color: var(--white);
-      border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-      text-align: center;
-    }
-    h2 {
-      font-size: 1.8rem;
-      color: var(--green-dark);
-      margin-bottom: 15px;
-    }
-
-    /* --- FORMULARIO --- */
-    .form-group {
-      margin-bottom: 15px;
-      text-align: left;
-    }
-    .form-group label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: 600;
-    }
-    .form-group input, .form-group textarea {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      font-size: 1rem;
-      box-sizing: border-box;
-    }
-    .submit-button {
-      background-color: var(--green-dark);
-      color: var(--white);
-      padding: 15px 30px;
-      border: none;
-      border-radius: 50px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      width: 100%;
-      margin-top: 20px;
-      transition: background-color 0.3s ease;
-    }
-    .submit-button:hover {
-      background-color: #2e7d32;
-    }
-
-    /* --- FOOTER --- */
-    .footer {
-      background-color: var(--green-dark);
-      color: var(--white);
-      text-align: center;
-      padding: 20px;
-      margin-top: auto;
-      font-size: 0.9rem;
-    }
-
-    /* --- BOTÓN DE CHAT --- */
-    .chat-button {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: var(--green-primary);
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 55px;
-      height: 55px;
-      font-size: 22px;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    }
-    .chat-box {
-      display: none;
-      position: fixed;
-      bottom: 80px;
-      right: 20px;
-      width: 300px;
-      max-height: 400px;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-      overflow: hidden;
-      flex-direction: column;
-    }
-    .chat-header {
-      background: var(--green-dark);
-      color: white;
-      padding: 10px;
-      font-weight: bold;
-      text-align: center;
-    }
-    .chat-messages {
-      flex: 1;
-      padding: 10px;
-      overflow-y: auto;
-      font-size: 0.9rem;
-    }
-    .chat-input {
-      display: flex;
-      border-top: 1px solid #ddd;
-    }
-    .chat-input input {
-      flex: 1;
-      border: none;
-      padding: 10px;
-    }
-    .chat-input button {
-      background: var(--green-primary);
-      border: none;
-      color: white;
-      padding: 10px 15px;
-      cursor: pointer;
-    }
-
-    /* --- MEDIA QUERIES --- */
-    @media (max-width: 768px) {
-      h2 {
-        font-size: 1.5rem;
-      }
-      .container {
-        padding: 15px;
-      }
-      .navbar a {
-        font-size: 0.9rem;
-        padding: 10px;
-      }
-    }
-    @media (max-width: 480px) {
-      .navbar {
-        flex-direction: column;
-      }
-      .navbar a {
-        width: 100%;
-        border-top: 1px solid rgba(255,255,255,0.2);
-      }
-      .chat-box {
-        width: 90%;
-        right: 5%;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arranca Ya! - Asesoría</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --green-primary: #66BB6A;
+    --green-dark: #388E3C;
+    --green-light: #E8F5E9;
+    --gray-light: #f4f7f6;
+    --white: #fff;
+    --text-color: #212121;
+}
+body {
+    font-family: 'Poppins', sans-serif;
+    margin:0;
+    padding:0;
+    background-color: var(--gray-light);
+    color: var(--text-color);
+    line-height:1.6;
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
+}
+.navbar {
+    background-color: var(--green-dark);
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+.navbar a {
+    flex:1 1 auto;
+    text-align:center;
+    color:white;
+    padding:14px 16px;
+    text-decoration:none;
+    font-size:1rem;
+    transition:background-color 0.3s ease;
+    min-width:120px;
+}
+.navbar a:hover { background-color:#2e7d32; }
+.header {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background-color: var(--white);
+    padding:15px 20px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.05);
+}
+.header-logo {
+    max-width:100px;
+    height:auto;
+}
+h2 { font-size:1.8rem; color: var(--green-dark); margin-bottom:15px; text-align:center; }
+p { margin-bottom:20px; text-align:center; }
+.container, .pricing-section {
+    width:90%;
+    max-width:1000px;
+    margin:30px auto;
+    padding:20px;
+    background-color: var(--white);
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
+.pricing-cards {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+.pricing-card {
+    flex: 1;
+    max-width: 350px;
+    background-color: var(--gray-light);
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align:left;
+}
+.pricing-card:hover { transform: translateY(-10px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+.pricing-card.highlighted { background-color: var(--green-primary); color: var(--white); transform: scale(1.05); }
+.pricing-card.highlighted h3, .pricing-card.highlighted .price { color: var(--white); }
+.pricing-card h3 { color: var(--green-dark); font-size: 1.5rem; margin-bottom: 10px; }
+.pricing-card .price { font-size: 2rem; font-weight:700; margin:15px 0; color: var(--green-dark); }
+.pricing-card ul { list-style:none; padding:0; margin:0 0 20px 0; }
+.pricing-card ul li { margin-bottom:10px; font-size:1rem; display:flex; align-items:center; gap:10px; }
+.pricing-card ul li span { color: var(--green-dark); font-size:1.2em; }
+.pricing-card.highlighted ul li span { color: var(--white); }
+.select-plan-btn {
+    background-color: var(--green-dark);
+    color: var(--white);
+    padding: 12px 25px;
+    border: none;
+    border-radius: 50px;
+    font-size:1rem;
+    font-weight:600;
+    cursor:pointer;
+    transition: background-color 0.3s ease;
+}
+.select-plan-btn:hover { background-color:#2e7d32; }
+.form-section { display:none; margin-top:30px; }
+.form-group { margin-bottom:15px; text-align:left; }
+.form-group label { display:block; margin-bottom:5px; font-weight:600; }
+.form-group input, .form-group textarea { width:100%; padding:12px; border:1px solid #ddd; border-radius:8px; font-size:1rem; box-sizing:border-box; }
+.submit-button { background-color: var(--green-dark); color:white; padding:15px 30px; border:none; border-radius:50px; font-size:1rem; font-weight:600; cursor:pointer; width:100%; margin-top:20px; transition:background-color 0.3s ease; }
+.submit-button:hover { background-color:#2e7d32; }
+.summary-section { display:none; margin-top:20px; padding:15px; background-color: var(--green-light); border-radius:12px; }
+.footer { background-color: var(--green-dark); color:white; text-align:center; padding:20px; margin-top:auto; font-size:0.9rem; }
+@media(max-width:768px){ .pricing-cards{ flex-direction:column; align-items:center; } }
+</style>
 </head>
 <body>
-  <nav class="navbar">
+<nav class="navbar">
     <a href="index.html">Inicio</a>
-    <a href="registro.html">Registro</a>
     <a href="cursos.html">Cursos</a>
     <a href="historico.html">Histórico</a>
-    <a href="asesoria.html">Asesoría</a>
     <a href="contacto.html">Contacto</a>
     <a href="asistente.html">Asistente</a>
     <a href="retos.html">Retos</a>
-  </nav>
+</nav>
 
-  <div class="header">
+<div class="header">
     <img src="logo/logosinf.png" alt="Logo de Arranca Ya" class="header-logo">
-  </div>
+</div>
 
-  <div class="container">
-    <h2>Agenda tu Asesoría</h2>
-    <p>Completa el formulario y un especialista se pondrá en contacto contigo para ayudarte a llevar tu idea de negocio al siguiente nivel.</p>
-    <form>
-      <div class="form-group">
-        <label for="name">Nombre</label>
-        <input type="text" id="name" required>
-      </div>
-      <div class="form-group">
-        <label for="email">Correo electrónico</label>
-        <input type="email" id="email" required>
-      </div>
-      <div class="form-group">
-        <label for="business">Breve descripción de tu negocio</label>
-        <textarea id="business" rows="4" required></textarea>
-      </div>
-      <button type="submit" class="submit-button">Solicitar Asesoría</button>
-    </form>
-  </div>
-
-  <footer class="footer">
-    <p>© 2025 Arranca Ya!. Todos los derechos reservados.</p>
-  </footer>
-
-  <!-- BOTÓN DE CHAT -->
-  <button class="chat-button" onclick="toggleChat()">🤖</button>
-  <div class="chat-box" id="chatBox">
-    <div class="chat-header">Asistente Arranca Ya!</div>
-    <div class="chat-messages" id="chatMessages"></div>
-    <div class="chat-input">
-      <input type="text" id="chatInput" placeholder="Escribe un mensaje...">
-      <button onclick="sendMessage()">Enviar</button>
+<!-- Paso 1: Selección de plan -->
+<!-- Paso 1: Selección de plan -->
+<section class="pricing-section">
+    <h2>Paso 1: Elige tu plan</h2>
+    <p>Selecciona el plan que mejor se adapte a tu etapa como emprendedor.</p>
+    <div class="pricing-cards">
+        <div class="pricing-card" data-price="99" data-name="Asesoría Básica">
+            <h3>Asesoría Básica</h3>
+            <p class="price">$99 MXN</p>
+            <ul>
+                <li><span>✅</span> 1 Sesión de 60 min. con un experto.</li>
+                <li><span>✅</span> Análisis inicial de tu idea de negocio.</li>
+                <li><span>❌</span> Guía sobre los primeros pasos.</li>
+                <li><span>❌</span> Soporte extendido.</li>
+            </ul>
+            <button class="select-plan-btn" onclick="selectPlan(this)">Seleccionar</button>
+        </div>
+        <div class="pricing-card highlighted" data-price="299" data-name="Asesoría Premium">
+            <h3>Asesoría Premium</h3>
+            <p class="price">$299 MXN</p>
+            <ul>
+                <li><span>✅</span> 3 Sesiones de 60 min. con un experto.</li>
+                <li><span>✅</span> Plan de negocio detallado.</li>
+                <li><span>✅</span> Estrategia de marketing y ventas.</li>
+                <li><span>✅</span> Soporte por correo por 30 días.</li>
+            </ul>
+            <button class="select-plan-btn" onclick="selectPlan(this)">Seleccionar</button>
+        </div>
     </div>
-  </div>
+</section>
 
-  <script>
-    function toggleChat() {
-      const box = document.getElementById('chatBox');
-      box.style.display = box.style.display === 'flex' ? 'none' : 'flex';
+
+<!-- Paso 2: Formulario -->
+<div class="container form-section" id="formSection">
+    <div>
+        <h2>Paso 2: Ingresa tus datos</h2>
+        <p>Completa tus datos para agendar la asesoría.</p>
+        <form id="aseForm">
+            <div class="form-group">
+                <label for="name">Nombre</label>
+                <input type="text" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="business">Breve descripción de tu negocio</label>
+                <textarea id="business" rows="4" required></textarea>
+            </div>
+            <button type="button" class="submit-button" onclick="showSummary()">Continuar</button>
+        </form>
+    </div>
+</div>
+
+<!-- Paso 3: Resumen y pago -->
+<div class="container summary-section" id="summarySection">
+    <h2>Paso 3: Confirma y paga</h2>
+    <p>Revisa tu selección y tus datos antes de pagar.</p>
+    <p id="summaryText"></p>
+    <button class="submit-button" onclick="checkout()">Pagar</button>
+</div>
+
+<footer class="footer">
+    <p>© 2025 Arranca Ya!. Todos los derechos reservados.</p>
+</footer>
+
+<script>
+let selectedPlan = null;
+
+function selectPlan(button){
+    const card = button.parentElement;
+    selectedPlan = {
+        name: card.dataset.name,
+        price: card.dataset.price
+    };
+    // resaltar seleccionado
+    document.querySelectorAll('.pricing-card').forEach(c=>c.style.border='none');
+    card.style.border='2px solid #388E3C';
+    // mostrar formulario
+    document.getElementById('formSection').style.display='flex';
+    window.scrollTo({ top: document.getElementById('formSection').offsetTop - 20, behavior: 'smooth' });
+}
+
+function showSummary(){
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const business = document.getElementById('business').value.trim();
+    if(!name || !email || !business){
+        alert('Por favor completa todos los campos.');
+        return;
     }
-    function sendMessage() {
-      const input = document.getElementById('chatInput');
-      const messages = document.getElementById('chatMessages');
-      if(input.value.trim() !== '') {
-        const msg = document.createElement('div');
-        msg.textContent = input.value;
-        messages.appendChild(msg);
-        input.value = '';
-        messages.scrollTop = messages.scrollHeight;
-      }
-    }
-  </script>
+    const summary = `Plan seleccionado: ${selectedPlan.name} - $${selectedPlan.price} USD\nNombre: ${name}\nCorreo: ${email}\nNegocio: ${business}`;
+    document.getElementById('summaryText').innerText = summary;
+    document.getElementById('summarySection').style.display='flex';
+    window.scrollTo({ top: document.getElementById('summarySection').offsetTop - 20, behavior: 'smooth' });
+}
+
+function checkout(){
+    alert('¡Gracias por tu compra! Total: $'+selectedPlan.price+' USD');
+    location.reload();
+}
+</script>
 </body>
 </html>

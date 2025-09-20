@@ -1,361 +1,363 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Arranca Ya! - Retos</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
-    :root {
-        --green-primary: #66BB6A;
-        --green-dark: #388E3C;
-        --green-light: #E8F5E9;
-        --gray-light: #f4f7f6;
-        --white: #fff;
-        --text-color: #212121;
-    }
-    body {
-        font-family: 'Poppins', sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: var(--gray-light);
-        color: var(--text-color);
-        line-height: 1.6;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-    }
-    .navbar {
-        background-color: var(--green-dark);
-        overflow: hidden;
-        text-align: center;
-    }
-    .navbar a {
-        display: inline-block;
-        color: white;
-        padding: 14px 20px;
-        text-decoration: none;
-        font-size: 1rem;
-        transition: background-color 0.3s ease;
-    }
-    .navbar a:hover {
-        background-color: #2e7d32;
-    }
-    .container {
-        max-width: 1100px;
-        margin: 40px auto;
-        padding: 20px;
-    }
-    .grid-2 {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 20px;
-    }
-    .card {
-        background-color: var(--white);
-        padding: 30px;
-        border-radius: 15px;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-        text-align: center;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-    h2, h3 {
-        color: var(--green-dark);
-        font-weight: 600;
-    }
-    .stats {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 15px;
-    }
-    .stat {
-        background-color: var(--green-light);
-        color: var(--green-dark);
-        padding: 8px 15px;
-        border-radius: 50px;
-        font-weight: 600;
-        font-size: 0.9rem;
-    }
-    .bar-container {
-        width: 100%;
-        background-color: #e0e0e0;
-        border-radius: 50px;
-        margin: 20px 0;
-        height: 10px;
-    }
-    .bar {
-        height: 100%;
-        background: linear-gradient(90deg, var(--green-primary), var(--green-dark));
-        border-radius: 50px;
-        transition: width 0.5s ease-in-out;
-    }
-    .quest-list {
-        margin-top: 20px;
-    }
-    .quest-item {
-        background-color: var(--green-light);
-        padding: 15px;
-        border-radius: 10px;
-        margin-bottom: 15px;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        text-align: left;
-    }
-    .quest-item h4 {
-        margin: 0 0 5px 0;
-        color: var(--green-dark);
-    }
-    .quest-item p {
-        margin: 0;
-        font-size: 0.9rem;
-        color: #555;
-    }
-    .quest-badges {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 5px;
-        margin: 10px 0;
-    }
-    .badge {
-        background-color: var(--green-dark);
-        color: var(--white);
-        padding: 4px 10px;
-        border-radius: 50px;
-        font-size: 0.8rem;
-        font-weight: 600;
-    }
-    .quest-actions {
-        display: flex;
-        gap: 10px;
-        margin-top: 10px;
-        flex-wrap: wrap;
-    }
-    .btn {
-        background-color: var(--green-primary);
-        color: var(--white);
-        padding: 10px 20px;
-        border: none;
-        border-radius: 50px;
-        cursor: pointer;
-        font-weight: 600;
-        transition: transform 0.3s ease;
-        font-size: 0.9rem;
-    }
-    .btn:hover {
-        transform: translateY(-2px);
-    }
-    .btn-delete {
-        background-color: #e53935;
-    }
-    .form-section {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        text-align: left;
-    }
-    .form-section input,
-    .form-section textarea {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        box-sizing: border-box;
-    }
-    .footer {
-        background-color: var(--green-dark);
-        color: var(--white);
-        text-align: center;
-        padding: 20px;
-        margin-top: 40px;
-    }
-    .chat-button {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background-color: var(--green-primary);
-        color: white;
-        border: none;
-        border-radius: 50%;
-        width: 60px;
-        height: 60px;
-        font-size: 28px;
-        cursor: pointer;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        z-index: 1000;
-    }
-    .chat-box {
-        display: none;
-        position: fixed;
-        bottom: 90px;
-        right: 20px;
-        width: 90%;
-        max-width: 350px;
-        max-height: 400px;
-        background: white;
-        border-radius: 10px;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-        overflow: hidden;
-        flex-direction: column;
-        z-index: 999;
-    }
-    .chat-header {
-        background: var(--green-dark);
-        color: white;
-        padding: 10px;
-        font-weight: bold;
-        text-align: center;
-    }
-    .chat-messages {
-        flex: 1;
-        padding: 10px;
-        overflow-y: auto;
-        font-size: 0.9rem;
-    }
-    .chat-input {
-        display: flex;
-        border-top: 1px solid #ddd;
-    }
-    .chat-input input {
-        flex: 1;
-        border: none;
-        padding: 10px;
-        font-family: 'Poppins', sans-serif;
-    }
-    .chat-input button {
-        background: var(--green-primary);
-        border: none;
-        color: white;
-        padding: 10px 15px;
-        cursor: pointer;
-    }
-    @media (max-width: 1024px) {
-        .container { padding: 15px; }
-        .card { padding: 20px; }
-    }
-    @media (max-width: 768px) {
-        .grid-2 {
-            grid-template-columns: 1fr;
-        }
-        .stats { justify-content: flex-start; gap: 5px; }
-    }
-    @media (max-width: 480px) {
-        .navbar a { padding: 10px; font-size: 0.8rem; }
-        .btn { font-size: 0.8rem; padding: 8px 15px; }
-        .form-section input, .form-section textarea { padding: 8px; }
-        .chat-box { width: 95%; bottom: 80px; }
-    }
+:root{
+  --green-primary:#66BB6A;
+  --green-dark:#388E3C;
+  --green-light:#E8F5E9;
+  --gray-light:#f4f7f6;
+  --white:#fff;
+  --text:#212121;
+  --shadow: rgba(0,0,0,0.12);
+  --shadow-deep: rgba(0,0,0,0.2);
+}
+
+*{box-sizing:border-box;}
+body{font-family:'Poppins',sans-serif;margin:0;color:var(--text);background:var(--gray-light);}
+
+/* Header */
+header{
+  background: var(--green-primary);
+  color: #fff;
+  padding:20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:sticky;
+  top:0;
+  z-index:10;
+  box-shadow:0 4px 12px var(--shadow-deep);
+  flex-wrap:wrap;
+}
+.brand{display:flex;align-items:center;gap:12px;}
+.brand h1{margin:0;font-size:1.7rem;font-weight:700;}
+nav{display:flex;gap:16px;flex:1;justify-content:center;flex-wrap:wrap;}
+nav a{color:#fff;text-decoration:none;font-weight:600;padding:8px 12px;border-radius:8px;transition: all 0.2s;}
+nav a:hover{background:rgba(255,255,255,0.2);}
+
+/* Perfil usuario */
+.user-profile{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:24px;
+}
+.user-profile img{
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid var(--green-dark);
+  box-shadow:0 2px 6px var(--shadow);
+}
+.user-profile span{
+  font-weight:700;
+  font-size:1.1rem;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+/* Container y grid */
+.wrap{max-width:1100px;margin:40px auto;padding:0 16px 50px;}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+@media (max-width:900px){.grid{grid-template-columns:1fr;}}
+
+/* Cards */
+.card{
+  background:var(--white);
+  border-radius:16px;
+  box-shadow:0 6px 20px var(--shadow-deep);
+  padding:20px;
+  transition: all 0.3s ease;
+}
+.card:hover{
+  transform: translateY(-5px);
+  box-shadow:0 12px 25px var(--shadow-deep);
+}
+h2{margin:10px 0 12px;color: var(--green-dark);}
+h3{margin:8px 0 12px;color:#2b2b2b;}
+.muted{color:#686868;font-size:1rem;}
+
+/* Stats */
+.stats{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;}
+.stat{
+  background:var(--green-light);
+  border-radius:14px;
+  padding:12px 16px;
+  font-weight:600;
+  color:var(--green-dark);
+  flex:1;
+  text-align:center;
+  box-shadow:0 2px 8px var(--shadow);
+}
+.bar{
+  height:12px;
+  background:#e9f4eb;
+  border-radius:999px;
+  overflow:hidden;
+  margin-top:6px;
+}
+.bar > div{
+  height:100%;
+  background:var(--green-dark);
+  width:0%;
+  border-radius:999px;
+  transition: width 1s ease-in-out;
+}
+
+/* Quests */
+.quest{
+  border:1px solid var(--green-light);
+  border-radius:14px;
+  padding:14px;
+  margin:12px 0;
+  transition: all 0.3s;
+}
+.quest:hover{ background:#f1fdf2; transform: translateY(-2px);}
+.quest h4{margin:0 0 6px;font-size:1rem;}
+.badge{
+  display:inline-block;
+  background:var(--green-light);
+  color:var(--green-dark);
+  padding:5px 10px;
+  border-radius:999px;
+  font-size:.85rem;
+  font-weight:600;
+  margin-right:6px;
+  transition: transform 0.3s;
+}
+.badge:hover{ transform: scale(1.2); }
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;}
+
+/* Botones */
+.btn{border:0;border-radius:999px;padding:10px 16px;font-weight:700;cursor:pointer;transition: all 0.2s;box-shadow:0 2px 6px var(--shadow);}
+.btn-primary{background:var(--green-dark);color:#fff;}
+.btn-primary:hover{transform: scale(1.05);box-shadow:0 4px 12px var(--shadow);}
+.btn-outline{background:#fff;border:2px solid var(--green-light);color:var(--green-dark);}
+.btn-outline:hover{transform: scale(1.05);}
+.btn-danger{background:#e53935;color:#fff;}
+.btn-danger:hover{transform: scale(1.05);}
+
+/* Formularios */
+.field{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;}
+input, textarea{border:1px solid var(--green-light);border-radius:12px;padding:12px;font:inherit;}
+input:focus, textarea:focus{outline:2px solid #a7d8aa;}
+.right{display:flex;justify-content:flex-end;}
+
+/* Empty state */
+.empty{border:1px dashed #cfe7d1;border-radius:14px;padding:18px;text-align:center;color:#6d6d6d;font-weight:600;}
+
+/* Recompensas */
+.rewards-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:20px;
+  margin-top:12px;
+}
+.reward-card{
+  background:var(--green-light);
+  border-radius:14px;
+  padding:18px;
+  text-align:center;
+  transition: all 0.3s;
+  box-shadow:0 2px 8px var(--shadow);
+}
+.reward-card:hover{ transform: scale(1.05); box-shadow:0 6px 16px var(--shadow);}
+.reward-card h4{margin:10px 0; font-size:1.05rem;font-weight:600;}
+.reward-card p{font-size:.95rem; color:#2b2b2b; line-height:1.3;}
+.reward-card span{font-size:2rem; display:block; margin-bottom:8px;}
 </style>
 </head>
 <body>
-<nav class="navbar">
-    <a href="index.html">Inicio</a>
-    <a href="registro.html">Registro</a>
+
+<header>
+  <div class="brand">
+    <div style="font-size:2rem;">🚀</div>
+    <h1>Arranca Ya!</h1>
+  </div>
+  <nav>
+    <a href="perfil.html">Perfil</a>
     <a href="cursos.html">Cursos</a>
-    <a href="retos.html">Retos</a>
+    <a href="asistente.html">Asistente</a>
     <a href="historico.html">Histórico</a>
     <a href="asesoria.html">Asesoría</a>
     <a href="contacto.html">Contacto</a>
-    <a href="asistente.html">Asistente</a>
-</nav>
+  </nav>
+  <div class="user-profile">
+    <img src="https://via.placeholder.com/60" alt="Usuario">
+    <span>😎 Miguel Ángel</span>
+  </div>
+</header>
 
-<div class="container">
-    <div class="grid-2">
-        <section class="card">
-            <h2>Tu Progreso 🏆</h2>
-            <div class="stats" id="stats"></div>
-            <div class="bar-container"><div id="xpBar" class="bar"></div></div>
-            <p style="font-size:0.9rem;color:#777;">Progreso al siguiente nivel</p>
-        </section>
-        <section class="card">
-            <h2>Crea un Reto Personalizado</h2>
-            <div class="form-section">
-                <input type="text" id="qTitle" placeholder="Título del reto (ej. Vender 5 productos)">
-                <textarea id="qDesc" rows="3" placeholder="Descripción (opcional)"></textarea>
-                <input type="number" id="qXP" value="50" min="10" step="10">
-                <button class="btn" id="addQuestBtn">Agregar Reto</button>
-            </div>
-        </section>
-    </div>
+<div class="wrap">
+  <div class="user-profile">
+    <img id="profileImg" src="https://via.placeholder.com/60" alt="Usuario">
+    <span id="profileName">👤 Usuario</span>
+  </div>
 
-    <div class="grid-2" style="margin-top:20px;">
-        <section class="card">
-            <h2>Retos Activos</h2>
-            <div class="quest-list" id="activeList"></div>
-        </section>
-        <section class="card">
-            <h2>Retos Completados</h2>
-            <div class="quest-list" id="doneList"></div>
-        </section>
-    </div>
+  <div class="grid">
+    <section class="card">
+      <h2>Progreso</h2>
+      <p class="muted">Lleva el control de tu avance y racha diaria.</p>
+      <div class="stats" id="stats"></div>
+      <div style="margin:10px 0 6px" class="muted">Progreso al siguiente nivel</div>
+      <div class="bar"><div id="xpBar"></div></div>
+    </section>
 
-    <div class="card" style="margin-top:20px;">
-        <h3>Insignias Conseguidas 🏅</h3>
-        <div class="quest-badges" id="badgesRow"></div>
-        <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:20px;">
-            <button class="btn" id="shareBtn">Compartir Progreso</button>
-            <button class="btn btn-delete" id="resetBtn">Reiniciar Gamificación</button>
-        </div>
+    <section class="card">
+      <h2>Agregar reto personalizado</h2>
+      <p class="muted">Crea misiones propias.</p>
+      <div class="field">
+        <label for="qTitle">Título del reto</label>
+        <input id="qTitle" placeholder="Ej. Hablar con 5 clientes potenciales">
+      </div>
+      <div class="field">
+        <label for="qDesc">Descripción</label>
+        <textarea id="qDesc" rows="3" placeholder="¿Qué harás, dónde y con qué objetivo?"></textarea>
+      </div>
+      <div class="field">
+        <label for="qXP">Recompensa (XP)</label>
+        <input id="qXP" type="number" min="10" step="10" value="50">
+      </div>
+      <div class="right">
+        <button class="btn btn-primary" id="addQuestBtn">Agregar reto</button>
+      </div>
+    </section>
+  </div>
+
+  <div class="grid" style="margin-top:16px">
+    <section class="card">
+      <h2>Retos activos</h2>
+      <div id="activeList"></div>
+    </section>
+
+    <section class="card">
+      <h2>Completados</h2>
+      <div id="doneList"></div>
+    </section>
+  </div>
+
+  <section class="card" style="margin-top:16px">
+    <h3>Insignias conseguidas</h3>
+    <div id="badgesRow"></div>
+    <div class="right" style="margin-top:10px; gap:8px">
+      <button class="btn btn-outline" id="shareBtn">Compartir progreso</button>
+      <button class="btn btn-danger" id="resetBtn">Reiniciar gamificación</button>
     </div>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h3>Recompensas disponibles</h3>
+    <div class="rewards-grid" id="rewardsGrid"></div>
+  </section>
 </div>
 
-<footer class="footer">
-    <p>© 2025 Arranca Ya!. Todos los derechos reservados.</p>
-</footer>
-
-<button class="chat-button" onclick="toggleChat()">🤖</button>
-<div class="chat-box" id="chatBox">
-    <div class="chat-header">Soy Sparkia, tu asistente virtual 🤖</div>
-    <div class="chat-messages" id="chatMessages">
-        <p><strong>Sparkia:</strong> ¡Hola! ¿En qué puedo ayudarte hoy?</p>
-    </div>
-    <div class="chat-input">
-        <input type="text" id="userInput" placeholder="Escribe un mensaje...">
-        <button onclick="sendMessage()">➤</button>
-    </div>
-</div>
-
-<script src="gamification.js"></script>
 <script>
-    // Mantengo tu script original con funcionalidades
-    const LS_KEY = 'gy_state_v1';
+let xp = 0;
+let level = 1;
+let streak = 0;
+let activeQuests = [];
+let doneQuests = [];
+let badges = [];
+let rewards = [
+  {emoji:'🎁', title:'10% Descuento', desc:'En tu próxima compra'},
+  {emoji:'🏆', title:'Medalla Oro', desc:'Por completar 5 retos'},
+  {emoji:'💎', title:'20% Descuento', desc:'En productos seleccionados'},
+  {emoji:'🎫', title:'Entrada Gratis', desc:'A un taller exclusivo'},
+  {emoji:'🥇', title:'Medalla Platino', desc:'Por completar 10 retos'},
+  {emoji:'🍀', title:'Sorteo Especial', desc:'Participa en el sorteo mensual'}
+];
 
-    function loadState() { try { const raw = localStorage.getItem(LS_KEY); return raw ? JSON.parse(raw) : null; } catch { return null; } }
-    function saveState(st) { localStorage.setItem(LS_KEY, JSON.stringify(st)); }
-    function slugify(s){return s.toLowerCase().trim().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');}
-    
-    function renderAll(){ /* ... tu código completo de render ... */ }
-    function markDone(key){ /* ... tu código ... */ }
-    function deleteQuest(key){ /* ... tu código ... */ }
-    function addCustomQuest(){ /* ... tu código ... */ }
-    function shareProgress(){ /* ... tu código ... */ }
-    function resetAll(){ /* ... tu código ... */ }
+// Funciones
+function updateProgress(){
+  const statsDiv = document.getElementById('stats');
+  statsDiv.innerHTML = `
+    <div class="stat">Nivel: ${level}</div>
+    <div class="stat">XP: ${xp}</div>
+    <div class="stat">Racha: ${streak} 🔥</div>
+  `;
+  const xpBar = document.getElementById('xpBar');
+  xpBar.style.width = Math.min((xp%100),100)+'%';
+}
 
-    document.addEventListener('DOMContentLoaded', ()=>{
-        setTimeout(renderAll,80);
-        document.getElementById('addQuestBtn').addEventListener('click', addCustomQuest);
-        document.getElementById('shareBtn').addEventListener('click', shareProgress);
-        document.getElementById('resetBtn').addEventListener('click', resetAll);
-    });
+function renderQuests(){
+  const activeDiv = document.getElementById('activeList');
+  const doneDiv = document.getElementById('doneList');
+  activeDiv.innerHTML = activeQuests.length ? activeQuests.map((q,i)=>
+    `<div class="quest">
+      <h4>${q.title}</h4>
+      <p>${q.desc}</p>
+      <div class="right"><button class="btn btn-primary" onclick="completeQuest(${i})">Completar (+${q.xp} XP)</button></div>
+    </div>`).join('') : '<div class="empty">No hay retos activos</div>';
+  doneDiv.innerHTML = doneQuests.length ? doneQuests.map(q=>
+    `<div class="quest">
+      <h4>${q.title}</h4>
+      <p>${q.desc}</p>
+    </div>`).join('') : '<div class="empty">No has completado retos</div>';
+}
 
-    function toggleChat(){
-        const chat = document.getElementById("chatBox");
-        chat.style.display = (chat.style.display === "flex") ? "none" : "flex";
-    }
-    function sendMessage(){
-        const input = document.getElementById("userInput");
-        const msg = input.value.trim();
-        if(!msg) return;
-        const messages = document.getElementById("chatMessages");
-        const userMsg = document.createElement("p"); userMsg.innerHTML = "<strong>Tú:</strong> "+msg; messages.appendChild(userMsg);
-        const botMsg = document.createElement("p"); botMsg.innerHTML = "<strong>Sparkia:</strong> Estoy en desarrollo, pero siempre aquí para ayudarte 🚀"; messages.appendChild(botMsg);
-        messages.scrollTop = messages.scrollHeight; input.value="";
-    }
+function renderBadges(){
+  const badgesDiv = document.getElementById('badgesRow');
+  badgesDiv.innerHTML = badges.length ? badges.map(b=>`<span class="badge">${b}</span>`).join('') : '<div class="empty">No tienes insignias aún</div>';
+}
+
+function renderRewards(){
+  const rewardsDiv = document.getElementById('rewardsGrid');
+  rewardsDiv.innerHTML = rewards.map(r=>`
+    <div class="reward-card">
+      <span>${r.emoji}</span>
+      <h4>${r.title}</h4>
+      <p>${r.desc}</p>
+    </div>
+  `).join('');
+}
+
+function addQuest(){
+  const title = document.getElementById('qTitle').value;
+  const desc = document.getElementById('qDesc').value;
+  const xpVal = parseInt(document.getElementById('qXP').value);
+  if(!title||!desc||!xpVal) return alert('Completa todos los campos');
+  activeQuests.push({title:title, desc:desc, xp:xpVal});
+  renderQuests();
+  document.getElementById('qTitle').value='';
+  document.getElementById('qDesc').value='';
+  document.getElementById('qXP').value=50;
+}
+
+function completeQuest(i){
+  const quest = activeQuests.splice(i,1)[0];
+  doneQuests.push(quest);
+  xp += quest.xp;
+  streak++;
+  if(streak%5===0) badges.push('🏅');
+  if(xp>=level*100){level++; xp=0;}
+  renderQuests();
+  renderProgress();
+  renderBadges();
+}
+
+function resetGamification(){
+  xp=0; level=1; streak=0; activeQuests=[]; doneQuests=[]; badges=[];
+  renderQuests(); renderProgress(); renderBadges();
+}
+
+function renderProgress(){updateProgress();}
+
+document.getElementById('addQuestBtn').onclick = addQuest;
+document.getElementById('resetBtn').onclick = resetGamification;
+
+// Inicializar
+renderQuests();
+renderProgress();
+renderBadges();
+renderRewards();
 </script>
+
 </body>
 </html>

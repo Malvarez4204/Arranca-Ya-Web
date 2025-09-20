@@ -1,249 +1,1007 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Arranca Ya! - Cursos</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --green-primary: #66BB6A;
-      --green-dark: #388E3C;
-      --green-light: #E8F5E9;
-      --gray-light: #f4f7f6;
-      --white: #fff;
-      --text-color: #212121;
-    }
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: var(--gray-light);
-      color: var(--text-color);
-      line-height: 1.6;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arranca Ya! - Cursos Dinámicos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --green-primary: #66BB6A;
+            --green-dark: #388E3C;
+            --green-light: #E8F5E9;
+            --gray-light: #f4f7f6;
+            --white: #fff;
+            --text-color: #212121;
+            --red-error: #D32F2F;
+            --blue-accent: #2196F3;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, var(--green-light) 0%, var(--gray-light) 100%);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden; /* Evita desbordamientos horizontales */
+        }
 
-    /* NAVBAR */
-    .navbar {
-      background-color: var(--green-dark);
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .navbar a {
-      display: block;
-      color: white;
-      padding: 14px 20px;
-      text-decoration: none;
-      font-size: 1rem;
-      transition: background-color 0.3s ease;
-    }
-    .navbar a:hover {
-      background-color: #2e7d32;
-    }
+        /* Animaciones Globales */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
 
-    /* CONTENEDOR PRINCIPAL */
-    .container {
-      max-width: 1100px;
-      margin: 20px auto;
-      padding: 20px;
-      background-color: var(--white);
-      border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-    }
+        /* NAVBAR */
+        .navbar {
+            background-color: var(--green-dark);
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 5px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+            z-index: 100;
+            animation: slideInLeft 0.8s ease-out;
+        }
+        .navbar a {
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            font-size: 1.05rem;
+            font-weight: 500;
+            transition: background-color 0.3s ease, transform 0.2s ease, border-radius 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .navbar a:hover {
+            background-color: #2e7d32;
+            transform: translateY(-3px);
+            border-radius: 8px;
+        }
+        .navbar a::before { /* Efecto de subrayado/resplandor */
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--green-primary);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-out;
+        }
+        .navbar a:hover::before {
+            transform: translateX(0);
+        }
 
-    h2 {
-      font-size: 2rem;
-      color: var(--green-dark);
-      margin-bottom: 20px;
-      text-align: center;
-    }
+        /* CONTENEDOR PRINCIPAL */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 30px;
+            background-color: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+            flex-grow: 1;
+            animation: fadeIn 1s ease-out;
+        }
 
-    /* HERO */
-    .hero-section {
-      background-color: var(--green-primary);
-      color: var(--white);
-      padding: 40px 20px;
-      border-radius: 15px;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-    .hero-section h1 {
-      font-size: 2rem;
-      margin-bottom: 10px;
-    }
-    .hero-section p {
-      font-size: 1rem;
-    }
+        h2 {
+            font-size: 2.5rem;
+            color: var(--green-dark);
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        h2::after { /* Subrayado decorativo para los títulos */
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 80px;
+            height: 4px;
+            background-color: var(--green-primary);
+            border-radius: 2px;
+        }
 
-    /* QUIZ */
-    .quiz-form {
-      margin-top: 20px;
-      text-align: left;
-    }
-    .quiz-question {
-      margin-bottom: 20px;
-      background-color: var(--green-light);
-      padding: 15px;
-      border-radius: 10px;
-    }
-    .quiz-options label,
-    .quiz-options textarea {
-      display: block;
-      margin-bottom: 10px;
-      width: 100%;
-    }
+        /* HERO - Sección de inicio del cuestionario */
+        .hero-section {
+            background: linear-gradient(45deg, var(--green-primary), var(--green-dark));
+            color: var(--white);
+            padding: 50px 30px;
+            border-radius: 18px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1.2s ease-out;
+        }
+        .hero-section::before { /* Elemento decorativo de fondo */
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 150px;
+            height: 150px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: rotate(30deg);
+        }
+        .hero-section::after { /* Elemento decorativo de fondo */
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            width: 180px;
+            height: 180px;
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            transform: rotate(-45deg);
+        }
+        .hero-section h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: pulse 3s infinite ease-in-out;
+        }
+        .hero-section p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-    /* BOTONES */
-    .hero-button {
-      background-color: var(--green-dark);
-      color: var(--white);
-      padding: 12px 25px;
-      border-radius: 50px;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-      transition: background-color 0.3s ease;
-      margin-top: 10px;
-    }
-    .hero-button:hover {
-      background-color: #2e7d32;
-    }
+        /* QUIZ */
+        #quiz-container {
+            display: none; /* Oculto por defecto, se mostrará con JS */
+            margin-top: 40px;
+            padding: 25px;
+            background-color: var(--green-light);
+            border-radius: 15px;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.05);
+            animation: fadeIn 1s ease-out;
+        }
+        .quiz-question {
+            margin-bottom: 25px;
+            padding: 20px;
+            background-color: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .quiz-question:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+        }
+        .quiz-question p {
+            font-weight: 600;
+            color: var(--green-dark);
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .quiz-question p i {
+            margin-right: 10px;
+            color: var(--green-primary);
+            font-size: 1.5rem;
+        }
+        .quiz-options label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            background-color: var(--gray-light);
+            border: 1px solid #e0e0e0;
+        }
+        .quiz-options label:hover {
+            background-color: #e6f7e8; /* Un verde más claro en hover */
+            transform: translateX(5px);
+        }
+        .quiz-options input[type="radio"] {
+            margin-right: 12px;
+            transform: scale(1.3); /* Radio buttons más grandes */
+            accent-color: var(--green-primary); /* Color del radio button */
+        }
+        .quiz-options input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .quiz-options input[type="text"]:focus {
+            border-color: var(--green-dark);
+            box-shadow: 0 0 8px rgba(56,142,60,0.4);
+            outline: none;
+        }
+        .quiz-question.error {
+            border: 2px solid var(--red-error);
+            box-shadow: 0 0 15px rgba(211, 47, 47, 0.3);
+        }
+        .quiz-error-message {
+            color: var(--red-error);
+            font-size: 0.95em;
+            margin-top: 8px;
+            display: none;
+            font-weight: 500;
+        }
 
-    /* CARDS */
-    .card-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-    }
-    .course-card {
-      background-color: var(--white);
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-    }
-    .course-card img {
-      width: 100%;
-      height: 160px;
-      object-fit: cover;
-    }
-    .course-content {
-      padding: 15px;
-    }
-    .course-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 10px;
-    }
-    .course-buttons button {
-      flex: 1;
-      min-width: 120px;
-    }
+        #quiz-result {
+            display: none;
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, var(--green-primary), var(--green-dark));
+            color: var(--white);
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1.5s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+        #quiz-result::before { /* Icono de fondo en el resultado */
+            content: '\f0a1'; /* Icono de bombilla de Font Awesome */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 5rem;
+            color: rgba(255, 255, 255, 0.15);
+            z-index: 1;
+        }
+        #quiz-result h3 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            z-index: 2;
+            position: relative;
+        }
+        #quiz-result p {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            line-height: 1.8;
+            z-index: 2;
+            position: relative;
+        }
+        #quiz-result strong {
+            color: var(--white);
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 1.3rem;
+        }
 
-    /* FOOTER */
-    .footer {
-      background-color: var(--green-dark);
-      color: var(--white);
-      text-align: center;
-      padding: 15px;
-      font-size: 0.9rem;
-    }
+        /* BOTONES GENERALES */
+        .hero-button, .submit-quiz-button {
+            background: linear-gradient(45deg, var(--green-dark), #2e7d32);
+            color: var(--white);
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            font-size: 1.15rem;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .hero-button:hover, .submit-quiz-button:hover {
+            background: linear-gradient(45deg, #2e7d32, var(--green-dark));
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        .hero-button i, .submit-quiz-button i {
+            font-size: 1.3em;
+        }
 
-    /* BOTONES FLOTANTES */
-    .chat-button, .shopping-cart-button {
-      position: fixed;
-      bottom: 20px;
-      border: none;
-      border-radius: 50%;
-      width: 55px;
-      height: 55px;
-      font-size: 24px;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .chat-button {
-      right: 20px;
-      background-color: var(--green-primary);
-      color: white;
-    }
-    .shopping-cart-button {
-      right: 90px;
-      background-color: #2196F3;
-      color: white;
-    }
+        /* CARDS DE CURSOS */
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+            animation: fadeIn 1.5s ease-out;
+        }
+        .course-card {
+            background-color: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .course-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+        .course-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+            transition: transform 0.4s ease;
+        }
+        .course-card:hover img {
+            transform: scale(1.05);
+        }
+        .course-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .course-content h3 {
+            color: var(--green-dark);
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-size: 1.6rem;
+        }
+        .course-content p {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 15px;
+        }
+        .course-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: auto; /* Empuja los botones al final de la tarjeta */
+        }
+        .course-buttons button, .course-buttons a { /* Asegúrate que los enlaces también se vean como botones */
+            flex: 1 1 auto; /* Flexibilidad para los botones */
+            min-width: 130px;
+            padding: 12px 18px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            background-color: var(--green-primary);
+            color: var(--white);
+            text-decoration: none; /* Para los enlaces */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        }
+        .course-buttons button:hover, .course-buttons a:hover {
+            background-color: var(--green-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .course-buttons .details-btn {
+            background-color: var(--blue-accent);
+        }
+        .course-buttons .details-btn:hover {
+            background-color: #1976D2; /* Azul más oscuro */
+        }
 
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
-      .hero-section h1 {
-        font-size: 1.6rem;
-      }
-      .hero-section p {
-        font-size: 0.95rem;
-      }
-      .navbar {
-        flex-direction: column;
-      }
-      .navbar a {
-        padding: 10px;
-        font-size: 0.9rem;
-      }
-    }
+        /* FOOTER */
+        .footer {
+            background-color: var(--green-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            margin-top: 50px;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            animation: slideInRight 0.8s ease-out;
+        }
 
-    @media (max-width: 480px) {
-      .container {
-        padding: 15px;
-      }
-      h2 {
-        font-size: 1.4rem;
-      }
-      .hero-section {
-        padding: 25px 15px;
-      }
-      .chat-button, .shopping-cart-button {
-        width: 50px;
-        height: 50px;
-        font-size: 20px;
-      }
-    }
-  </style>
+        /* BOTONES FLOTANTES */
+        .floating-button-wrapper { /* Contenedor para botones flotantes */
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* Espacio entre los botones */
+        }
+        .floating-button {
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 26px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .floating-button:hover {
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+        }
+        .chat-button {
+            background-color: var(--green-primary);
+        }
+        .shopping-cart-button {
+            background-color: var(--blue-accent);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 992px) {
+            .container {
+                padding: 25px;
+                margin: 25px auto;
+            }
+            h2 { font-size: 2.2rem; }
+            .hero-section h1 { font-size: 2.4rem; }
+            .hero-section p { font-size: 1.1rem; }
+            .course-card img { height: 180px; }
+            .course-content h3 { font-size: 1.4rem; }
+        }
+
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; padding: 0; }
+            .navbar a { padding: 10px 15px; border-radius: 0; }
+            .navbar a:hover { transform: none; border-radius: 0; }
+            .navbar a::before { display: none; }
+            h2 { font-size: 2rem; margin-bottom: 25px; }
+            .hero-section { padding: 40px 20px; margin-bottom: 25px; }
+            .hero-section h1 { font-size: 2rem; }
+            .hero-section p { font-size: 1rem; }
+            .quiz-question p { font-size: 1.1rem; }
+            .course-card img { height: 160px; }
+            .course-content h3 { font-size: 1.3rem; }
+            .course-buttons { flex-direction: column; }
+            .course-buttons button, .course-buttons a { min-width: unset; width: 100%; }
+        }
+
+        @media (max-width: 480px) {
+            .container { padding: 15px; margin: 15px auto; }
+            h2 { font-size: 1.8rem; margin-bottom: 20px; }
+            .hero-section { padding: 30px 15px; }
+            .hero-section h1 { font-size: 1.8rem; }
+            .hero-section p { font-size: 0.9rem; }
+            .quiz-question { padding: 15px; margin-bottom: 15px; }
+            .quiz-question p { font-size: 1rem; }
+            .quiz-options label { padding: 8px 10px; font-size: 0.95rem; }
+            #quiz-result h3 { font-size: 2rem; }
+            #quiz-result p { font-size: 1rem; }
+            .submit-quiz-button, .hero-button {
+                padding: 12px 25px;
+                font-size: 1rem;
+                gap: 8px;
+            }
+            .floating-button-wrapper { bottom: 15px; right: 15px; gap: 10px; }
+            .floating-button { width: 50px; height: 50px; font-size: 22px; }
+        }
+    </style>
 </head>
 <body>
-  <nav class="navbar">
-    <a href="index.html">Inicio</a>
-    <a href="registro.html">Registro</a>
-    <a href="cursos.html">Cursos</a>
-    <a href="historico.html">Histórico</a>
-    <a href="asesoria.html">Asesoría</a>
-    <a href="contacto.html">Contacto</a>
-    <a href="asistente.html">Asistente</a>
-    <a href="retos.html">Retos</a>
-  </nav>
+<nav class="navbar">
+  <a href="index.html">Inicio</a>
+  <a href="registro.html">Registro</a>
+  <a href="cursos.html">Cursos</a>
+  <a href="historico.html">Histórico</a>
+  <a href="asesoria.html">Asesoría</a>
+  <a href="contacto.html">Contacto</a>
+  <a href="asistente.html">Asistente</a>
+  <a href="retos.html">Retos</a>
+</nav>
 
-  <div class="container">
-    <h2>Nuestros Cursos</h2>
-    <div class="hero-section">
-      <h1>Encuentra tu camino</h1>
-      <p>Responde a este breve cuestionario para que te recomendemos los mejores cursos.</p>
-      <button class="hero-button">Comenzar Cuestionario</button>
+    <div class="container">
+        <h2>Impulsa tu Futuro Emprendedor</h2>
+
+        <div id="intro-section" class="hero-section">
+            <h1>¡Descubre tu Tipo de Emprendedor!</h1>
+            <p>Responde un breve cuestionario para que te ayudemos a entender mejor tu perfil y te recomendemos los cursos más adecuados para ti.</p>
+            <button class="hero-button" onclick="startQuiz()">
+                <i class="fas fa-lightbulb"></i> Comenzar Cuestionario
+            </button>
+        </div>
+
+        <div id="quiz-container">
+            <form id="entrepreneur-quiz">
+                <div class="quiz-question" id="q1">
+                    <p><i class="fas fa-question-circle"></i> 1. ¿Cuál es tu principal motivación para emprender?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q1" value="innovacion"> Crear algo nuevo y disruptivo.</label>
+                        <label><input type="radio" name="q1" value="impacto_social"> Generar un impacto positivo en la sociedad.</label>
+                        <label><input type="radio" name="q1" value="libertad_financiera"> Lograr independencia económica y flexibilidad.</label>
+                        <label><input type="radio" name="q1" value="crecimiento_personal"> Desafiarme y aprender constantemente.</label>
+                    </div>
+                    <span class="quiz-error-message" id="q1-error"></span>
+                </div>
+
+                <div class="quiz-question" id="q2">
+                    <p><i class="fas fa-question-circle"></i> 2. ¿Cómo manejas el riesgo?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q2" value="asumo_riesgos"> Lo asumo como parte del juego, busco oportunidades.</label>
+                        <label><input type="radio" name="q2" value="analizo_mitigo"> Lo analizo y busco formas de mitigarlo.</label>
+                        <label><input type="radio" name="q2" value="prefiero_seguridad"> Prefiero la seguridad, pero estoy dispuesto a crecer poco a poco.</label>
+                        <label><input type="radio" name="q2" value="lo_evito"> Trato de evitarlo al máximo.</label>
+                    </div>
+                    <span class="quiz-error-message" id="q2-error"></span>
+                </div>
+
+                <div class="quiz-question" id="q3">
+                    <p><i class="fas fa-question-circle"></i> 3. ¿Qué tipo de ambiente de trabajo prefieres?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q3" value="autonomia"> Autonomía total, ser mi propio jefe.</label>
+                        <label><input type="radio" name="q3" value="colaborativo"> Colaborativo, con un equipo que comparta la visión.</label>
+                        <label><input type="radio" name="q3" value="estable"> Estable y con roles bien definidos.</label>
+                        <label><input type="radio" name="q3" value="flexible"> Flexible, con posibilidad de cambiar y adaptar.</label>
+                    </div>
+                    <span class="quiz-error-message" id="q3-error"></span>
+                </div>
+
+                <div class="quiz-question" id="q4">
+                    <p><i class="fas fa-question-circle"></i> 4. ¿Cómo reaccionas ante un fracaso o un contratiempo?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q4" value="aprendo_continuo"> Lo veo como una oportunidad para aprender y sigo adelante.</label>
+                        <label><input type="radio" name="q4" value="me_desanimo_analizo"> Me desanimo, pero luego analizo qué salió mal.</label>
+                        <label><input type="radio" name="q4" value="busco_ayuda"> Busco ayuda y consejo de otros.</label>
+                        <label><input type="radio" name="q4" value="me_cuesta_recuperar"> Me cuesta mucho recuperarme y dudo de mi capacidad.</label>
+                    </div>
+                    <span class="quiz-error-message" id="q4-error"></span>
+                </div>
+
+                <div class="quiz-question" id="q5">
+                    <p><i class="fas fa-question-circle"></i> 5. ¿Qué importancia le das a la innovación en un negocio?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q5" value="esencial"> Es esencial, sin ella no hay futuro.</label>
+                        <label><input type="radio" name="q5" value="importante_adaptar"> Es importante, pero me enfoco más en adaptar lo que ya funciona.</label>
+                        <label><input type="radio" name="q5" value="secundaria"> Es secundaria, prefiero lo probado y seguro.</label>
+                        <label><input type="radio" name="q5" value="clave_diferenciar"> Clave para diferenciarme y destacar.</label>
+                    </div>
+                    <span class="quiz-error-message" id="q5-error"></span>
+                </div>
+
+                <div class="quiz-question" id="q6">
+                    <p><i class="fas fa-question-circle"></i> 6. ¿Cómo tomas decisiones importantes?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q6" value="rapido_intuitivo"> Rápido y de forma intuitiva, confiando en mi instinto.</label>
+                        <label><input type="radio" name="q6" value="investigo_consulto"> Investigo a fondo y consulto con expertos.</label>
+                        <label><input type="radio" name="q6" value="lentamente_seguro"> Lentamente, asegurándome de no cometer errores.</label>
+                        <label><input type="radio" name="q6" value="delego"> Prefiero delegar en alguien de confianza.</label>
+                    </div>
+                    <span class="quiz-error-message" id="q6-error"></span>
+                </div>
+
+                <div class="quiz-question" id="q7">
+                    <p><i class="fas fa-question-circle"></i> 7. ¿Te sientes cómodo liderando un equipo?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q7" value="si_natural"> Sí, es algo natural para mí.</label>
+                        <label><input type="radio" name="q7" value="si_aprendo"> Sí, y estoy dispuesto a aprender a ser mejor líder.</label>
+                        <label><input type="radio" name="q7" value="prefiero_seguir"> Prefiero seguir y ejecutar, no tanto liderar.</label>
+                        <label><input type="radio" name="q7" value="no_me_gusta"> No me gusta la responsabilidad de liderar.</label>
+                    </div>
+                    <span class="quiz-error-message" id="q7-error"></span>
+                </div>
+
+                <div class="quiz-question" id="q8">
+                    <p><i class="fas fa-question-circle"></i> 8. ¿Cómo te relacionas con tus clientes o usuarios?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q8" value="escucho_feedback"> Escucho activamente su feedback para mejorar constantemente.</label>
+                        <label><input type="radio" name="q8" value="ofrezco_lo_mejor"> Me aseguro de ofrecerles el mejor producto/servicio posible.</label>
+                        <label><input type="radio" name="q8" value="mantengo_distancia"> Mantengo una distancia profesional.</label>
+                        <label><input type="radio" name="q8" value="construyo_comunidad"> Construyo una comunidad y una relación cercana.</label>
+                    </div>
+                    <span class="quiz-error-message" id="q8-error"></span>
+                </div>
+
+                <div class="quiz-question" id="q9">
+                    <p><i class="fas fa-question-circle"></i> 9. ¿Qué rol te gustaría tener en tu propio negocio?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q9" value="visionario"> El visionario que dirige la estrategia.</label>
+                        <label><input type="radio" name="q9" value="operador"> El operador que se asegura de que todo funcione.</label>
+                        <label><input type="radio" name="q9" value="creativo"> El creativo que genera nuevas ideas de productos/servicios.</label>
+                        <label><input type="radio" name="q9" value="comercial"> El comercial que se encarga de las ventas y la expansión.</label>
+                    </div>
+                    <span class="quiz-error-message" id="q9-error"></span>
+                </div>
+
+                <div class="quiz-question" id="q10">
+                    <p><i class="fas fa-question-circle"></i> 10. ¿Qué tan cómodo te sientes con la tecnología y las herramientas digitales?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q10" value="experto"> Soy experto y siempre busco las últimas herramientas.</label>
+                        <label><input type="radio" name="q10" value="usuario_regular"> Soy usuario regular, me adapto a lo que necesite.</label>
+                        <label><input type="radio" name="q10" value="me_cuesta"> Me cuesta un poco, pero estoy dispuesto a aprender.</label>
+                        <label><input type="radio" name="q10" value="prefiero_manual"> Prefiero métodos más tradicionales/manuales.</label>
+                    </div>
+                    <span class="quiz-error-message" id="q10-error"></span>
+                </div>
+
+                <div style="text-align: center; margin-top: 30px;">
+                    <button type="submit" class="submit-quiz-button"><i class="fas fa-check-circle"></i> Ver mi Perfil Emprendedor</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="quiz-result">
+            <h3>¡Tu Perfil Emprendedor es: <span id="entrepreneur-type"></span>!</h3>
+            <p id="entrepreneur-description"></p>
+            <p>Aquí tienes algunos cursos recomendados para ti:</p>
+            <div id="recommended-courses" class="card-container">
+                </div>
+            <button class="hero-button" onclick="resetQuiz()" style="margin-top: 30px;"><i class="fas fa-redo"></i> Volver a hacer el Cuestionario</button>
+        </div>
+
+        <h2 id="all-courses-title" style="margin-top: 50px;">Explora Todos Nuestros Cursos</h2>
+        <div id="all-courses-container" class="card-container">
+            <div class="course-card">
+                <img src="logo/cursos/marketing.jpg" alt="Curso Marketing Digital">
+                <div class="course-content">
+                    <h3>Marketing Digital Estratégico</h3>
+                    <p>Aprende a diseñar y ejecutar campañas de marketing digital efectivas para hacer crecer tu negocio.</p>
+                    <div class="course-buttons">
+                        <button class="details-btn"><i class="fas fa-info-circle"></i> Detalles</button>
+                        <button><i class="fas fa-cart-plus"></i> Inscribirme</button>
+                    </div>
+                </div>
+            </div>
+            <div class="course-card">
+                <img src="logo/finanzaz.jpg" alt="Curso Finanzas Emprendedores">
+                <div class="course-content">
+                    <h3>Finanzas para Emprendedores</h3>
+                    <p>Domina los fundamentos financieros para gestionar tu startup, desde el presupuesto hasta la inversión.</p>
+                    <div class="course-buttons">
+                        <button class="details-btn"><i class="fas fa-info-circle"></i> Detalles</button>
+                        <button><i class="fas fa-cart-plus"></i> Inscribirme</button>
+                    </div>
+                </div>
+            </div>
+            <div class="course-card">
+                <img src="logo/lean.jpg" alt="Curso Lean Startup">
+                <div class="course-content">
+                    <h3>Metodología Lean Startup</h3>
+                    <p>Valida tus ideas rápidamente y lanza productos exitosos al mercado con menos riesgo y mayor eficiencia.</p>
+                    <div class="course-buttons">
+                        <button class="details-btn"><i class="fas fa-info-circle"></i> Detalles</button>
+                        <button><i class="fas fa-cart-plus"></i> Inscribirme</button>
+                    </div>
+                </div>
+            </div>
+            <div class="course-card">
+                <img src="logo/ventas.jpg" alt="Curso Ventas Efectivas">
+                <div class="course-content">
+                    <h3>Estrategias de Ventas Efectivas</h3>
+                    <p>Conviértete en un experto en ventas y cierra más tratos con técnicas probadas y un enfoque centrado en el cliente.</p>
+                    <div class="course-buttons">
+                        <button class="details-btn"><i class="fas fa-info-circle"></i> Detalles</button>
+                        <button><i class="fas fa-cart-plus"></i> Inscribirme</button>
+                    </div>
+                </div>
+            </div>
+<div class="course-card">
+    <img src="logo/cursos/branding.png" alt="Curso Branding Personal">
+    <div class="course-content">
+        <h3>Branding Personal para Emprendedores</h3>
+        <p>Construye una marca personal sólida que te diferencie y atraiga a tu público ideal y oportunidades.</p>
+        <div class="course-buttons">
+            <button class="details-btn">Detalles</button>
+            <button>Inscribirme</button>
+        </div>
     </div>
-    <div class="card-container">
-      <!-- Aquí irán los cursos -->
+</div>
+            <div class="course-card">
+                <img src="logo/proyectos.png" alt="Curso Gestión de Proyectos">
+                <div class="course-content">
+                    <h3>Gestión de Proyectos Ágil</h3>
+                    <p>Organiza, planifica y ejecuta tus proyectos de manera eficiente utilizando metodologías ágiles como Scrum.</p>
+                    <div class="course-buttons">
+                        <button class="details-btn"><i class="fas fa-info-circle"></i> Detalles</button>
+                        <button><i class="fas fa-cart-plus"></i> Inscribirme</button>
+                    </div>
+                </div>
+            </div>
     </div>
-  </div>
 
-  <footer class="footer">
-    <p>© 2025 Arranca Ya!. Todos los derechos reservados.</p>
-  </footer>
+    <div class="floating-button-wrapper">
+        <a href="asistente.html" class="floating-button chat-button" title="Habla con nuestro asistente virtual">
+            <i class="fas fa-robot"></i>
+        </a>
+        <button class="floating-button shopping-cart-button" title="Ver mi carrito de compras">
+            <i class="fas fa-shopping-cart"></i>
+        </button>
+    </div>
 
-  <button class="chat-button">🤖</button>
-  <button class="shopping-cart-button">🛒</button>
+    <footer class="footer">
+        <p>© 2025 Arranca Ya!. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        const introSection = document.getElementById('intro-section');
+        const quizContainer = document.getElementById('quiz-container');
+        const quizResult = document.getElementById('quiz-result');
+        const entrepreneurTypeSpan = document.getElementById('entrepreneur-type');
+        const entrepreneurDescriptionP = document.getElementById('entrepreneur-description');
+        const recommendedCoursesContainer = document.getElementById('recommended-courses');
+        const allCoursesTitle = document.getElementById('all-courses-title');
+        const allCoursesContainer = document.getElementById('all-courses-container');
+        const quizForm = document.getElementById('entrepreneur-quiz');
+
+        const entrepreneurProfiles = {
+            "Innovador Visionario": {
+                description: "Eres un <strong>Innovador Visionario</strong>, te mueven las ideas disruptivas y tienes una gran capacidad para ver el futuro. No temes al riesgo y siempre buscas ir un paso más allá.",
+                recommendations: ["Marketing Digital Estratégico", "Metodología Lean Startup", "Branding Personal para Emprendedores"]
+            },
+            "Constructor Estratégico": {
+                description: "Como <strong>Constructor Estratégico</strong>, eres metódico y te gusta planificar. Tomas decisiones basadas en el análisis y valoras la estabilidad mientras buscas el crecimiento sostenido.",
+                recommendations: ["Finanzas para Emprendedores", "Gestión de Proyectos Ágil", "Estrategias de Ventas Efectivas"]
+            },
+            "Impacto Social": {
+                description: "Tu perfil de <strong>Emprendedor de Impacto Social</strong> indica que tu motor es generar un cambio positivo. Te preocupas por la comunidad y buscas soluciones que beneficien a otros, construyendo relaciones sólidas.",
+                recommendations: ["Branding Personal para Emprendedores", "Marketing Digital Estratégico", "Gestión de Proyectos Ágil"]
+            },
+            "Líder Adaptativo": {
+                description: "Eres un <strong>Líder Adaptativo</strong>, te sientes cómodo dirigiendo y no te asusta el cambio. Aprendes de los errores y eres flexible, buscando siempre la mejora continua y el crecimiento de tu equipo.",
+                recommendations: ["Gestión de Proyectos Ágil", "Estrategias de Ventas Efectivas", "Finanzas para Emprendedores"]
+            },
+            "Explorador Creativo": {
+                description: "El <strong>Explorador Creativo</strong> dentro de ti anhela la autonomía y la generación constante de nuevas ideas. No te conformas con lo establecido y buscas constantemente la innovación y la diferenciación.",
+                recommendations: ["Metodología Lean Startup", "Marketing Digital Estratégico", "Branding Personal para Emprendedores"]
+            }
+        };
+
+        const allAvailableCourses = [
+            {
+                id: "marketing-digital",
+                title: "Marketing Digital Estratégico",
+                description: "Aprende a diseñar y ejecutar campañas de marketing digital efectivas para hacer crecer tu negocio.",
+                image: "https://via.placeholder.com/400x200/66BB6A/ffffff?text=Marketing+Digital"
+            },
+            {
+                id: "finanzas",
+                title: "Finanzas para Emprendedores",
+                description: "Domina los fundamentos financieros para gestionar tu startup, desde el presupuesto hasta la inversión.",
+                image: "https://via.placeholder.com/400x200/388E3C/ffffff?text=Finanzas+Emprendedores"
+            },
+            {
+                id: "lean-startup",
+                title: "Metodología Lean Startup",
+                description: "Valida tus ideas rápidamente y lanza productos exitosos al mercado con menos riesgo y mayor eficiencia.",
+                image: "https://via.placeholder.com/400x200/8BC34A/ffffff?text=Lean+Startup"
+            },
+            {
+                id: "ventas-efectivas",
+                title: "Estrategias de Ventas Efectivas",
+                description: "Conviértete en un experto en ventas y cierra más tratos con técnicas probadas y un enfoque centrado en el cliente.",
+                image: "https://via.placeholder.com/400x200/4CAF50/ffffff?text=Ventas+Efectivas"
+            },
+            {
+                id: "branding-personal",
+                title: "Branding Personal para Emprendedores",
+                description: "Construye una marca personal sólida que te diferencie y atraiga a tu público ideal y oportunidades.",
+                image: "https://via.placeholder.com/400x200/9CCC65/ffffff?text=Branding+Personal"
+            },
+            {
+                id: "gestion-proyectos",
+                title: "Gestión de Proyectos Ágil",
+                description: "Organiza, planifica y ejecuta tus proyectos de manera eficiente utilizando metodologías ágiles como Scrum.",
+                image: "https://via.placeholder.com/400x200/7CB342/ffffff?text=Gestion+de+Proyectos"
+            }
+        ];
+
+        function displayCourses(coursesToDisplay, containerElement) {
+            containerElement.innerHTML = ''; // Limpiar contenedor
+            coursesToDisplay.forEach(course => {
+                const card = `
+                    <div class="course-card">
+                        <img src="${course.image}" alt="${course.title}">
+                        <div class="course-content">
+                            <h3>${course.title}</h3>
+                            <p>${course.description}</p>
+                            <div class="course-buttons">
+                                <a href="#" class="details-btn"><i class="fas fa-info-circle"></i> Detalles</a>
+                                <button><i class="fas fa-cart-plus"></i> Inscribirme</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                containerElement.innerHTML += card;
+            });
+        }
+
+        // Mostrar todos los cursos por defecto al cargar la página
+        document.addEventListener('DOMContentLoaded', () => {
+            displayCourses(allAvailableCourses, allCoursesContainer);
+        });
+
+        function startQuiz() {
+            introSection.style.display = 'none';
+            quizContainer.style.display = 'block';
+            allCoursesTitle.style.display = 'none'; // Ocultar el título de todos los cursos
+            allCoursesContainer.style.display = 'none'; // Ocultar todos los cursos al iniciar el quiz
+            quizResult.style.display = 'none'; // Asegurarse de que el resultado esté oculto
+        }
+
+        function resetQuiz() {
+            introSection.style.display = 'block';
+            quizContainer.style.display = 'none';
+            quizResult.style.display = 'none';
+            allCoursesTitle.style.display = 'block'; // Mostrar el título de todos los cursos
+            allCoursesContainer.style.display = 'grid'; // Mostrar todos los cursos
+            quizForm.reset(); // Reiniciar el formulario
+            // Limpiar errores
+            document.querySelectorAll('.quiz-error-message').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.quiz-question').forEach(el => el.classList.remove('error'));
+        }
+
+        quizForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Limpiar errores anteriores
+            document.querySelectorAll('.quiz-error-message').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.quiz-question').forEach(el => el.classList.remove('error'));
+
+            let scores = {
+                "Innovador Visionario": 0,
+                "Constructor Estratégico": 0,
+                "Impacto Social": 0,
+                "Líder Adaptativo": 0,
+                "Explorador Creativo": 0
+            };
+
+            let allAnswered = true;
+
+            const questions = [
+                { id: 'q1', name: 'q1' },
+                { id: 'q2', name: 'q2' },
+                { id: 'q3', name: 'q3' },
+                { id: 'q4', name: 'q4' },
+                { id: 'q5', name: 'q5' },
+                { id: 'q6', name: 'q6' },
+                { id: 'q7', name: 'q7' },
+                { id: 'q8', name: 'q8' },
+                { id: 'q9', name: 'q9' },
+                { id: 'q10', name: 'q10' }
+            ];
+
+            questions.forEach(q => {
+                const selectedOption = document.querySelector(`input[name="${q.name}"]:checked`);
+                if (!selectedOption) {
+                    document.getElementById(`${q.id}-error`).textContent = 'Por favor, selecciona una opción.';
+                    document.getElementById(`${q.id}-error`).style.display = 'block';
+                    document.getElementById(q.id).classList.add('error');
+                    allAnswered = false;
+                } else {
+                    const value = selectedOption.value;
+                    // Lógica para puntuar cada perfil basado en las respuestas
+                    switch (q.id) {
+                        case 'q1': // Motivación
+                            if (value === 'innovacion') scores["Innovador Visionario"] += 2;
+                            if (value === 'impacto_social') scores["Impacto Social"] += 2;
+                            if (value === 'libertad_financiera') scores["Constructor Estratégico"] += 1;
+                            if (value === 'crecimiento_personal') scores["Líder Adaptativo"] += 1;
+                            break;
+                        case 'q2': // Manejo del riesgo
+                            if (value === 'asumo_riesgos') scores["Innovador Visionario"] += 2;
+                            if (value === 'analizo_mitigo') scores["Constructor Estratégico"] += 2;
+                            if (value === 'prefiero_seguridad') scores["Constructor Estratégico"] += 1;
+                            if (value === 'lo_evito') scores["Impacto Social"] += 1; // Podría buscar estabilidad para su impacto
+                            break;
+                        case 'q3': // Ambiente de trabajo
+                            if (value === 'autonomia') scores["Explorador Creativo"] += 2;
+                            if (value === 'colaborativo') scores["Impacto Social"] += 2;
+                            if (value === 'estable') scores["Constructor Estratégico"] += 1;
+                            if (value === 'flexible') scores["Líder Adaptativo"] += 1;
+                            break;
+                        case 'q4': // Reacción al fracaso
+                            if (value === 'aprendo_continuo') scores["Líder Adaptativo"] += 2;
+                            if (value === 'me_desanimo_analizo') scores["Constructor Estratégico"] += 1;
+                            if (value === 'busco_ayuda') scores["Impacto Social"] += 1;
+                            if (value === 'me_cuesta_recuperar') scores["Explorador Creativo"] -= 1; // Un poco en contra
+                            break;
+                        case 'q5': // Importancia de la innovación
+                            if (value === 'esencial') scores["Innovador Visionario"] += 2;
+                            if (value === 'importante_adaptar') scores["Constructor Estratégico"] += 1;
+                            if (value === 'secundaria') scores["Impacto Social"] += 1; // Puede enfocarse en soluciones existentes
+                            if (value === 'clave_diferenciar') scores["Explorador Creativo"] += 2;
+                            break;
+                        case 'q6': // Toma de decisiones
+                            if (value === 'rapido_intuitivo') scores["Explorador Creativo"] += 2;
+                            if (value === 'investigo_consulto') scores["Constructor Estratégico"] += 2;
+                            if (value === 'lentamente_seguro') scores["Constructor Estratégico"] += 1;
+                            if (value === 'delego') scores["Líder Adaptativo"] += 1;
+                            break;
+                        case 'q7': // Liderazgo
+                            if (value === 'si_natural') scores["Líder Adaptativo"] += 2;
+                            if (value === 'si_aprendo') scores["Líder Adaptativo"] += 1;
+                            if (value === 'prefiero_seguir') scores["Constructor Estratégico"] += 1;
+                            if (value === 'no_me_gusta') scores["Impacto Social"] += 1; // No liderazgo tradicional, pero sí colaboración
+                            break;
+                        case 'q8': // Relación con clientes
+                            if (value === 'escucho_feedback') scores["Líder Adaptativo"] += 1;
+                            if (value === 'ofrezco_lo_mejor') scores["Constructor Estratégico"] += 1;
+                            if (value === 'mantengo_distancia') scores["Innovador Visionario"] += 1; // Más enfocado en el producto
+                            if (value === 'construyo_comunidad') scores["Impacto Social"] += 2;
+                            break;
+                        case 'q9': // Rol en el negocio
+                            if (value === 'visionario') scores["Innovador Visionario"] += 2;
+                            if (value === 'operador') scores["Constructor Estratégico"] += 2;
+                            if (value === 'creativo') scores["Explorador Creativo"] += 2;
+                            if (value === 'comercial') scores["Líder Adaptativo"] += 1;
+                            break;
+                        case 'q10': // Tecnología
+                            if (value === 'experto') scores["Innovador Visionario"] += 2;
+                            if (value === 'usuario_regular') scores["Líder Adaptativo"] += 1;
+                            if (value === 'me_cuesta') scores["Constructor Estratégico"] += 0; // Neutro
+                            if (value === 'prefiero_manual') scores["Impacto Social"] += 1; // Puede usar métodos tradicionales para su impacto
+                            break;
+                    }
+                }
+            });
+
+            if (!allAnswered) {
+                // Si no todas las preguntas fueron respondidas, no se muestra el resultado
+                return;
+            }
+
+            // Determinar el perfil con la puntuación más alta
+            let entrepreneurType = '';
+            let maxScore = -1;
+            for (const type in scores) {
+                if (scores[type] > maxScore) {
+                    maxScore = scores[type];
+                    entrepreneurType = type;
+                } else if (scores[type] === maxScore) {
+                    // En caso de empate, se puede definir una preferencia o aleatoriedad
+                    // Por simplicidad, mantendremos el primero que se encuentre con el score máximo
+                    // o podrías elegir un tipo "mixto"
+                }
+            }
+
+            // Mostrar resultado
+            entrepreneurTypeSpan.textContent = entrepreneurType;
+            entrepreneurDescriptionP.innerHTML = entrepreneurProfiles[entrepreneurType].description;
+
+            // Cargar cursos recomendados
+            const recommendedCourseTitles = entrepreneurProfiles[entrepreneurType].recommendations;
+            const coursesToShow = allAvailableCourses.filter(course =>
+                recommendedCourseTitles.includes(course.title)
+            );
+            displayCourses(coursesToShow, recommendedCoursesContainer);
+
+            quizContainer.style.display = 'none';
+            quizResult.style.display = 'block';
+            allCoursesTitle.style.display = 'none'; // Ocultar título de todos los cursos
+            allCoursesContainer.style.display = 'none'; // Ocultar todos los cursos
+        });
+    </script>
 </body>
 </html>

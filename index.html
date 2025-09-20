@@ -1,375 +1,758 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Arranca Ya! - Emprende con Nosotros</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --green-primary: #66BB6A;
-      --green-dark: #388E3C;
-      --green-light: #E8F5E9;
-      --gray-light: #f4f7f6;
-      --white: #fff;
-      --text-color: #212121;
-      --purple-udemy:#A435F0; 
-      --purple-light-udemy:#CEC0FC; 
-      --purple-dark-udemy:#8C25B6;
-    }
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: var(--gray-light);
-      color: var(--text-color);
-      line-height: 1.6;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arranca Ya! - Emprende con Nosotros</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        :root {
+            --green-primary: #66BB6A;
+            --green-dark: #388E3C;
+            --green-light: #E8F5E9;
+            --gray-light: #f4f7f6;
+            --white: #fff;
+            --text-color: #212121;
+            --purple-udemy:#A435F0; 
+            --purple-light-udemy:#CEC0FC; 
+            --purple-dark-udemy:#8C25B6;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #22eb22
+            color: var(--text-color);
+            line-height: 1.6;
+        }
 
-    /* BANNER */
-    .top-banner {
-      background: var(--purple-light-udemy);
-      padding: 10px 20px;
-      text-align: center;
-      position: relative;
-      font-size: 0.9rem;
-    }
-    .top-banner p {
-      margin: 0;
-      color: var(--purple-dark-udemy);
-      font-weight: 600;
-    }
-    .top-banner .close-btn {
-      position: absolute;
-      right: 15px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 1.2rem;
-      cursor: pointer;
-      color: var(--purple-dark-udemy);
-    }
+        /* BANNER */
+        .top-banner {
+            background: var(--purple-light-udemy);
+            padding: 10px 20px;
+            text-align: center;
+            position: relative;
+            font-size: 0.9rem;
+        }
+        .top-banner p {
+            margin: 0;
+            color: var(--purple-dark-udemy);
+            font-weight: 600;
+        }
+        .top-banner .close-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--purple-dark-udemy);
+        }
 
-    /* HEADER */
-    .header-main {
-      background-color: var(--white);
-      padding: 15px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-      border-bottom: 2px solid var(--green-light);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      flex-wrap: wrap;
-    }
-    .brand h1 {
-      margin: 0;
-      font-size: 1.5rem;
-      color: var(--green-dark);
-    }
-    .search-bar {
-      flex-grow: 1;
-      position: relative;
-      min-width: 200px;
-    }
-    .search-bar input {
-      width: 100%;
-      padding: 10px 40px 10px 15px;
-      border: 1px solid #ccc;
-      border-radius: 999px;
-      font-family: inherit;
-    }
-    .search-bar-icon {
-      position: absolute;
-      right: 15px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #777;
-    }
-    .header-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .btn-login, .btn-signup {
-      border-radius: 999px;
-      padding: 8px 16px;
-      font-weight: 700;
-      cursor: pointer;
-      text-decoration: none;
-      font-size: 0.9rem;
-    }
-    .btn-login {
-      background: var(--white);
-      color: var(--green-dark);
-      border: 2px solid var(--green-dark);
-    }
-    .btn-signup {
-      background: var(--green-dark);
-      color: var(--white);
-      border: none;
-    }
+        /* HEADER */
+        .header-main {
+            background-color: var(--white);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            border-bottom: 2px solid var(--green-light);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            flex-wrap: wrap;
+        }
+        .brand h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: var(--green-dark);
+        }
+        .search-bar {
+            flex-grow: 1;
+            position: relative;
+            min-width: 200px;
+        }
+        .search-bar input {
+            width: 100%;
+            padding: 10px 40px 10px 15px;
+            border: 1px solid #ccc;
+            border-radius: 999px;
+            font-family: inherit;
+        }
+        .search-bar-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+        }
+        .header-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .btn-login, .btn-signup {
+            border-radius: 999px;
+            padding: 8px 16px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .btn-login {
+            background: var(--white);
+            color: var(--green-dark);
+            border: 2px solid var(--green-dark);
+        }
+        .btn-signup {
+            background: var(--green-dark);
+            color: var(--white);
+            border: none;
+        }
 
-    /* HERO */
-    .hero-section {
-      background-color: var(--green-primary);
-      color: var(--white);
-      padding: 40px 20px;
-      text-align: center;
-    }
-    .hero-logo {
-      max-width: 100px;
-      height: auto;
-      margin-bottom: 15px;
-    }
-    .hero-section h1 {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-    .hero-section p {
-      font-size: 1rem;
-      max-width: 500px;
-      margin: 0 auto 20px auto;
-    }
-    .hero-button {
-      background-color: var(--green-dark);
-      color: var(--white);
-      padding: 12px 20px;
-      text-decoration: none;
-      border-radius: 50px;
-      font-weight: 600;
-      margin: 5px;
-      display: inline-block;
-      transition: transform 0.3s ease;
-    }
-    .hero-button:hover {
-      transform: translateY(-3px);
-      background-color: #2e7d32;
-    }
+        /* HERO */
+   .hero-section {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                    url('logo/banner2.JPG');
+    background-size: cover;     /* Cubre todo, sin espacios */
+    background-position: center; /* Centrada */
+    background-repeat: no-repeat; /* No repetir */
+    color: var(--white);
+    padding: 0px 0px;
+    text-align: center;
+    transition: background-image 0.5s ease-in-out;
+    height: 100vh; /* Toda la altura de la pantalla */
+}
 
-    /* FEATURES */
-    .container {
-      max-width: 1200px;
-      margin: 40px auto;
-      padding: 20px;
-    }
-    h2 {
-      text-align: center;
-      font-size: 2rem;
-      font-weight: 600;
-      color: var(--green-dark);
-      margin-bottom: 40px;
-    }
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-    }
-    .feature-card {
-      background-color: var(--white);
-      padding: 20px;
-      border-radius: 12px;
-      text-align: center;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-    }
-    .feature-icon {
-      width: 60px;
-      margin-bottom: 15px;
-    }
-    .feature-card h3 {
-      font-size: 1.3rem;
-      margin-bottom: 10px;
-      color: var(--green-primary);
-    }
+        .hero-logo {
+            max-width: 300px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+        .hero-section h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .hero-section p {
+            font-size: 1rem;
+            max-width: 500px;
+            margin: 0 auto 20px auto;
+        }
+        .hero-button {
+            background-color: var(--green-dark);
+            color: var(--white);
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            margin: 5px;
+            display: inline-block;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .hero-button:hover {
+            transform: translateY(-3px);
+            background-color: #2e7d32;
+        }
 
-    /* FOOTER */
-    .footer {
-      background-color: var(--green-dark);
-      color: var(--white);
-      text-align: center;
-      padding: 20px;
-    }
+        /* FEATURES */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        h2 {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--green-dark);
+            margin-bottom: 40px;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+        .feature-card {
+            background-color: var(--white);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        .feature-icon {
+            width: 60px;
+            margin-bottom: 15px;
+        }
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--green-primary);
+        }
 
-    /* CHAT */
-    .chat-button {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: var(--green-primary);
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      font-size: 24px;
-      border: none;
-      cursor: pointer;
-      color: white;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      z-index: 1000;
-    }
-    .chat-box {
-      display: none;
-      position: fixed;
-      bottom: 90px;
-      right: 20px;
-      width: 90%;
-      max-width: 300px;
-      max-height: 400px;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-      flex-direction: column;
-      overflow: hidden;
-    }
-    .chat-header {
-      background: var(--green-dark);
-      color: white;
-      padding: 10px;
-      text-align: center;
-      font-weight: bold;
-    }
-    .chat-messages {
-      flex: 1;
-      padding: 10px;
-      overflow-y: auto;
-      font-size: 0.9rem;
-    }
-    .chat-input {
-      display: flex;
-    }
-    .chat-input input {
-      flex: 1;
-      border: none;
-      padding: 10px;
-    }
-    .chat-input button {
-      background: var(--green-primary);
-      border: none;
-      color: white;
-      padding: 10px 15px;
-      cursor: pointer;
-    }
+        /* SLIDER DE IMÁGENES */
+        .slider-section {
+            padding: 40px 0;
+            text-align: center;
+            background-color: var(--white);
+        }
+        .slider-section h2 {
+            margin-bottom: 20px;
+        }
+        .slider-container {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 20px 0;
+        }
+        .slider-track {
+            display: inline-flex;
+            animation: slide-right 20s linear infinite;
+        }
+        .slide {
+            width: 250px;
+            height: 150px;
+            object-fit: cover;
+            margin: 0 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        @keyframes slide-right {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-50%);
+            }
+        }
 
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
-      .header-main {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .header-actions {
-        justify-content: center;
-        width: 100%;
-      }
-      .hero-section h1 {
-        font-size: 1.6rem;
-      }
-      .hero-section p {
-        font-size: 0.9rem;
-      }
-    }
-    @media (max-width: 480px) {
-      .hero-section {
-        padding: 30px 15px;
-      }
-      .hero-section h1 {
-        font-size: 1.4rem;
-      }
-      .features-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+        /* SECCIONES DE TEXTO E IMAGEN */
+        .text-image-section {
+            background-color: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin: 40px auto;
+            padding: 40px;
+        }
+        .two-column-grid {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        .reversed-columns {
+            flex-direction: row-reverse;
+        }
+        .two-column-grid .text-content {
+            flex: 1;
+        }
+        .two-column-grid .text-content h2 {
+            text-align: left;
+        }
+        .two-column-grid .image-content {
+            flex: 1;
+        }
+        .two-column-grid .image-content img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .two-column-grid p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+        .text-content .hero-button {
+            margin: 0;
+        }
+        .image-content.multiple-images {
+            display: flex;
+            gap: 15px;
+        }
+        .image-content.multiple-images img {
+            width: 50%;
+        }
+        
+        /* ÚLTIMA SECCIÓN DE LLAMADO A LA ACCIÓN */
+        .call-to-action-section {
+            background-color: var(--green-light);
+            text-align: center;
+            padding: 60px 20px;
+        }
+        .call-to-action-section h2 {
+            font-size: 2.5rem;
+            color: var(--green-dark);
+            margin-bottom: 10px;
+        }
+        .call-to-action-section .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-color);
+            margin-bottom: 30px;
+        }
+        .call-to-action-section .hero-button {
+            background-color: var(--purple-dark-udemy);
+            color: var(--white);
+            padding: 15px 30px;
+            font-size: 1rem;
+            text-transform: uppercase;
+        }
+        .call-to-action-section .hero-button:hover {
+            background-color: var(--purple-udemy);
+        }
+
+        /* ANIMATIONS */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* FOOTER */
+        .footer {
+            background-color: var(--green-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 20px;
+        }
+        .footer-links {
+            margin: 10px 0;
+        }
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 0.9rem;
+            transition: opacity 0.3s ease;
+        }
+        .footer-links a:hover {
+            opacity: 0.8;
+        }
+        .footer-socials {
+            margin-top: 15px;
+        }
+        .footer-socials a {
+            color: var(--white);
+            font-size: 24px;
+            margin: 0 8px;
+            transition: color 0.3s ease;
+        }
+        .footer-socials a:hover {
+            color: var(--green-light);
+        }
+
+        /* CHAT */
+        .chat-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--green-primary);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+            border: none;
+            cursor: pointer;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+        .chat-box {
+            display: none;
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 90%;
+            max-width: 300px;
+            max-height: 400px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .chat-header {
+            background: var(--green-dark);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .chat-messages {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            font-size: 0.9rem;
+        }
+        .chat-input {
+            display: flex;
+        }
+        .chat-input input {
+            flex: 1;
+            border: none;
+            padding: 10px;
+        }
+        .chat-input button {
+            background: var(--green-primary);
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+
+        /* Login Form */
+        .login-form-container {
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .login-form-content {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            position: relative;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        .login-form-content h2 {
+            margin-top: 0;
+            color: var(--green-dark);
+            text-align: center;
+        }
+        .login-form-content label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .login-form-content input[type="email"],
+        .login-form-content input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+        }
+        .login-form-content button[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--green-dark);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .login-form-content button[type="submit"]:hover {
+            background-color: #2e7d32;
+        }
+        #welcome-message {
+            text-align: center;
+            font-weight: 600;
+            color: var(--green-dark);
+            margin-top: 20px;
+        }
+        .close-login-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #aaa;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .close-login-btn:hover {
+            color: #333;
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .header-main {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .header-actions {
+                justify-content: center;
+                width: 100%;
+            }
+            .hero-section h1 {
+                font-size: 1.6rem;
+            }
+            .hero-section p {
+                font-size: 0.9rem;
+            }
+            .two-column-grid {
+                flex-direction: column;
+                text-align: center;
+            }
+            .two-column-grid .text-content h2 {
+                text-align: center;
+            }
+            .call-to-action-section h2 {
+                font-size: 2rem;
+            }
+            .call-to-action-section .subtitle {
+                font-size: 1rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero-section {
+                padding: 30px 15px;
+            }
+            .hero-section h1 {
+                font-size: 1.4rem;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .login-form-content {
+                padding: 30px 20px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- BANNER -->
-  <div class="top-banner" id="promo-banner">
-    <p>¡Promoción especial! 50% de descuento en tu próximo curso 🎉</p>
-    <span class="close-btn" onclick="document.getElementById('promo-banner').style.display='none';">&times;</span>
-  </div>
-
-  <!-- HEADER -->
-  <header class="header-main">
-    <div class="brand"><h1>Arranca Ya!</h1></div>
-    <div class="search-bar">
-      <input type="text" placeholder="Buscar cursos o herramientas...">
-      <span class="search-bar-icon">&#x1F50D;</span>
+    <div class="top-banner" id="promo-banner">
+        <p>¡Promoción especial! 50% de descuento en tu próximo curso 🎉</p>
+        <span class="close-btn" onclick="document.getElementById('promo-banner').style.display='none';">&times;</span>
     </div>
-    <div class="header-actions">
-      <a href="#" class="btn-login" id="showLoginBtn">Iniciar sesión</a>
-      <a href="registro.html" class="btn-signup">Regístrate</a>
+
+    <header class="header-main">
+        <div class="brand"><h1>Arranca Ya!</h1></div>
+        <div class="search-bar">
+            <input type="text" placeholder="Buscar cursos o herramientas...">
+            <span class="search-bar-icon">&#x1F50D;</span>
+        </div>
+        <div class="header-actions">
+            <a href="#" class="btn-login" id="showLoginBtn">Iniciar sesión</a>
+            <a href="registro.html" class="btn-signup">Regístrate</a>
+        </div>
+    </header>
+
+    <div class="login-form-container" id="login-form-container" style="display: none;">
+        <div class="login-form-content">
+            <span class="close-login-btn" id="closeLoginBtn">&times;</span>
+            <h2>Iniciar sesión</h2>
+            <form id="login-form">
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" name="email" required>
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">Entrar</button>
+            </form>
+            <p id="welcome-message" style="display: none;"></p>
+        </div>
     </div>
-  </header>
+    
+    <section class="hero-section fade-in">
+        <img src="logo/logosinf.png" alt="Logo de Arranca Ya" class="hero-logo">
+        <h1 id="heroTitle">Desbloquea tu Potencial Emprendedor</h1>
+        <p>Accede a cursos, herramientas y recursos para llevar tu negocio al siguiente nivel. 🚀</p>
+        <a href="registro.html" class="hero-button">Prueba gratuita</a>
+        <a href="asistente.html" class="hero-button">Usa nuestro asistente de voz</a>
+    </section>
 
-  <!-- HERO -->
-  <section class="hero-section">
-    <img src="logo/logosinf.png" alt="Logo de Arranca Ya" class="hero-logo">
-    <h1 id="heroTitle">Desbloquea tu Potencial Emprendedor</h1>
-    <p>Accede a cursos, herramientas y recursos para llevar tu negocio al siguiente nivel. 🚀</p>
-    <a href="registro.html" class="hero-button">Prueba gratuita</a>
-    <a href="asistente.html" class="hero-button">Usa nuestro asistente de voz</a>
-  </section>
+    <section class="container fade-in">
+        <h2>Lo que obtendrás</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <img src="logo/trofeo.png" alt="Cursos ilimitados" class="feature-icon">
+                <h3>Cursos Ilimitados</h3>
+                <p>Aprende en áreas como finanzas, marketing y gestión.</p>
+            </div>
+            <div class="feature-card">
+                <img src="logo/grafico.png" alt="Análisis financiero" class="feature-icon">
+                <h3>Análisis Financiero</h3>
+                <p>Herramientas exclusivas para gestionar gastos y presupuestos.</p>
+            </div>
+            <div class="feature-card">
+                <img src="logo/ia.jpg" alt="Asistente con IA" class="feature-icon">
+                <h3>Asistente con IA</h3>
+                <p>Soporte personalizado 24/7 con Sparkia.</p>
+            </div>
+        </div>
+    </section>
 
-  <!-- FEATURES -->
-  <section class="container">
-    <h2>Lo que obtendrás</h2>
-    <div class="features-grid">
-      <div class="feature-card">
-        <img src="logo/trofeo.png" alt="Cursos ilimitados" class="feature-icon">
-        <h3>Cursos Ilimitados</h3>
-        <p>Aprende en áreas como finanzas, marketing y gestión.</p>
-      </div>
-      <div class="feature-card">
-        <img src="logo/grafico.png" alt="Análisis financiero" class="feature-icon">
-        <h3>Análisis Financiero</h3>
-        <p>Herramientas exclusivas para gestionar gastos y presupuestos.</p>
-      </div>
-      <div class="feature-card">
-        <img src="logo/ia.jpg" alt="Asistente con IA" class="feature-icon">
-        <h3>Asistente con IA</h3>
-        <p>Soporte personalizado 24/7 con Sparkia.</p>
-      </div>
+    <section class="slider-section">
+        <h2>Historias de Éxito</h2>
+        <div class="slider-container">
+            <div class="slider-track">
+                <img src="logo/carne.jpg" alt="Historia 1" class="slide">
+                <img src="logo/comercio.jpg" alt="Historia 2" class="slide">
+                <img src="logo/independientes.jpg" alt="Historia 3" class="slide">
+                <img src="logo/quesadilla.jpg" alt="Historia 4" class="slide">
+                <img src="logo/carne.jpg" alt="Historia 1" class="slide">
+                <img src="logo/comercio.jpg" alt="Historia 2" class="slide">
+                <img src="logo/independientes.jpg" alt="Historia 3" class="slide">
+                <img src="logo/quesadilla.jpg" alt="Historia 4" class="slide">
+            </div>
+        </div>
+    </section>
+    <section class="container fade-in text-image-section">
+        <div class="two-column-grid">
+            <div class="text-content">
+                <h2>¿Abrumado por dónde empezar?</h2>
+                <p>Lanzar un negocio es un reto. Trámites confusos, cálculos financieros que no cuadran y el miedo a cometer errores caros pueden paralizar hasta la mejor idea.</p>
+                <a href="#" class="hero-button">Descubre cómo</a>
+            </div>
+            <div class="image-content">
+                <img src="logo/app.jpg" alt="Imagen de la primera sección">
+            </div>
+        </div>
+    </section>
+
+    <section class="container fade-in text-image-section">
+        <div class="two-column-grid reversed-columns">
+            <div class="text-content">
+                <h2>Crea tu Ruta Personalizada</h2>
+                <p>Responde unas preguntas clave sobre tu idea y nuestro sistema generará una ruta de lanzamiento personalizada solo para ti.</p>
+                <a href="#" class="hero-button">Empezar ahora</a>
+            </div>
+            <div class="image-content multiple-images">
+                <img src="logo/curso.jpg" alt="Imagen de la segunda sección">
+                <img src="logo/curso2.jpg" alt="Imagen de la segunda sección">
+            </div>
+        </div>
+    </section>
+    
+    <section class="call-to-action-section fade-in">
+        <h2>¿Listo para dejar de soñar y empezar a construir?</h2>
+        <p class="subtitle">El mejor momento para empezar fue ayer. El segundo mejor es ahora.</p>
+        <a href="registro.html" class="hero-button">Regístrate y obtén tu plan</a>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="#">Legales</a>
+            <a href="#">Aviso de Privacidad</a>
+            <a href="#">Términos y Condiciones</a>
+        </div>
+        <div class="footer-socials">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <p>© 2025 Arranca Ya!. Todos los derechos reservados.</p>
+    </footer>
+
+    <button class="chat-button" onclick="toggleChat()">🤖</button>
+    <div class="chat-box" id="chatBox">
+        <div class="chat-header">Soy Sparkia 🤖</div>
+        <div class="chat-messages" id="chatMessages">
+            <p><strong>Sparkia:</strong> ¡Hola! ¿En qué puedo ayudarte hoy?</p>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Escribe un mensaje...">
+            <button onclick="sendMessage()">➤</button>
+        </div>
     </div>
-  </section>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <p>© 2025 Arranca Ya!. Todos los derechos reservados.</p>
-  </footer>
+    <script>
+        // CHAT
+        function toggleChat() {
+            const chat = document.getElementById("chatBox");
+            chat.style.display = (chat.style.display === "flex") ? "none" : "flex";
+        }
+        function sendMessage() {
+            const input = document.getElementById("userInput");
+            const msg = input.value.trim();
+            if (!msg) return;
+            const messages = document.getElementById("chatMessages");
+            messages.innerHTML += "<p><strong>Tú:</strong> " + msg + "</p>";
+            messages.innerHTML += "<p><strong>Sparkia:</strong> Estoy en desarrollo, pero siempre aquí 🚀</p>";
+            messages.scrollTop = messages.scrollHeight;
+            input.value = "";
+        }
 
-  <!-- CHAT -->
-  <button class="chat-button" onclick="toggleChat()">🤖</button>
-  <div class="chat-box" id="chatBox">
-    <div class="chat-header">Soy Sparkia 🤖</div>
-    <div class="chat-messages" id="chatMessages">
-      <p><strong>Sparkia:</strong> ¡Hola! ¿En qué puedo ayudarte hoy?</p>
-    </div>
-    <div class="chat-input">
-      <input type="text" id="userInput" placeholder="Escribe un mensaje...">
-      <button onclick="sendMessage()">➤</button>
-    </div>
-  </div>
+        // LOGIN FUNCTIONALITY
+        document.addEventListener('DOMContentLoaded', () => {
+            const showLoginBtn = document.getElementById('showLoginBtn');
+            const loginFormContainer = document.getElementById('login-form-container');
+            const closeLoginBtn = document.getElementById('closeLoginBtn');
+            const loginForm = document.getElementById('login-form');
+            const welcomeMessage = document.getElementById('welcome-message');
 
-  <script>
-    // CHAT
-    function toggleChat() {
-      const chat = document.getElementById("chatBox");
-      chat.style.display = (chat.style.display === "flex") ? "none" : "flex";
-    }
-    function sendMessage() {
-      const input = document.getElementById("userInput");
-      const msg = input.value.trim();
-      if (!msg) return;
-      const messages = document.getElementById("chatMessages");
-      messages.innerHTML += "<p><strong>Tú:</strong> " + msg + "</p>";
-      messages.innerHTML += "<p><strong>Sparkia:</strong> Estoy en desarrollo, pero siempre aquí 🚀</p>";
-      messages.scrollTop = messages.scrollHeight;
-      input.value = "";
-    }
-  </script>
+            showLoginBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                loginFormContainer.style.display = 'flex';
+            });
+
+            closeLoginBtn.addEventListener('click', () => {
+                loginFormContainer.style.display = 'none';
+            });
+            
+            window.addEventListener('click', (event) => {
+                if (event.target == loginFormContainer) {
+                    loginFormContainer.style.display = 'none';
+                }
+            });
+
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+
+                if (email && password) {
+                    localStorage.setItem('loggedIn', 'true');
+                    localStorage.setItem('userEmail', email);
+
+                    welcomeMessage.textContent = `¡Bienvenido! Redirigiendo a la página de Tu perfil...`;
+                    welcomeMessage.style.display = 'block';
+                   
+                    
+                    setTimeout(() => {
+                        loginForm.style.display = 'none';
+                    }, 500);
+
+                    setTimeout(() => {
+                        window.location.href = 'perfil.html';
+                    }, 3000);
+                } else {
+                    alert('Por favor, ingresa tu correo y contraseña.');
+                }
+            });
+        });
+
+        // JS for fade-in effect on scroll
+        const faders = document.querySelectorAll('.fade-in');
+        const appearOnScroll = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.2
+        });
+        faders.forEach(fader => {
+            appearOnScroll.observe(fader);
+        });
+    </script>
 </body>
 </html>

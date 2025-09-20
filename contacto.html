@@ -1,302 +1,432 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contacto - Arranca Ya!</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --green-primary: #66BB6A;
-      --green-dark: #388E3C;
-      --green-light: #E8F5E9;
-      --gray-light: #f4f7f6;
-      --white: #fff;
-      --text-color: #212121;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arranca Ya! - Asistente IA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-primary: #66BB6A;
+            --green-dark: #388E3C;
+            --green-light: #E8F5E9;
+            --gray-light: #f4f7f6;
+            --white: #fff;
+            --text-color: #212121;
+            --blue-accent: #2196F3;
+            --navy-blue: #1C335A;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(120deg, #f4f7f6, #E8F5E9, #ffffff);
+            background-size: 300% 300%;
+            animation: gradientMove 10s ease infinite;
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: var(--gray-light);
-      color: var(--text-color);
-      line-height: 1.6;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
+        /* Animaciones */
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes fadeInUp {
+            0% { opacity:0; transform: translateY(20px); }
+            100% { opacity:1; transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0%,100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+        @keyframes dots {
+            0% { content: ""; }
+            33% { content: "."; }
+            66% { content: ".."; }
+            100% { content: "..."; }
+        }
 
-    .navbar {
-      background-color: var(--green-dark);
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
+        /* NAVBAR */
+        .navbar {
+            background: linear-gradient(135deg, #388E3C, #66BB6A);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: fadeInUp 0.6s ease;
+        }
+        .navbar a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .navbar a:hover {
+            background: rgba(255,255,255,0.1);
+            transform: scale(1.05);
+        }
 
-    .navbar a {
-      flex: 1 1 auto;
-      text-align: center;
-      color: white;
-      padding: 14px 12px;
-      text-decoration: none;
-      font-size: 1rem;
-      transition: background-color 0.3s ease;
-    }
+        /* BANNER */
+        .banner {
+            background: linear-gradient(135deg, var(--blue-accent), var(--navy-blue));
+            text-align: center;
+            padding: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            animation: fadeInUp 0.8s ease;
+            color: var(--white);
+        }
+        .banner-headline { font-size: 1.8rem; font-weight: 700; margin: 0; color: var(--white); }
+        .banner-subtext { margin: 10px 0 0; font-weight: 400; font-size: 1rem; opacity: 0.9; max-width: 600px; margin: 10px auto; }
+        .banner-callout {
+            background: var(--green-primary);
+            color: white;
+            padding: 8px 24px;
+            border-radius: 25px;
+            display: inline-block;
+            font-weight: 700;
+            margin-top: 15px;
+            animation: pulse 3s infinite;
+        }
 
-    .navbar a:hover {
-      background-color: #2e7d32;
-    }
+        /* CONTENEDOR PRINCIPAL */
+        .main-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+            animation: fadeInUp 1s ease;
+        }
 
-    .container {
-      width: 90%;
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 20px;
-      background-color: var(--white);
-      border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-      flex-grow: 1;
-    }
+        /* SECCIÓN IZQUIERDA (ASISTENTE) */
+        .assistant-section {
+            flex: 2;
+            min-width: 300px;
+        }
+        .assistant-section h2 {
+            font-size: 1.9rem;
+            color: var(--green-dark);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .video-container {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        .video-container:hover { transform: scale(1.02); }
+        video { width: 100%; height: auto; }
+        .chat-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            padding: 20px;
+            height: 420px;
+            display: flex;
+            flex-direction: column;
+        }
+        #chat-box {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding-bottom: 10px;
+        }
+        .message {
+            margin: 8px 0;
+            max-width: 75%;
+            padding: 10px 15px;
+            border-radius: 18px;
+            animation: fadeInUp 0.3s ease;
+            word-wrap: break-word;
+        }
+        .user-message {
+            background: var(--green-primary);
+            color: white;
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+        }
+        .ai-message {
+            background: #f1f1f1;
+            color: #333;
+            margin-right: auto;
+            border-bottom-left-radius: 5px;
+        }
+        .typing {
+            display: inline-block;
+            border-right: 2px solid #333;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 3s steps(30, end), blink 0.7s step-end infinite;
+        }
+        .loading-dots::after {
+            content: "";
+            animation: dots 1.5s infinite;
+        }
+        .chat-input-container {
+            display: flex;
+            margin-top: 10px;
+        }
+        #user-input {
+            flex-grow: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        #user-input:focus { border-color: var(--green-primary); }
+        #send-button {
+            margin-left: 10px;
+            background: linear-gradient(135deg, #388E3C, #66BB6A);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        #send-button:hover { transform: scale(1.1); }
 
-    h2 {
-      text-align: center;
-      font-size: clamp(1.5rem, 2vw, 2rem);
-      font-weight: 600;
-      color: var(--green-dark);
-      margin-bottom: 30px;
-    }
+        /* SECCIÓN DERECHA (DESCRIPCIÓN) */
+        .description-section {
+            flex: 1;
+            min-width: 300px;
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            padding: 30px;
+            text-align: left;
+            animation: fadeInUp 1.2s ease;
+        }
+        .description-section h3 {
+            font-size: 1.5rem;
+            color: var(--navy-blue);
+            margin-bottom: 5px;
+        }
+        .description-section .subtitle {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 25px;
+        }
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+        .feature-icon {
+            width: 32px;
+            height: 32px;
+            color: var(--blue-accent);
+            flex-shrink: 0;
+            background: #e3f2fd;
+            border-radius: 50%;
+            padding: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .feature-text {
+            margin-left: 15px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .feature-text p {
+            margin: 0;
+            font-weight: 600;
+        }
+        .feature-text span {
+            display: block;
+            font-weight: 400;
+            color: #555;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
 
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
+        /* FOOTER */
+        .footer {
+            background: linear-gradient(135deg, #388E3C, #66BB6A);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: auto;
+            animation: fadeInUp 1.2s ease;
+        }
 
-    .contact-form label {
-      font-weight: 600;
-      color: var(--text-color);
-    }
-
-    .contact-form input,
-    .contact-form textarea,
-    .contact-form select {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 1rem;
-      box-sizing: border-box;
-    }
-
-    .contact-form textarea {
-      resize: vertical;
-      min-height: 120px;
-    }
-
-    .contact-form button {
-      background-color: var(--green-primary);
-      color: var(--white);
-      padding: 15px;
-      border: none;
-      border-radius: 50px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      font-size: 1rem;
-      width: 100%;
-    }
-
-    .contact-form button:hover {
-      background-color: var(--green-dark);
-    }
-
-    .footer {
-      background-color: var(--green-dark);
-      color: var(--white);
-      text-align: center;
-      padding: 20px;
-      margin-top: auto;
-    }
-
-    /* Mensaje de confirmación */
-    .confirmation-message {
-      display: none;
-      text-align: center;
-      padding: 20px;
-      background-color: var(--green-light);
-      border: 1px solid var(--green-primary);
-      border-radius: 10px;
-      margin-top: 20px;
-      font-weight: 600;
-      color: var(--green-dark);
-    }
-
-    /* Estilos del campo de archivo */
-    .file-upload-container {
-      border: 2px dashed #ccc;
-      border-radius: 8px;
-      padding: 20px;
-      text-align: center;
-      cursor: pointer;
-      transition: border-color 0.3s ease;
-    }
-
-    .file-upload-container:hover {
-      border-color: var(--green-primary);
-    }
-
-    .file-upload-container p {
-      margin: 0;
-      color: #555;
-    }
-
-    .file-upload-container input[type="file"] {
-      display: none;
-    }
-
-    .filename {
-      font-style: italic;
-      color: var(--green-dark);
-    }
-
-    .file-upload-field {
-      display: none;
-    }
-
-    /* Media Queries */
-    @media (max-width: 768px) {
-      .navbar a {
-        flex: 1 1 100%;
-        font-size: 0.95rem;
-        padding: 12px;
-      }
-
-      .container {
-        margin: 20px auto;
-        padding: 15px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .contact-form button {
-        font-size: 0.9rem;
-        padding: 12px;
-      }
-    }
-  </style>
+        /* RESPONSIVE */
+        @media (max-width: 992px) {
+            .main-container {
+                flex-direction: column;
+            }
+            .assistant-section, .description-section {
+                width: 100%;
+                min-width: auto;
+            }
+            .assistant-section {
+                order: 2;
+            }
+            .description-section {
+                order: 1;
+            }
+        }
+        @media (max-width: 768px) {
+            h2 { font-size: 1.5rem; }
+            .chat-container { height: 380px; }
+        }
+        @media (max-width: 480px) {
+            .navbar { flex-direction: column; }
+            .navbar a { padding: 10px; font-size: 0.9rem; width: 100%; }
+            h2 { font-size: 1.3rem; }
+            .chat-container { height: 330px; padding: 15px; }
+        }
+    </style>
 </head>
 <body>
-  <nav class="navbar">
-    <a href="index.html">Inicio</a>
-    <a href="registro.html">Registro</a>
+    <nav class="navbar">
+    <a href="perfil.html">Perfil</a>
     <a href="cursos.html">Cursos</a>
     <a href="historico.html">Histórico</a>
     <a href="asesoria.html">Asesoría</a>
-    <a href="contacto.html">Contacto</a>
     <a href="asistente.html">Asistente</a>
     <a href="retos.html">Retos</a>
-  </nav>
+    </nav>
 
-  <div class="container">
-    <h2>Contáctanos</h2>
-    <form class="contact-form" id="contactForm">
-      <label for="name">Nombre:</label>
-      <input type="text" id="name" name="name" required>
-
-      <label for="email">Correo Electrónico:</label>
-      <input type="email" id="email" name="email" required>
-
-      <label for="reason">Motivo de Contacto:</label>
-      <select id="reason" name="reason" required>
-        <option value="">Selecciona un motivo</option>
-        <option value="consulta">Consulta General</option>
-        <option value="socio">Alta de Socio</option>
-        <option value="profesor">Alta de Profesor</option>
-      </select>
-
-      <div class="file-upload-field" id="fileField">
-        <label for="cv">Cargar Currículum (opcional):</label>
-        <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx">
-        <div class="file-upload-container" onclick="document.getElementById('cv').click()">
-          <p id="file-label">Haz clic aquí o arrastra un archivo</p>
-          <span id="file-name" class="filename"></span>
+    <div class="banner">
+        <h1 class="banner-headline">Agente Virtual Inteligente (IVA) de Sparkia</h1>
+        <p class="banner-subtext">Brinda a tus clientes autoservicio con IA a través de canales de voz y digitales para una rápida atención.</p>
+    </div>
+    
+    <div class="main-container">
+        <div class="description-section">
+            <h3>¿Qué puede hacer Sparkia por ti?</h3>
+            <div class="feature-item">
+                <svg class="feature-icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                <div class="feature-text">
+                    <p>Atención al cliente 24/7</p>
+                    <span>Resuelve dudas al instante sobre cursos, registro y pagos, sin importar la hora.</span>
+                </div>
+            </div>
+            <div class="feature-item">
+                <svg class="feature-icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2c-3.14 0-5.83 1.94-7.01 4.67C3.39 8.65 2 11.23 2 14c0 4.41 3.59 8 8 8h4c4.41 0 8-3.59 8-8 0-2.77-1.39-5.35-3.01-7.33C17.83 3.94 15.14 2 12 2zm-4 8c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S5 3.34 5 5v2c0 1.66 1.34 3 3 3z"/></svg>
+                <div class="feature-text">
+                    <p>Asesoría personalizada</p>
+                    <span>Analiza tus intereses y objetivos para recomendarte el curso perfecto para ti.</span>
+                </div>
+            </div>
+            <div class="feature-item">
+                <svg class="feature-icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8.58l-9 9z"/></svg>
+                <div class="feature-text">
+                    <p>Transferencia inteligente</p>
+                    <span>Si necesitas hablar con un humano, te conectamos con el agente adecuado con el contexto de tu conversación.</span>
+                </div>
+            </div>
+            <div class="feature-item">
+                <svg class="feature-icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2c-4.41 0-8 3.59-8 8s3.59 8 8 8 8-3.59 8-8-3.59-8-8-8zM7 9c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm5 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm5 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1z"/></svg>
+                <div class="feature-text">
+                    <p>Soporte personalizado</p>
+                    <span>Recuerda tus interacciones pasadas para ofrecerte una experiencia más fluida y relevante.</span>
+                </div>
+            </div>
         </div>
-      </div>
 
-      <label for="message">Mensaje:</label>
-      <textarea id="message" name="message" rows="6" required></textarea>
+        <div class="assistant-section">
+            <h2>Chatea con Sparkia</h2>
+            <div class="video-container">
+                <video controls>
+                    <source src="logo/alexia.mp4" type="video/mp4">
+                    Tu navegador no soporta el formato de video.
+                </video>
+            </div>
+            <div class="chat-container">
+                <div id="chat-box">
+                    <div class="message ai-message"><span class="typing">¡Hola! Soy Sparkia, tu asistente virtual. Estoy lista para responder a tus preguntas.</span></div>
+                </div>
+                <div class="chat-input-container">
+                    <input type="text" id="user-input" placeholder="Escribe tu mensaje..." onkeypress="handleKeyPress(event)">
+                    <button id="send-button" onclick="sendMessage()">➤</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-      <button type="submit">Enviar Solicitud</button>
-    </form>
+    <footer class="footer">
+        <p>© 2025 Arranca Ya!. Todos los derechos reservados.</p>
+    </footer>
 
-    <div class="confirmation-message" id="confirmationMessage"></div>
-  </div>
+    <script>
+        async function sendMessage() {
+            const inputElement = document.getElementById('user-input');
+            const userMessage = inputElement.value.trim().toLowerCase(); // Convertir a minúsculas para coincidir mejor
+            if (userMessage === '') return;
 
-  <footer class="footer">
-    <p>© 2025 Arranca Ya!. Todos los derechos reservados.</p>
-  </footer>
+            const chatBox = document.getElementById('chat-box');
+            
+            // Mostrar el mensaje del usuario
+            const userDiv = document.createElement('div');
+            userDiv.classList.add('message', 'user-message');
+            userDiv.textContent = userMessage;
+            chatBox.appendChild(userDiv);
+            inputElement.value = '';
 
-  <script>
-    document.getElementById('contactForm').addEventListener('submit', function(event) {
-      event.preventDefault();
-      const reason = document.getElementById('reason').value;
-      const folio = Math.floor(Math.random() * 1000000);
-      let messageText = '';
+            // Mostrar "Sparkia está pensando"
+            const loadingDiv = document.createElement('div');
+            loadingDiv.classList.add('message', 'ai-message', 'loading-dots');
+            loadingDiv.textContent = 'Sparkia está pensando';
+            chatBox.appendChild(loadingDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
 
-      if (reason === 'socio') {
-        messageText = `
-          <p>¡Gracias por tu interés en unirte como socio!</p>
-          <p><strong>Folio de seguimiento: ${folio}</strong></p>
-          <p>Te contactaremos en menos de 48 horas.</p>
-        `;
-      } else if (reason === 'profesor') {
-        messageText = `
-          <p>¡Gracias por tu interés en unirte como profesor!</p>
-          <p><strong>Folio de seguimiento: ${folio}</strong></p>
-          <p>Te contactaremos en menos de 48 horas.</p>
-        `;
-      } else {
-        messageText = `
-          <p>Tu solicitud ha sido procesada con éxito.</p>
-          <p><strong>Folio de seguimiento: ${folio}</strong></p>
-          <p>Recibirás una respuesta en menos de 24 horas.</p>
-        `;
-      }
+            // Lógica de chatbot simple
+            let aiResponse = '';
+            if (userMessage.includes('hola') || userMessage.includes('saludos')) {
+                aiResponse = '¡Hola! Soy Sparkia, tu asistente virtual. Estoy lista para responder a tus preguntas sobre nuestros cursos, registro y pagos. ¿En qué puedo ayudarte hoy?';
+            } else if (userMessage.includes('cursos') || userMessage.includes('course')) {
+                aiResponse = 'Tenemos una gran variedad de cursos en línea. Te recomendamos los más populares: Desarrollo Web, Marketing Digital y Ciencia de Datos. ¿Te gustaría saber más sobre alguno en particular?';
+            } else if (userMessage.includes('registro') || userMessage.includes('registrarme')) {
+                aiResponse = '¡Claro! El proceso de registro es muy sencillo. Solo tienes que ir a la sección "Registro" de nuestra página web, llenar el formulario con tus datos y crear una cuenta. Si tienes algún problema, házmelo saber.';
+            } else if (userMessage.includes('pago') || userMessage.includes('pagos') || userMessage.includes('precio') || userMessage.includes('costo')) {
+                aiResponse = 'Puedes pagar tus cursos de forma segura con tarjeta de crédito, PayPal o transferencia bancaria. Los precios de los cursos varían, ¿te gustaría saber el costo de un curso específico?';
+            } else if (userMessage.includes('contacto') || userMessage.includes('ayuda') || userMessage.includes('humano')) {
+                aiResponse = 'Si necesitas ayuda personalizada, puedes contactar a nuestro equipo de soporte técnico a través del formulario en la página de "Contacto" o en el correo electrónico ayuda@arrancaya.com. Estarán encantados de ayudarte.';
+            } else if (userMessage.includes('gracias')) {
+                aiResponse = 'De nada. ¡Fue un placer ayudarte! Si tienes otra pregunta, no dudes en volver a contactarme.';
+            } else {
+                aiResponse = 'Lo siento, no pude entender tu pregunta. Estoy programada para ayudarte con temas relacionados con nuestros cursos, registro, pagos y contacto. Por favor, intenta de nuevo.';
+            }
 
-      document.getElementById('contactForm').style.display = 'none';
-      const messageDiv = document.getElementById('confirmationMessage');
-      messageDiv.innerHTML = messageText;
-      messageDiv.style.display = 'block';
-    });
+            // Simular un retraso para que la respuesta parezca más natural
+            await new Promise(resolve => setTimeout(resolve, 1500)); 
 
-    // Mostrar el campo de CV solo si se selecciona "Socio" o "Profesor"
-    document.getElementById('reason').addEventListener('change', function() {
-      const fileField = document.getElementById('fileField');
-      if (this.value === 'socio' || this.value === 'profesor') {
-        fileField.style.display = 'block';
-      } else {
-        fileField.style.display = 'none';
-        document.getElementById('cv').value = '';
-        document.getElementById('file-name').innerText = '';
-        document.getElementById('file-label').innerText = 'Haz clic aquí o arrastra un archivo';
-      }
-    });
+            // Mostrar la respuesta de la IA
+            chatBox.removeChild(loadingDiv);
+            const aiDiv = document.createElement('div');
+            aiDiv.classList.add('message', 'ai-message');
+            aiDiv.textContent = aiResponse;
+            chatBox.appendChild(aiDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
 
-    // Mostrar nombre del archivo seleccionado
-    document.getElementById('cv').addEventListener('change', function() {
-      const fileNameSpan = document.getElementById('file-name');
-      const fileLabel = document.getElementById('file-label');
-      const file = this.files[0];
-      if (file) {
-        fileNameSpan.innerText = file.name;
-        fileLabel.innerText = 'Archivo adjuntado:';
-      } else {
-        fileNameSpan.innerText = '';
-        fileLabel.innerText = 'Haz clic aquí o arrastra un archivo';
-      }
-    });
-  </script>
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+    </script>
+    <script src="ruta/a/gy-gamificacion.js"></script>
 </body>
 </html>

@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Arranca Ya! - Registro</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
     :root {
         --green-primary: #66BB6A;
@@ -21,18 +22,50 @@
         font-family: 'Poppins', sans-serif;
         margin: 0;
         padding: 0;
-        background-color: var(--gray-light);
+        background: linear-gradient(135deg, var(--green-light), var(--gray-light));
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        overflow-x: hidden;
         color: var(--text-color);
-        line-height: 1.6;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
     }
+
+    /* Decoración lateral */
+    .decor {
+        position: fixed;
+        border-radius: 50%;
+        opacity: 0.2;
+        animation: float 8s ease-in-out infinite;
+        z-index: 0;
+    }
+    .decor1 {
+        width: 180px;
+        height: 180px;
+        background: var(--green-primary);
+        top: 10%;
+        left: -60px;
+    }
+    .decor2 {
+        width: 120px;
+        height: 120px;
+        background: var(--green-dark);
+        bottom: 15%;
+        right: -40px;
+        animation-delay: 2s;
+    }
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-25px); }
+    }
+
     .navbar {
         background-color: var(--green-dark);
         text-align: center;
         flex-wrap: wrap;
         display: flex;
         justify-content: center;
+        z-index: 10;
     }
     .navbar a {
         display: block;
@@ -40,20 +73,40 @@
         padding: 12px 18px;
         text-decoration: none;
         font-size: 1rem;
-        transition: background-color 0.3s ease;
+        transition: background-color 0.3s ease, transform 0.2s ease;
     }
     .navbar a:hover {
         background-color: #2e7d32;
+        transform: scale(1.05);
     }
     .container {
+        position: relative;
+        z-index: 10;
         max-width: 500px;
         width: 90%;
         margin: 40px auto;
         padding: 20px 30px;
         background-color: var(--white);
         border-radius: 15px;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 1.2s ease;
     }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Estilos para la imagen de la mascota */
+    .form-mascot {
+        display: block; /* Para que ocupe su propia línea y se pueda centrar */
+        max-width: 120px; /* Ajusta el tamaño como prefieras */
+        margin: 0 auto 25px auto; /* Centra la imagen y le da un margen inferior */
+        transition: transform 0.3s ease;
+    }
+    .form-mascot:hover {
+        transform: scale(1.05); /* Un pequeño efecto al pasar el ratón */
+    }
+
     h2 {
         font-size: 2rem;
         color: var(--green-dark);
@@ -72,7 +125,13 @@
         width: 100%;
         padding: 12px;
         border: 1px solid #ccc;
-        border-radius: 5px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+    .form-group input:focus {
+        border-color: var(--green-dark);
+        box-shadow: 0 0 6px rgba(56,142,60,0.3);
+        outline: none;
     }
     .privacy-notice {
         background-color: var(--green-light);
@@ -95,24 +154,22 @@
         margin-bottom: 20px;
         gap: 10px;
     }
-    .privacy-checkbox input {
-        margin-top: 4px;
-    }
     .submit-btn {
         display: block;
         width: 100%;
-        padding: 12px;
-        background-color: var(--green-dark);
+        padding: 14px;
+        background: linear-gradient(135deg, var(--green-primary), var(--green-dark));
         color: var(--white);
         border: none;
-        border-radius: 5px;
+        border-radius: 8px;
         font-size: 1.1rem;
         font-weight: 600;
         cursor: pointer;
-        transition: background-color 0.3s ease;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .submit-btn:hover {
-        background-color: #2e7d32;
+        transform: scale(1.05);
+        box-shadow: 0 6px 15px rgba(56,142,60,0.4);
     }
     .footer {
         background-color: var(--green-dark);
@@ -120,6 +177,7 @@
         text-align: center;
         padding: 20px;
         margin-top: 20px;
+        z-index: 10;
     }
     .floating-button {
         position: fixed;
@@ -129,9 +187,9 @@
         width: 90px;
         height: 90px;
         border-radius: 15px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
         transition: transform 0.3s ease;
-        background-color: var(--green-dark);
+        background: linear-gradient(135deg, var(--green-primary), var(--green-dark));
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -141,8 +199,9 @@
         text-align: center;
     }
     .floating-button:hover {
-        transform: scale(1.1);
+        transform: scale(1.15);
     }
+    /* Icono del asistente usando Font Awesome */
     .bot-icon {
         font-size: 2.2rem;
         color: white;
@@ -177,36 +236,26 @@
 
     /* MEDIA QUERIES */
     @media (max-width: 768px) {
-        h2 {
-            font-size: 1.7rem;
-        }
-        .navbar a {
-            padding: 10px;
-            font-size: 0.9rem;
-        }
-        .container {
-            padding: 15px 20px;
-        }
-        .floating-button {
-            width: 80px;
-            height: 80px;
+        .decor1, .decor2 { display: none; }
+        h2 { font-size: 1.7rem; }
+        .navbar a { padding: 10px; font-size: 0.9rem; }
+        .container { padding: 15px 20px; }
+        .form-mascot {
+            max-width: 90px; /* Más pequeña en móviles */
+            margin-bottom: 15px;
         }
     }
     @media (max-width: 480px) {
-        h2 {
-            font-size: 1.5rem;
-        }
-        .bot-text {
-            font-size: 0.6rem;
-        }
-        .container {
-            margin: 20px auto;
-            padding: 15px;
-        }
+        h2 { font-size: 1.5rem; }
+        .bot-text { font-size: 0.6rem; }
+        .container { margin: 20px auto; padding: 15px; }
     }
 </style>
 </head>
 <body>
+    <div class="decor decor1"></div>
+    <div class="decor decor2"></div>
+
     <nav class="navbar">
         <a href="index.html">Inicio</a>
         <a href="registro.html">Registro</a>
@@ -218,6 +267,7 @@
     </nav>
 
     <div class="container">
+        <img src="logo/pose.jpeg" alt="Mascota de Arranca Ya!" class="form-mascot">
         <h2>Registro de Usuario</h2>
         <form onsubmit="handleRegistration(event)">
             <div class="form-group">
@@ -251,7 +301,7 @@
     </div>
 
     <a href="asistente.html" class="floating-button" title="Habla con nuestro asistente virtual">
-        <span class="bot-icon">🤖</span>
+        <i class="fas fa-robot bot-icon"></i>
         <span class="bot-text">Soy EsparkIA<br>tu asistente virtual</span>
     </a>
 
@@ -265,33 +315,42 @@
             const email = document.getElementById('email');
             const password = document.getElementById('password');
             const privacyAccepted = document.getElementById('accept-privacy').checked;
+
+            // Limpiar mensajes de error y clases
             document.querySelectorAll('.error-message').forEach(el => {
                 el.textContent = '';
                 el.style.display = 'none';
             });
             document.querySelectorAll('.form-group').forEach(el => el.classList.remove('has-error'));
+
             const statusMessage = document.getElementById('status-message');
             statusMessage.textContent = '';
-            statusMessage.className = 'status-message';
+            statusMessage.className = 'status-message'; // Resetear clases
+
             let isValid = true;
+
             if (name.value.trim() === '') {
                 document.getElementById('name-error').textContent = 'El nombre es obligatorio.';
                 document.getElementById('name-error').style.display = 'block';
                 name.closest('.form-group').classList.add('has-error');
                 isValid = false;
             }
-            if (email.value.trim() === '' || !email.value.includes('@')) {
+
+            // Validación de email con formato básico
+            if (email.value.trim() === '' || !email.value.includes('@') || !email.value.includes('.')) {
                 document.getElementById('email-error').textContent = 'Por favor, introduce un correo válido.';
                 document.getElementById('email-error').style.display = 'block';
                 email.closest('.form-group').classList.add('has-error');
                 isValid = false;
             }
+
             if (password.value.length < 8) {
                 document.getElementById('password-error').textContent = 'La contraseña debe tener al menos 8 caracteres.';
                 document.getElementById('password-error').style.display = 'block';
                 password.closest('.form-group').classList.add('has-error');
                 isValid = false;
             }
+
             if (!privacyAccepted) {
                 alert("Debes aceptar el aviso de privacidad para continuar.");
                 isValid = false;
@@ -303,19 +362,25 @@
             event.preventDefault();
             const statusMessage = document.getElementById('status-message');
             if (!validateForm()) return;
+
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
+
             statusMessage.textContent = 'Enviando datos...';
             statusMessage.classList.add('success');
+
+            // Simular una llamada a un servidor
             await new Promise(resolve => setTimeout(resolve, 2000));
-            if (email === 'error@ejemplo.com') {
+
+            // Lógica de registro simulada
+            if (email === 'error@ejemplo.com') { // Puedes usar este email para probar el error
                 statusMessage.textContent = 'Este correo ya está registrado. Intenta con otro.';
                 statusMessage.classList.remove('success');
                 statusMessage.classList.add('error');
             } else {
-                localStorage.setItem('userName', name);
+                localStorage.setItem('userName', name); // Guarda el nombre del usuario
                 statusMessage.textContent = '¡Registro exitoso! Redirigiendo a la página de cursos...';
-                window.location.href = 'cursos.html';
+                setTimeout(()=>{ window.location.href = 'cursos.html'; }, 1500);
             }
         }
     </script>
